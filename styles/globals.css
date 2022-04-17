@@ -20,3 +20,9 @@ a {
 .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .show>.nav-link.active{
   color: red !important;
 }
+
+@media screen and (max-width: 1200px) {}
+@media screen and (max-width: 992px) {}
+@media screen and (max-width: 768px) {}
+@media screen and (max-width: 576px) {}
+@media screen and (max-width: 380px) {}

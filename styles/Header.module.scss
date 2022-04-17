@@ -1,0 +1,154 @@
+@use "scss/colors" as *;
+
+.header {
+    position: relative;
+    height: calc(100vh - 70px);
+    width: 100%;
+    background: $bg-image;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .title_header {
+        color: $color-white;
+
+        h1 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+
+            span {
+                font-size: 72px;
+            }
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 15px;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .social_media {
+        position: absolute;
+        width: 160px;
+        right: 20px;
+        top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .information_contact {
+        position: absolute;
+        width: 160px;
+        left: 20px;
+        bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.icon_social_media {
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    background-color: $bg-orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s ease-in background;
+    
+    &:hover{
+        background-color: $bg-organge-hover;
+    }
+
+    i {
+        font-size: 25px;
+        color: #fff;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .header {
+        .title_header {
+            h1 span {
+                font-size: 65px;
+            }
+
+            .logo {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .header {
+        .title_header {
+            h1 span {
+                font-size: 60px;
+            }
+
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        .title_header {
+            h1{
+                flex-direction: column;
+                span{
+                    font-size: 60px;
+                }
+            }
+            .logo {
+                margin: 15px;
+                width: 150px;
+                height: 150px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .header {
+        .title_header {
+            h1 span{
+                font-size: 50px;
+            }
+        }
+    }
+}
+@media screen and (max-width: 380px) {
+    .header {
+        .title_header {
+            h1 span{
+                font-size: 40px;
+            }
+            .logo{
+                width: 130px;
+                height: 130px
+            }
+        }
+        .information_contact, .social_media{
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+    }
+}
