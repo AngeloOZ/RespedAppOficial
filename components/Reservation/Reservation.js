@@ -1,3 +1,4 @@
+import Image from "next/image";
 import css from "../../styles/Reservation.module.scss";
 
 export const Reservation = ({fecha}) => {
@@ -47,7 +48,7 @@ export const Reservation = ({fecha}) => {
                     </div>
                     <div className={`col-12 col-md-6`}>
                         <div className={`${css.sub_contenedor}`}>
-                            <img src="/img/dinner2.jpg" alt="Cena Fogon de COZ" />
+                            <Image src="/img/dinner2.jpg" alt="Cena Fogon de COZ" />
                         </div>
                     </div>
                 </div>

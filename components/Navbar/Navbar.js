@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "../../styles/Navbar.module.scss";
 import NavBarItem from "./NavBarItem";
+import Image from "next/image";
 
 export const Navbar = () => {
     return (
@@ -8,7 +9,7 @@ export const Navbar = () => {
             <div className="container-fluid">
                 <Link href="/">
                     <a className="navbar-brand">
-                        <img src="/img/logo_navbar.png" width="50" alt="Logo El fogon de COZ" />
+                        <Image src="/img/logo_navbar.png" width="50" alt="Logo El fogon de COZ" />
                     </a>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

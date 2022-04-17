@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from "../../styles/Header.module.scss";
 import IconRedes from "./IconRedes";
 
@@ -8,7 +9,7 @@ export const Header = () => {
                 <h1>
                     <span className="text-uppercase">el fogón</span>
                     <div className={styles.logo}>
-                        <img src="/img/logo_header.png" alt="El fogón de coz" />
+                        <Image src="/img/logo_header.png" alt='El fogón de coz'/>
                     </div>
                     <span className="text-uppercase">de coz</span>
                 </h1>
@@ -19,8 +20,8 @@ export const Header = () => {
                 <IconRedes url="#" icon="bi bi-whatsapp" />
             </div>
             <div className={styles.information_contact}>
-                <IconRedes url="#" icon="bi bi-telephone-fill"/>
-                <IconRedes url="#" icon="bi bi-envelope-fill"/>
+                <IconRedes url="#" icon="bi bi-telephone-fill" />
+                <IconRedes url="#" icon="bi bi-envelope-fill" />
                 <IconRedes url="#" icon="bi bi-geo-alt-fill" />
             </div>
         </header>
