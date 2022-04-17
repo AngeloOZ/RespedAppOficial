@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import styles from "../../styles/Header.module.scss";
 import IconRedes from "./IconRedes";
 
@@ -8,8 +7,8 @@ export const Header = () => {
             <div className={styles.title_header}>
                 <h1>
                     <span className="text-uppercase">el fogón</span>
-                    <div className={styles.logo}>
-                        <Image src="/img/logo_header.png" alt='El fogón de coz'/>
+                    <div class={styles.logo}>
+                        <img src="/img/logo_header.png" alt="El fogón de coz" />
                     </div>
                     <span className="text-uppercase">de coz</span>
                 </h1>
