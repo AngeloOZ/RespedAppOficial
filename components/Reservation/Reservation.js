@@ -12,33 +12,33 @@ export const Reservation = ({fecha}) => {
                                 <form>
                                     <div className="row">
                                         <div className="col">
-                                            <input type="date" className="form-control" min={fecha}/>
+                                            <input type="date" className="form-control" min={fecha} required/>
                                         </div>
                                         <div className="col">
-                                            <input type="time" className="form-control" placeholder="Hora" min="12:30" max="23:00"/>
+                                            <input type="time" className="form-control" placeholder="Hora" min="12:30" max="23:00" required/>
                                         </div>
                                         <div className="col">
-                                            <input type="number" className="form-control" placeholder="Personas" min="1" max="50"/>
-                                        </div>
-                                    </div>
-                                    <div className="row mt-4">
-                                        <div className="col">
-                                            <input type="text" className="form-control" placeholder="Nombres y Apellidos"/>
+                                            <input type="number" className="form-control" placeholder="Personas" min="1" max="50" required/>
                                         </div>
                                     </div>
                                     <div className="row mt-4">
                                         <div className="col">
-                                            <input type="email" className="form-control" placeholder="Correo electrónico"/>
+                                            <input type="text" className="form-control" placeholder="Nombres y Apellidos" required/>
                                         </div>
                                     </div>
                                     <div className="row mt-4">
                                         <div className="col">
-                                            <input type="telf" className="form-control" placeholder="Télefono"/>
+                                            <input type="email" className="form-control" placeholder="Correo electrónico" required/>
                                         </div>
                                     </div>
                                     <div className="row mt-4">
                                         <div className="col">
-                                            <button type="submit">Realizar reservación</button>
+                                            <input type="telf" className="form-control" placeholder="Télefono" required/>
+                                        </div>
+                                    </div>
+                                    <div className="row mt-4">
+                                        <div className="col">
+                                            <button type="submit" className={`btn ${css.button_reserve}`}>Realizar reservación</button>
                                         </div>
                                     </div>
                                 </form>
