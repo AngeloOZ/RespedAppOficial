@@ -30,7 +30,7 @@ export const Navbar = () => {
                         </Link>
                         <div className="btn-group ms-2">
                             <button type="button" className="btn btn-outline-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-fill"></i>
+                                <i className="bi bi-person-fill"></i>
                                 <span className="ms-2">Mi cuenta</span>
                             </button>
                             <ul className="dropdown-menu">
