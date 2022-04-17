@@ -7,7 +7,7 @@ export const Header = () => {
             <div className={styles.title_header}>
                 <h1>
                     <span className="text-uppercase">el fogón</span>
-                    <div class={styles.logo}>
+                    <div className={styles.logo}>
                         <img src="/img/logo_header.png" alt="El fogón de coz" />
                     </div>
                     <span className="text-uppercase">de coz</span>
