@@ -1,14 +1,16 @@
+import Image from "next/image";
 import css from "../../styles/Reservation.module.scss";
 
 export const Reservation = ({fecha}) => {
+    const date = new Date();
     return (
-        <section className={css.section}>
+        <section className={css.section} id="reservaciones">
             <div className="container-lg">
                 <div className="row">
                     <div className={`col-12 col-md-6`}>
                         <div className={`${css.sub_contenedor}`}>
                             <div className={css.reserva}>
-                                <h2>Hacer una reserva</h2>
+                                <h2>Hacer una reserva </h2>
                                 <form>
                                     <div className="row">
                                         <div className="col">
@@ -47,7 +49,7 @@ export const Reservation = ({fecha}) => {
                     </div>
                     <div className={`col-12 col-md-6`}>
                         <div className={`${css.sub_contenedor}`}>
-                            <img src="/img/dinner2.jpg" alt="Cena Fogon de COZ" />
+                            <img className={css.img_sub} width={400} height={400} src="/img/dinner2.jpg" alt="Cena Fogon de COZ" />
                         </div>
                     </div>
                 </div>

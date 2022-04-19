@@ -5,9 +5,9 @@ import Image from "next/image";
 
 export const Navbar = () => {
     return (
-        <nav className={`navbar navbar-expand-lg navbar-dark bg-dark ${styles.bg_navbar}`}>
+        <nav className={`navbar sticky-top navbar-expand-lg navbar-dark bg-dark ${styles.bg_navbar}`}>
             <div className="container-fluid">
-                <Link href="/">
+                <Link href="/#home">
                     <a className="navbar-brand">
                         <img src="/img/logo_navbar.png" width="50" alt="Logo El fogon de COZ" />
                     </a>
@@ -17,11 +17,12 @@ export const Navbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <NavBarItem text="Reservaciones" url="#reservaciones" />
-                        <NavBarItem text="Galería" url="#galeria" />
-                        <NavBarItem text="Nosotros" url="#nosotros" />
-                        <NavBarItem text="Contacto" url="#contacto" />
+                        <NavBarItem text="Reservaciones" href="/#reservaciones" />
+                        <NavBarItem text="Galería" href="/#galeria" />
+                        <NavBarItem text="Nosotros" href="/#nosotros" />
+                        <NavBarItem text="Contacto" href="/#contacto" />
                     </ul>
+
                     <div className="d-flex">
                         <Link href="/">
                             <a className={`btn ${styles.btn_menu}`}>

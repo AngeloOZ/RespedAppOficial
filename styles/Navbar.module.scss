@@ -5,7 +5,11 @@
     &:hover{
         color: rgba(255, 255, 255, 1) !important;
     }
-}
+    &.active{
+        color: $bg-yellow !important;
+    }
+}   
+
 .bg_navbar{
     background-color: $bg-black !important;
 }

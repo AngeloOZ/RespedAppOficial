@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
+import { Galeria } from '../components/Galeria/Galeria'
 import { Header } from '../components/Header/Header'
 import { Navbar } from '../components/Navbar/Navbar'
 import { Reservation } from '../components/Reservation/Reservation'
-import styles from '../styles/Home.module.css'
 
 export default function Home({fecha}) {
     return (
@@ -15,6 +15,7 @@ export default function Home({fecha}) {
             <Navbar />
             <Header/>
             <Reservation fecha={fecha}/>
+            <Galeria />
         </>
     ) 
 }
@@ -22,7 +23,6 @@ export default function Home({fecha}) {
 export async function getStaticProps(){
     let date = new Date();
     date = date.toISOString().split('T')[0];
-    console.log(date);
     return {
         props:{
             fecha: date
