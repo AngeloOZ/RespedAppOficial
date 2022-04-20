@@ -13,13 +13,13 @@ export const Reservation = ({fecha}) => {
                                 <h2>Hacer una reserva </h2>
                                 <form>
                                     <div className="row">
-                                        <div className="col">
+                                        <div className="col mt-4">
                                             <input type="date" className="form-control" min={fecha}/>
                                         </div>
-                                        <div className="col">
+                                        <div className="col mt-4">
                                             <input type="time" className="form-control" placeholder="Hora" min="12:30" max="23:00"/>
                                         </div>
-                                        <div className="col">
+                                        <div className="col mt-4">
                                             <input type="number" className="form-control" placeholder="Personas" min="1" max="50"/>
                                         </div>
                                     </div>
@@ -48,8 +48,8 @@ export const Reservation = ({fecha}) => {
                         </div>
                     </div>
                     <div className={`col-12 col-md-6`}>
-                        <div className={`${css.sub_contenedor}`}>
-                            <img className={css.img_sub} width={400} height={400} src="/img/dinner2.jpg" alt="Cena Fogon de COZ" />
+                        <div className={`${css.sub_contenedor} d-flex justify-content-center`}>
+                            <Image width={550} height={400} src="/img/dinner2.jpg" alt="Cena Fogon de COZ" objectFit="cover"/>
                         </div>
                     </div>
                 </div>

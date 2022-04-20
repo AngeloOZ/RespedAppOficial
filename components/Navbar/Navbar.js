@@ -9,7 +9,7 @@ export const Navbar = () => {
             <div className="container-fluid">
                 <Link href="/#home">
                     <a className="navbar-brand">
-                        <img src="/img/logo_navbar.png" width="50" alt="Logo El fogon de COZ" />
+                        <Image src="/img/logo_navbar.png" width={50} height={40} alt="Logo El fogon de COZ" objectFit="cover" />
                     </a>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
