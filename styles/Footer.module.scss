@@ -1,0 +1,74 @@
+@use "./scss/colors" as *;
+.footer{
+    min-height: 350px;
+    padding: 25px;
+    background-color: $bg-black;
+    color: $color-white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .sub_contenedor{
+        max-width: 390px;
+        width: 100%;
+        p{
+            margin: 0;
+            padding: 0;
+        }
+        & > p{
+            text-align: justify;
+        }    
+        .contenedor_pagos{
+            display: flex;
+            align-items: center;
+            .img_pagos{
+                width: 30px;
+                margin-right: 20px;
+            }
+        }  
+        .contenedor_text{
+            h2{
+                text-transform: uppercase;
+                font-size: 25px;
+                margin: 0;
+                margin-bottom: 25px;
+            }
+            .infor_dir{
+                display: flex;
+                align-items: center;
+                margin-top: 5px;
+                i{
+                    font-size: 22px;
+                    margin-right: 10px;
+                }
+            }
+            p{
+                margin: 0;
+                strong{
+                    display: block;
+                    margin-bottom: 5px;
+                }   
+            }
+        }
+    }
+    .contenedor_logo{
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin-bottom: 5px;
+        h2{
+            text-transform: uppercase;
+            font-size: 25px;
+            margin: 0;
+            margin-left: 15px;
+        }
+        .logo{
+            height: 60px;
+            width: 60px;
+        }
+    }
+    .social_media {
+        width: 160px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
