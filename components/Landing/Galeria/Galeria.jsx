@@ -7,15 +7,16 @@ import FsLightbox from "fslightbox-react";
 import css from "../../../styles/Galeria.module.scss";
 import bg from "../../../public/Img/bg.jpg";
 
+
 const photos = [
-  "http://localhost:3000/img/galeria/2.jpg",
-  "http://localhost:3000/img/galeria/3.jpg",
-  "http://localhost:3000/img/galeria/4.jpg",
-  "http://localhost:3000/img/galeria/5.webp",
-  "http://localhost:3000/img/galeria/6.webp",
-  "http://localhost:3000/img/galeria/7.webp",
-  "http://localhost:3000/img/galeria/8.webp",
-  "http://localhost:3000/img/galeria/9.webp",
+  "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1650670208/website/galeria/6_atv7hc.webp",
+  "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1650670203/website/galeria/4_vshe1w.jpg",
+  "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1650670200/website/galeria/5_hdtmxj.webp",
+  "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1650670200/website/galeria/7_nhnz1l.webp",
+  "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1650670200/website/galeria/3_wczxnz.jpg",
+  "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1650670200/website/galeria/9_lzuowc.webp",
+  "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1650670199/website/galeria/8_vbdtxp.webp",
+  "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1650670199/website/galeria/2_qo4ubs.jpg",
 ];
 
 export const Galeria = () => {

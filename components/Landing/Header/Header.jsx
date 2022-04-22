@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "../../../styles/Header.module.scss";
 import IconRedes from "./IconRedes";
-import logoHeader from "../../../public/Img/logo_header.png";
+import logoHeader from "../../../public/Img/logo_header.png";;
 
 export const Header = () => {
   return (
