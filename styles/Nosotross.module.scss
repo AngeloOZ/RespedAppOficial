@@ -1,0 +1,35 @@
+@use "scss/colors" as *;
+
+.about_us{
+    background-color: $bg-black;
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: $color-white;
+
+    .image_aboutUs{
+        box-shadow: 0 0 2px 1px #8D8D87;
+    }
+    h2{
+        text-align: center;
+        margin: 0;
+        margin-bottom: 35px;
+    }
+    .paragraph{
+        text-align: justify;
+    }
+}
+
+@media screen and (max-width: 1200px) {}
+@media screen and (max-width: 992px) {}
+@media screen and (max-width: 768px) 
+{
+    .about_us{
+        h2{
+            margin: 35px 0;
+        }
+    }
+}
+@media screen and (max-width: 576px) {}
+@media screen and (max-width: 380px) {}

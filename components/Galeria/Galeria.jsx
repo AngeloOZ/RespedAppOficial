@@ -6,6 +6,7 @@ import { ItemGalery } from "./ItemGalery";
 import FsLightbox from "fslightbox-react";
 
 import css from "../../styles/Galeria.module.scss";
+import bg from "../../public/Img/bg.jpg";
 
 const photos = [
   "http://localhost:3000/img/galeria/2.jpg",
