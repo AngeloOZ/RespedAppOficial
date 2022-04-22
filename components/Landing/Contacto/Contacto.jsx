@@ -1,4 +1,4 @@
-import css from "../../styles/Contacto.module.scss";
+import css from "../../../styles/Contacto.module.scss";
 
 export const Contacto = () => {
   return (

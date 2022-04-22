@@ -1,6 +1,7 @@
 import Image from "next/image";
-import styles from "../../styles/Header.module.scss";
+import styles from "../../../styles/Header.module.scss";
 import IconRedes from "./IconRedes";
+import logoHeader from "../../../public/Img/logo_header.png";
 
 export const Header = () => {
   return (
@@ -9,12 +10,7 @@ export const Header = () => {
         <h1>
           <span className="text-uppercase">el fogón</span>
           <div className={styles.logo}>
-            <Image
-              src="/img/logo_header.png"
-              width="200"
-              height="200"
-              alt="El fogón de coz"
-            />
+            <Image src={logoHeader} alt="El fogón de coz" />
           </div>
           <span className="text-uppercase">de coz</span>
         </h1>

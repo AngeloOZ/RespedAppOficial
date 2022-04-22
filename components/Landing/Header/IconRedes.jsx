@@ -1,5 +1,5 @@
 import Link from "next/link";
-import css from "../../styles/Header.module.scss";
+import css from "../../../styles/Header.module.scss";
 
 const IconRedes = ({ icon, url = "/", target = "_blank" }) => {
   return (

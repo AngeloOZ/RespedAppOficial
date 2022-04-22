@@ -1,6 +1,6 @@
 import Image from "next/image";
-import about from "../../public/Img/about1.jpg";
-import css from "../../styles/Nosotross.module.scss";
+import about from "../../../public/Img/about1.jpg";
+import css from "../../../styles/Nosotross.module.scss";
 
 export const Nosotros = () => {
   return (

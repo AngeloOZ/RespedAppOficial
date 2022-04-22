@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import styles from "../../styles/Header.module.scss";
-import IconRedes from "../Header/IconRedes";
+import IconRedes from "../Landing/Header/IconRedes";
 import css from "../../styles/Footer.module.scss";
 import logo from "../../public/Img/logo_navbar.png";
 import visa from "../../public/Img/visa.png";

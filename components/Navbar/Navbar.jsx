@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "../../styles/Navbar.module.scss";
 import NavBarItem from "./NavBarItem";
 import Image from "next/image";
+import logoNavbar from "../../public/Img/logo_navbar.png"
 
 export const Navbar = () => {
   return (
@@ -9,10 +10,10 @@ export const Navbar = () => {
       className={`navbar sticky-top navbar-expand-lg navbar-dark bg-dark ${styles.bg_navbar}`}
     >
       <div className="container-fluid">
-        <Link href="/#home">
+        <Link href="/">
           <a className="navbar-brand">
             <Image
-              src="/img/logo_navbar.png"
+              src={logoNavbar}
               width={50}
               height={40}
               alt="Logo El fogon de COZ"
@@ -40,7 +41,7 @@ export const Navbar = () => {
           </ul>
 
           <div className="d-flex">
-            <Link href="/">
+            <Link href="/menu">
               <a className={`btn ${styles.btn_menu}`}>
                 <i className="bi bi-grid-3x3-gap-fill"></i>
                 <span className="ms-2">Ver menú</span>

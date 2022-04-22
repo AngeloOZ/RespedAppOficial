@@ -17,9 +17,9 @@ a {
 .text-uppercase{
   text-transform: uppercase;
 }
-/* .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .show>.nav-link.active{
-  color: red !important;
-} */
+.main_layout{
+  min-height: 400px;
+}
 
 @media screen and (max-width: 1200px) {}
 @media screen and (max-width: 992px) {}

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import FsLightbox from "fslightbox-react";
-import css from "../../styles/Galeria.module.scss";
+import css from "../../../styles/Galeria.module.scss";
 
 export const ItemGalery = ({
   src,

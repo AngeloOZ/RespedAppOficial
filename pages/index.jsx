@@ -1,25 +1,19 @@
-import Head from 'next/head'
-import { Contacto } from '../components/Contacto/Contacto'
-import { Footer } from '../components/Footer/Footer'
-import { Galeria } from '../components/Galeria/Galeria'
-import { Header } from '../components/Header/Header'
-import { Navbar } from '../components/Navbar/Navbar'
-import { Nosotros } from '../components/Nosotros/Nosotros'
-import { Reservation } from '../components/Reservation/Reservation'
+import Head from "next/head";
+import { MainLayout } from "../components/layouts/MainLayout";
+import { Header } from "../components/Landing/Header/Header";
+import { Reservation } from "../components/Landing/Reservation/Reservation";
+import { Galeria } from "../components/Landing/Galeria/Galeria";
+import { Nosotros } from "../components/Landing/Nosotros/Nosotros";
+import { Contacto } from "../components/Landing/Contacto/Contacto";
 
 export default function Home() {
-    return (
-        <>
-            <Head>
-                <title>El fogón de COZ</title>
-            </Head>
-            <Navbar />
-            <Header />
-            <Reservation />
-            <Galeria />
-            <Nosotros />
-            <Contacto />
-            <Footer />
-        </>
-    )
+  return (
+    <MainLayout>
+      <Header />
+      <Reservation />
+      <Galeria />
+      <Nosotros />
+      <Contacto />
+    </MainLayout>
+  );
 }

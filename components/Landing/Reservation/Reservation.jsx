@@ -1,5 +1,6 @@
 import Image from "next/image";
-import css from "../../styles/Reservation.module.scss";
+import css from "../../../styles/Reservation.module.scss";
+import dinner from "../../../public/Img/dinner2.jpg";
 
 const date = new Date();
 
@@ -82,13 +83,7 @@ export const Reservation = () => {
             <div
               className={`${css.sub_contenedor} d-flex justify-content-center`}
             >
-              <Image
-                width={550}
-                height={400}
-                src="/img/dinner2.jpg"
-                alt="Cena Fogon de COZ"
-                objectFit="cover"
-              />
+              <Image src={dinner} alt="Cena Fogon de COZ" objectFit="cover" />
             </div>
           </div>
         </div>
