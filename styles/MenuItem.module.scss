@@ -89,7 +89,7 @@ $bg-menu-item: #0c0c0c;
         grid-template-columns: 200px auto;
     }
 }
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 500px) {
     .menuItem{
         grid-template-columns: 100%;
         .contenedorLogo{
