@@ -1,5 +1,8 @@
 import { MainLayout } from "../components/layouts/MainLayout";
+import { Menu } from "../components/menu/Menu";
 
-export default function Menu() {
-  return <MainLayout></MainLayout>;
+export default function MenuIndex() {
+  return <MainLayout>
+    <Menu></Menu>
+  </MainLayout>;
 }

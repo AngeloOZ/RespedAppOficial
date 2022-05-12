@@ -1,0 +1,100 @@
+@use "scss/colors"as *;
+// $bg-menu-item: #0c0c0c;
+$bg-menu-item: #0c0c0c;
+
+
+.menuItem {
+    background-color: $bg-light-black;
+    background-color: $bg-menu-item;
+    border-radius: 10px;
+    min-height: 250px;
+    height: auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 220px auto;
+
+    &:hover .contenedorLogo img {
+        transform: scale(1.03);
+    }
+
+    .contenedorLogo {
+        position: relative;
+        border-radius: 10px;
+        height: 100%;
+        width: 220px;
+
+        span {
+            border-radius: 10px;
+        }
+
+        img {
+            transition: 0.3s ease transform;
+        }
+    }
+    .bodyCard{
+        padding: 10px 15px;
+        width: 100%;
+        .header{
+            display: flex;
+            justify-content: space-between;
+            h2{
+                font-size: 24px;
+                margin: 0;
+                text-align: justify;
+                padding: 0;
+                transition: 1 ease color;
+            }
+            p{
+                margin-left: 20px;
+                font-size: 18px;
+                font-weight: bold;
+                &::before{
+                    content: '$';
+                    margin-right: 2px;
+                }
+                &::after{
+                    content: 'USD';
+                    margin-left: 2px;
+                }
+            }
+        }
+        .description{
+            font-weight: 500;
+            font-size: 17px;
+            margin-top: 10px;
+        }
+    }
+    &:hover .bodyCard .header h2 {
+        color: $bg-orange;
+        transition: 1 ease color;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .menuItem{
+        grid-template-columns: 100%;
+        .contenedorLogo{
+            width: 100%;
+            min-height: 220px;
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .menuItem{
+        grid-template-columns: 250px auto;
+    }
+}
+@media screen and (max-width: 620px) {
+    .menuItem{
+        grid-template-columns: 200px auto;
+    }
+}
+@media screen and (max-width: 380px) {
+    .menuItem{
+        grid-template-columns: 100%;
+        .contenedorLogo{
+            width: 100%;
+            min-height: 220px;
+        }
+    }
+}

@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { MainLayout } from "../components/layouts/MainLayout";
 import { Header } from "../components/Landing/Header/Header";
 import { Reservation } from "../components/Landing/Reservation/Reservation";
