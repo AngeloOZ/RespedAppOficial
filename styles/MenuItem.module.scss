@@ -1,6 +1,6 @@
 @use "scss/colors"as *;
 // $bg-menu-item: #0c0c0c;
-$bg-menu-item: #0c0c0c;
+$bg-menu-item: #1c1d21;
 
 
 .menuItem {
@@ -84,12 +84,8 @@ $bg-menu-item: #0c0c0c;
         grid-template-columns: 250px auto;
     }
 }
+
 @media screen and (max-width: 620px) {
-    .menuItem{
-        grid-template-columns: 200px auto;
-    }
-}
-@media screen and (max-width: 500px) {
     .menuItem{
         grid-template-columns: 100%;
         .contenedorLogo{
