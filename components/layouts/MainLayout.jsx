@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Footer } from "../Footer/Footer";
 import { Navbar } from "../Navbar/Navbar";
 
-export const MainLayout = ({title = "Fogón de COZ", desc ="", children}) => {
+export const MainLayout = ({ title = "Fogón de COZ", desc = "", children }) => {
   return (
     <>
       <Head>
@@ -14,9 +14,7 @@ export const MainLayout = ({title = "Fogón de COZ", desc ="", children}) => {
         {/* <link rel="shortcut icon" href="favicon.ico"/> */}
       </Head>
       <Navbar />
-      <main className="main_layout">
-          {children}
-      </main>
+      <main className="main_layout">{children}</main>
       <Footer />
     </>
   );

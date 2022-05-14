@@ -7,13 +7,11 @@ body {
   background-color: #040404;
 }
 
-#__next{
-  background-color: #040404;
-}
 
 a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
 * {

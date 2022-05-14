@@ -1,0 +1,482 @@
+/* =========== Google Fonts ============ */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+/* =============== Globals ============== */
+* {
+    font-family: "Ubuntu", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blue: #222;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #111;
+    --black2: #999;
+    --width-sideBar: 250px;
+    /* --blue: #2a2185;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999; */
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.admin-container {
+    position: relative;
+    width: 100%;
+}
+
+/* =============== Navigation ================ */
+.admin-navigation {
+    position: fixed;
+    width: var(--width-sideBar);
+    height: 100%;
+    background: var(--blue);
+    border-left: 10px solid var(--blue);
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.admin-navigation.active {
+    width: 80px;
+}
+
+.admin-navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+}
+
+.admin-navigation ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.admin-navigation ul li:hover,
+.admin-navigation ul li.hovered {
+    background-color: var(--gray);
+}
+
+.admin-navigation ul li:nth-child(1) {
+    margin-bottom: 40px;
+    pointer-events: none;
+}
+
+.admin-navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.admin-navigation ul li:hover a,
+.admin-navigation ul li.hovered a {
+    color: var(--blue);
+}
+
+.admin-navigation ul li a .admin-icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 75px;
+    text-align: center;
+}
+
+.admin-navigation ul li a .admin-icon ion-icon{
+    font-size: 1.75rem;
+}
+
+.admin-navigation ul li a .admin-title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+/* --------- curve outside ---------- */
+.admin-navigation ul li:hover a::before,
+.admin-navigation ul li.hovered a::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--gray);
+    pointer-events: none;
+}
+
+.admin-navigation ul li:hover a::after,
+.admin-navigation ul li.hovered a::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--gray);
+    pointer-events: none;
+}
+
+/* ===================== Main ===================== */
+.admin-main {
+    position: absolute;
+    width: calc(100% - var(--width-sideBar));
+    left: var(--width-sideBar);
+    min-height: 100vh;
+    background: var(--white);
+    transition: 0.5s;
+}
+
+.admin-main.active {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+
+.admin-topbar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    box-shadow: 0 7px 5px rgba(0, 0, 0, 0.03);
+}
+
+.admin-toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.admin-user {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.admin-user img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.container-content{
+    width: 100%;
+    padding: 10px 20px;
+    min-height: calc(100vh - 60px);
+    background-color: var(--gray);
+    overflow-x: hidden;
+}
+/* ======================= Cards ====================== */
+.dash-cardBox {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+.dash-cardBox .dash-card {
+    position: relative;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.dash-cardBox .dash-card .dash-numbers {
+    position: relative;
+    font-weight: 500;
+    font-size: 2.2rem;
+    color: var(--blue);
+}
+
+.dash-cardBox .dash-card .dash-cardName {
+    color: var(--black2);
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+.dash-cardBox .dash-card .dash-iconBx {
+    font-size: 3.5rem;
+    color: var(--black2);
+}
+
+.dash-cardBox .dash-card:hover {
+    background: var(--blue);
+}
+
+.dash-cardBox .dash-card:hover .dash-numbers,
+.dash-cardBox .dash-card:hover .dash-cardName,
+.dash-cardBox .dash-card:hover .dash-iconBx {
+    color: var(--white);
+}
+
+/* ================== Order Detailts List ============== */
+.admin-details {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    /* margin-top: 10px; */
+}
+
+.admin-details .admin-recentOrders {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.admin-details .admin-cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.admin-cardHeader h2 {
+    font-weight: 600;
+    color: var(--blue);
+}
+
+.admin-cardHeader .admin-btn {
+    position: relative;
+    padding: 5px 10px;
+    background: var(--blue);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+}
+
+.admin-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.admin-details table thead td {
+    font-weight: 600;
+}
+
+.admin-details .admin-recentOrders table tr {
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.admin-details .admin-recentOrders table tr:last-child {
+    border-bottom: none;
+}
+
+.admin-details .admin-recentOrders table tbody tr:hover {
+    background: var(--blue);
+    color: var(--white);
+}
+
+.admin-details .admin-recentOrders table tr td {
+    padding: 10px;
+}
+
+.admin-details .admin-recentOrders table tr td:last-child {
+    text-align: end;
+}
+
+.admin-details .admin-recentOrders table tr td:nth-child(2) {
+    text-align: end;
+}
+
+.admin-details .admin-recentOrders table tr td:nth-child(3) {
+    text-align: center;
+}
+
+.admin-tb-status {
+    padding: 2px 4px;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.admin-tb-status.delivered {
+    background: #8de02c;
+}
+
+.admin-tb-status.pending {
+    background: #e9b10a;
+}
+
+.admin-tb-status.return {
+    background: #f00;
+}
+
+.admin-tb-status.inProgress {
+    background: #1795ce;
+}
+
+.admin-recentCustomers {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    padding: 20px;
+    background: var(--white);
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.admin-recentCustomers .admin-imgBx {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.admin-recentCustomers .admin-imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-recentCustomers table tr td {
+    padding: 12px 10px;
+}
+
+.admin-recentCustomers table tr td h4 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2rem;
+}
+
+.admin-recentCustomers table tr td h4 span {
+    font-size: 14px;
+    color: var(--black2);
+}
+
+.admin-recentCustomers table tr:hover {
+    background: var(--blue);
+    color: var(--white);
+}
+
+.admin-recentCustomers table tr:hover td h4 span {
+    color: var(--white);
+}
+
+/* ====================== Responsive Design ========================== */
+@media (max-width: 991px) {
+    .admin-navigation {
+        left: -300px;
+    }
+
+    .admin-navigation.active {
+        width: 300px;
+        left: 0;
+    }
+
+    .admin-main {
+        width: 100%;
+        left: 0;
+    }
+
+    .admin-main.active {
+        left: 300px;
+    }
+
+    .dash-cardBox {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-details {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-recentOrders {
+        overflow-x: auto;
+    }
+
+    .admin-tb-status.inProgress {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .dash-cardBox {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .admin-cardHeader h2 {
+        font-size: 20px;
+    }
+
+    .user {
+        min-width: 40px;
+    }
+
+    .admin-navigation {
+        width: 100%;
+        left: -100%;
+        z-index: 1000;
+    }
+
+    .admin-navigation.active {
+        width: 100%;
+        left: 0;
+    }
+
+    .toggle {
+        z-index: 10001;
+    }
+
+    .admin-main.active .toggle {
+        color: #fff;
+        position: fixed;
+        right: 0;
+        left: initial;
+    }
+}

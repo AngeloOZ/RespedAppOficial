@@ -6,6 +6,7 @@ const date = new Date();
 
 export const Reservation = () => {
   const fecha = date.toISOString().split("T")[0];
+  const hora = date.toTimeString().split(' ')[0].slice(0,-3);
   return (
     <section className={css.section} id="reservaciones">
       <div className="container-lg">
@@ -17,13 +18,14 @@ export const Reservation = () => {
                 <form>
                   <div className="row">
                     <div className="col mt-4">
-                      <input type="date" className="form-control" min={fecha} />
+                      <input type="date" className="form-control" min={fecha} placeholder={fecha} value={fecha}/>
                     </div>
                     <div className="col mt-4">
                       <input
                         type="time"
                         className="form-control"
-                        placeholder="Hora"
+                        placeholder="13:00"
+                        value={hora}
                         min="12:30"
                         max="23:00"
                       />

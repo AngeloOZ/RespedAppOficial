@@ -43,32 +43,22 @@ const Categorias = styled.div`
   }
 `;
 
-export const Menu = () => {
+export const Menu = ({ categorias, productos }) => {
   return (
     <>
       <main className="container-fluid px-md-5 my-3">
         <Categorias>
           <ul>
             <li className="active">Todas</li>
-            <li>Carnes</li>
-            <li>Parrilla</li>
-            <li>Postres</li>
-            <li>Bebidas</li>
+            {categorias.map((categoria) => (
+              <li key={categoria.idCategoria}>{categoria.name}</li>
+            ))}
           </ul>
         </Categorias>
         <div className="row g-5">
-          <div className="col-12  col-md-6">
-            <ItemMenu></ItemMenu>
-          </div>
-          <div className="col-12  col-md-6">
-            <ItemMenu></ItemMenu>
-          </div>
-          <div className="col-12  col-md-6">
-            <ItemMenu></ItemMenu>
-          </div>
-          <div className="col-12  col-md-6">
-            <ItemMenu></ItemMenu>
-          </div>
+          {productos.map((prod) => (
+            <ItemMenu key={prod.idProducto} producto={prod} />
+          ))}
         </div>
       </main>
     </>
