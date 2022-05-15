@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import PropTypes from "prop-types";
 
 const ItemSidebar = ({ href, name, icon }) => {
     const {asPath} = useRouter();
@@ -18,9 +17,4 @@ const ItemSidebar = ({ href, name, icon }) => {
   );
 };
 
-ItemSidebar.propTypes = {
-  href: PropTypes.string,
-  name: PropTypes.string,
-  icon: PropTypes.string,
-};
 export default ItemSidebar;

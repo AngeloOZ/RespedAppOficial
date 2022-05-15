@@ -39,7 +39,7 @@ export const SidebarAdmin = ({ showSide }) => {
           icon="settings-outline"
         />
         <ItemSidebar
-          href="#"
+          href="/"
           name="Sign Out"
           icon="log-out-outline"
         />
