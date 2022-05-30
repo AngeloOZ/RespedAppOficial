@@ -1,0 +1,29 @@
+$bg-danger: #dc3545;
+
+.custom_input {
+    width: 100%;
+
+    .text {
+        margin-left: 6px;
+        text-transform: capitalize;
+        margin-top: 100px;
+    }
+
+    input.error_input {
+        border: 1px solid $bg-danger;
+        box-shadow: 0 0 2px 1px $bg-danger;
+        outline-color: $bg-danger;
+    }
+    input.error_input::placeholder{
+        color: $bg-danger;
+    }
+
+    .error {
+        margin-top: 2px;
+        margin-bottom: 5px;
+        display: block;
+        color: $bg-danger;
+        text-align: left;
+        font-weight: 500;
+    }
+}

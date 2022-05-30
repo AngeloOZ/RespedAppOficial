@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 export const useFilterProductos = (currentProducst) => {
     const { products, category } = currentProducst
-    const [productos, setProductos] = useState(products);
+    const [productos, setProductos] = useState([]);
 
     useEffect(() => {
         if (category != 0) {
@@ -11,6 +11,6 @@ export const useFilterProductos = (currentProducst) => {
         }else{
             setProductos(products)
         }
-    }, [category]);
+    }, [category, products]);
     return productos;
 }

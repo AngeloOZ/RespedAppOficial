@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --login-bg: #f3f3f3;
+    --title-bg: #000;
+    --button-bg: #E84C21;
+    --light-pink: #e95931;
+    --image-bg: #fcb364;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+}
+.main-layaout {
+    height: 100vh;
+    background-color: #e95931;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.login-container {
+    height: 560px;
+    width: 90%;
+    max-width: 900px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.login-info-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: var(--login-bg);
+}
+
+.image-container {
+    position: relative;
+    padding: 32px;
+    width: 50%;
+    background-color: var(--image-bg);
+    box-sizing: border-box;
+}
+
+.title {
+    text-transform: capitalize;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--title-bg);
+    margin: 20px;
+}
+
+.social-login {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+
+.social-login-element {
+    width: 150px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: 5px;
+    border: 1px solid var(--button-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-login-element i {
+    font-size: 20px;
+    margin-right: 8px;
+}
+.social-login-element:nth-child(2) i{
+    color: #4267b2;
+}
+.social-login-element:nth-child(1) i{
+    color: #D50f25;
+}
+
+.social-login-element:hover {
+    background-color: #f8f8f8;
+}
+
+.login-info-container>p {
+    font-size: 20px;
+}
+
+.inputs-container {
+    height: 55%;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.input,
+.btn-login {
+    width: 90%;
+    height: 3.125rem;
+    font-size: 1em;
+}
+
+.input {
+    padding-left: 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+    outline-color: var(--button-bg);
+}
+
+.input:hover {
+    border: 2px solid var(--button-bg);
+}
+
+.btn-login {
+    width: 80%;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--button-bg);
+    cursor: pointer;
+}
+
+.inputs-container p {
+    margin: 0;
+}
+
+.span {
+    color: var(--light-pink);
+    font-weight: 600;
+    cursor: pointer;
+}
+.span:hover{
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 1000px) {
+    .login-container {
+        width: 70%;
+        margin-top: 3rem;
+    }
+
+    .login-info-container {
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    .image-container {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .login-container {
+        width: 90%;
+    }
+
+    .social-login-element {
+        font-size: 16px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .title {
+        font-size: 24px;
+    }
+
+    .login-container {
+        height: 90%;
+    }
+
+    .social-login {
+        flex-direction: column;
+        align-items: center;
+        height: 30%;
+    }
+
+    .login-info-container>p {
+        margin: 0;
+    }
+}

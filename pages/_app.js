@@ -1,4 +1,5 @@
 import Head from 'next/head';
+
 import '../styles/globals.css';
 import "../styles/globalsAdmin.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,10 +13,10 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (<>
-    <Head>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"></link>
-    </Head>
-    <Component {...pageProps} />
+      <Head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"></link>
+      </Head>
+      <Component {...pageProps} />
   </>)
 }
 

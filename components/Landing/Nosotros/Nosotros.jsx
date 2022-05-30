@@ -10,23 +10,14 @@ export const Nosotros = () => {
         <div className="row g-3">
           <div className="col-12 col-sm-6 d-sm-flex align-items-center">
             <div className={css.image_aboutUs}>
-              <Image src={about} alt="" objectFit="cover" ></Image>
+              <Image src={about} alt="" objectFit="cover"></Image>
             </div>
           </div>
           <div className="col-12 col-sm-6 d-flex align-items-center">
             <p className={css.paragraph}>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-              aut soluta rem vitae dolorum commodi accusantium. Odit provident
-              nobis sunt corrupti. Accusamus aspernatur pariatur repudiandae.
-              Accusantium fugiat blanditiis asperiores nesciunt perspiciatis
-              natus necessitatibus porro enim. Eveniet ab consequuntur aperiam,
-              ipsum dolorem harum odit deleniti eaque recusandae, tempora magnam
-              sit eius. Tempore ut temporibus iste, obcaecati quasi fuga aperiam
-              quas iure ea impedit minima eos numquam ullam non veritatis quidem
-              magni voluptas deserunt. Ad cupiditate natus culpa nisi doloremque
-              odit, veniam omnis officiis fuga adipisci quos distinctio nobis,
-              possimus quae aut hic consequuntur earum nemo harum quidem quia
-              iusto illo voluptatum!
+              Bienvenidos al Restaurante su cocción es 100% al carbón, su nombre viene en nombre de su madre la Sra. Carmen Ordóñez Zeas.
+              <br /><br />
+              Sus platos vienen servidos en piedra volcánica, y más está dirigido a la Sierra ecuatoriana de la parte Andina, Tiene 3 tipos de cocción a gas para las salsas, leña para las costillas en horno de leña, cuy, pavo y carbón para los cortes de carne, parrilladas, asados, mariscos, pulpo, calamar, camarón servidos en piedra carbónica.
             </p>
           </div>
         </div>
