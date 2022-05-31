@@ -1,16 +1,10 @@
 import { ItemMenu } from "./ItemMenu";
-import { useFilterProductos } from "../../Hooks/useFilterProductos";
 
-export const GridItemsMenu = ({ productos, selectedCategory }) => {
-  const filterProductos = useFilterProductos({
-    products: productos,
-    category: selectedCategory,
-  });
-
+export const GridItemsMenu = ({ productos }) => {
   return (
     <div className="row g-5">
-      {filterProductos.map((prod) => (
-        <ItemMenu key={prod.idProducto} producto={prod} />
+      {productos.map((producto) => (
+        <ItemMenu key={producto.idProducto} producto={producto} />
       ))}
     </div>
   );

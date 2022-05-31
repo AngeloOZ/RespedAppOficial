@@ -1,6 +1,6 @@
 import Image from "next/image";
-import css from "../../styles/Footer.module.scss";
-import logo from "../../public/Img/logo_navbar.png";
+import css from "../../../styles/Footer.module.scss";
+import logo from "../../../public/Img/logo_navbar.png";
 
 export const Footer = () => {
   const date = new Date();

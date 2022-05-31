@@ -1,7 +1,8 @@
 //import
 import Link from "next/link";
-import css from "../../styles/Navbar.module.scss";
 import { useRouter } from "next/router";
+
+import css from "../../../styles/MenuItem.module.scss";
 
 export default function NavBarItem({ text, href }) {
   const { asPath } = useRouter();

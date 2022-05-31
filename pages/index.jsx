@@ -1,18 +1,20 @@
-import { MainLayout } from "../components/layouts/MainLayout";
-import { Header } from "../components/Landing/Header/Header";
-import { Reservation } from "../components/Landing/Reservation/Reservation";
-import { Galeria } from "../components/Landing/Galeria/Galeria";
-import { Nosotros } from "../components/Landing/Nosotros/Nosotros";
-import { Contacto } from "../components/Landing/Contacto/Contacto";
+import { LandingLayout } from "../components/layouts/LandingLayout";
+import {
+  Contacto,
+  Galeria,
+  Header,
+  Nosotros,
+  Reservation,
+} from "../components/Landing";
 
 export default function Home() {
   return (
-    <MainLayout>
+    <LandingLayout>
       <Header />
       <Reservation />
       <Galeria />
       <Nosotros />
       <Contacto />
-    </MainLayout>
+    </LandingLayout>
   );
 }

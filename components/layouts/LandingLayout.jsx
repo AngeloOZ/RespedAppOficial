@@ -1,8 +1,7 @@
 import Head from "next/head";
-import { Footer } from "../Footer/Footer";
-import { Navbar } from "../Navbar/Navbar";
+import { Footer, Navbar } from "../Landing";
 
-export const MainLayout = ({ title = "Fogón de COZ", desc = "", children }) => {
+export const LandingLayout = ({ title = "Fogón de COZ", desc = "", children }) => {
   return (
     <>
       <Head>

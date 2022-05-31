@@ -3,7 +3,6 @@ import { GridItemsMenu } from "./GridItemsMenu";
 import { MenuCategorias } from "./MenuCategorias";
 
 export const Menu = ({ categorias, productos }) => {
-  const [selectedCategory, setSelectedCategory] = useState(0);
 
   return (
     <main className="container-fluid py-3 px-md-5">
@@ -12,10 +11,7 @@ export const Menu = ({ categorias, productos }) => {
         category={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <GridItemsMenu
-        productos={productos}
-        selectedCategory={selectedCategory}
-      />
+      <GridItemsMenu productos={productos} />
     </main>
   );
 };

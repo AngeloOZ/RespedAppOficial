@@ -1,8 +1,10 @@
-import Link from "next/link";
-import styles from "../../styles/Navbar.module.scss";
-import NavBarItem from "./NavBarItem";
 import Image from "next/image";
-import logoNavbar from "../../public/Img/logo_navbar.png"
+import Link from "next/link";
+
+import NavBarItem from "./NavBarItem";
+import logoNavbar from "../../../public/Img/logo_navbar.png"
+
+import styles from "../../../styles/Navbar.module.scss";
 
 export const Navbar = () => {
   return (

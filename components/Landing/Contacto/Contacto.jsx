@@ -62,7 +62,7 @@ export const Contacto = () => {
                       type="submit"
                       className={`btn ${css.button_reserve}`}
                     >
-                      Realizar reservación
+                    Enviar mensaje
                     </button>
                   </div>
                 </div>

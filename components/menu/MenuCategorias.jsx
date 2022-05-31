@@ -1,35 +1,24 @@
-import React from "react";
-
+import Link from "next/link";
+import { useRouter } from "next/router";
 import css from "./Menu.module.scss";
 
-export const MenuCategorias = ({
-  categorias,
-  category,
-  setSelectedCategory,
-}) => {
-  const handleClickCategory = (id) => {
-    setSelectedCategory(id);
-  };
+export const MenuCategorias = ({ categorias }) => {
+  const { asPath } = useRouter();
 
   return (
     <div className={css.categorias}>
       <ul>
-        <li
-          key={0}
-          className={category == 0 ? css.active : ""}
-          onClick={() => handleClickCategory(0)}
-        >
-          Todas
-        </li>
-        {categorias.map(({ idCategoria, name }) => {
+        <Link href="/menu" passHref>
+          <li className={asPath == "/menu" ? css.active : ""}>Todas</li>
+        </Link>
+        {categorias.map((category) => {
+          const uri = `/menu/${category.NAME.toLowerCase()}`;
           return (
-            <li
-              className={category == idCategoria ? css.active : ""}
-              key={idCategoria}
-              onClick={() => handleClickCategory(idCategoria)}
-            >
-              {name}
-            </li>
+            <Link href={uri} passHref key={category.IDCATEGORIA}>
+              <li className={asPath == uri ? css.active : ""}>
+                {category.NAME}
+              </li>
+            </Link>
           );
         })}
       </ul>

@@ -12,10 +12,10 @@ export const ItemMenu = ({producto}) => {
         </div>
         <div className={css.bodyCard}>
           <header className={css.header}>
-            <h2>{producto.name}</h2>
-            <p>{producto.price}</p>
+            <h2>{producto.NAME}</h2>
+            <p>{producto.PRICE}</p>
           </header>
-          <p className={css.description}>{producto.detail}</p>
+          <p className={css.description}>{producto.DETAIL}</p>
         </div>
       </article>
     </div>

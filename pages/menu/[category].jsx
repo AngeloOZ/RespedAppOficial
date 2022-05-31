@@ -5,12 +5,12 @@ import { MenuCategorias } from "../../components/menu/MenuCategorias";
 import { getCategories, getProducts } from "../../helpers/axios/requestMenu";
 
 
-export default function MenuIndex({ categories, products }) {
+export default function MenuIndex({ categories, productos }) {
   return (
     <LandingLayout>
       <main className="container-fluid py-3 px-md-5">
         <MenuCategorias categorias={categories} />
-        <GridItemsMenu productos={products} />
+        {/* <GridItemsMenu productos={productos} /> */}
       </main>
     </LandingLayout>
   );
@@ -19,25 +19,20 @@ export default function MenuIndex({ categories, products }) {
 export async function getServerSideProps() {
   try {
     const categories = await getCategories();
-    const products = await getProducts();
+    const producst = await getProducts();
 
     return {
       props: {
         categories,
-        products,
+        productos: [],
       },
     };
   } catch (error) {
     if(error.response){
       console.error(error.response.data);
-    }else{
-      console.error(error)
     }
     return {
-      redirect:{
-        destination: '/',
-        permanent: false
-      }
+      props: {},
     };
   }
 }

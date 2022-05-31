@@ -5,25 +5,25 @@
     margin-bottom: 10px;
 
     ul {
-        max-width: 400px;
+        max-width: 800px;
         padding: 0;
         margin: auto;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
 
         li {
             list-style: none;
             padding: 0;
-            margin: 0;
-            text-transform: capitalize;
+            margin: 5px;
             padding: 10px 15px;
             border-radius: 10px;
             font-weight: bold;
-            cursor: pointer;
             box-shadow: 0 0 1px 0.5px #8d8d87;
             transition: 0.2s ease;
+            text-transform: uppercase;
+            cursor: pointer;
 
             &.active,
             &:hover {
