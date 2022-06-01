@@ -1,6 +1,6 @@
 @use "scss/colors"as *;
 // $bg-menu-item: #0c0c0c;
-$bg-menu-item: #1c1d21;
+$bg-menu-item: #141414;
 
 
 .menuItem {
@@ -11,7 +11,7 @@ $bg-menu-item: #1c1d21;
     height: auto;
     width: 100%;
     display: grid;
-    grid-template-columns: 220px auto;
+    grid-template-columns: 240px auto;
 
     &:hover .contenedorLogo img {
         transform: scale(1.03);
@@ -21,7 +21,7 @@ $bg-menu-item: #1c1d21;
         position: relative;
         border-radius: 10px;
         height: 100%;
-        width: 220px;
+        width: 100%;
 
         span {
             border-radius: 10px;
@@ -32,7 +32,7 @@ $bg-menu-item: #1c1d21;
         }
     }
     .bodyCard{
-        padding: 10px 15px;
+        padding: 10px 25px;
         width: 100%;
         .header{
             display: flex;
@@ -40,8 +40,8 @@ $bg-menu-item: #1c1d21;
             justify-content: space-between;
             h2{
                 font-size: 24px;
+                text-align: left;
                 margin: 0;
-                text-align: justify;
                 padding: 0;
                 transition: 1 ease color;
             }

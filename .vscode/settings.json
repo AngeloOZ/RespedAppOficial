@@ -3,5 +3,6 @@
     "appService.zipIgnorePattern": [
         "node_modules{,/**}",
         ".vscode{,/**}"
-    ]
+    ],
+    "editor.tabSize": 3
 }

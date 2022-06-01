@@ -1,9 +1,8 @@
+import { obtenerCategorias } from "../../backend/controllers/categoriasController";
+import { obtenerProductos } from "../../backend/controllers/productsController";
 import { LandingLayout } from "../../components/layouts/LandingLayout";
 import { GridItemsMenu } from "../../components/menu/GridItemsMenu";
 import { MenuCategorias } from "../../components/menu/MenuCategorias";
-
-import { getCategories, getProducts } from "../../helpers/axios/requestMenu";
-
 
 export default function MenuIndex({ categories, products }) {
   return (
@@ -18,8 +17,8 @@ export default function MenuIndex({ categories, products }) {
 
 export async function getServerSideProps() {
   try {
-    const categories = await getCategories();
-    const products = await getProducts();
+    const categories = await obtenerCategorias();
+    const products = await obtenerProductos();
 
     return {
       props: {
@@ -28,16 +27,20 @@ export async function getServerSideProps() {
       },
     };
   } catch (error) {
-    if(error.response){
+    if (error.response) {
       console.error(error.response.data);
-    }else{
-      console.error(error)
+    } else {
+      console.error(error);
     }
     return {
-      redirect:{
-        destination: '/',
-        permanent: false
-      }
+      props: {
+        categories:[],
+        products:[],
+      },
+      // redirect:{
+      //   destination: '/',
+      //   permanent: false
+      // }
     };
   }
 }
