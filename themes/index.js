@@ -1,0 +1,1 @@
+export * from "./ligth-theme";

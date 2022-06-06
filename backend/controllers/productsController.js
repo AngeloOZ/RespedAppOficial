@@ -1,5 +1,4 @@
 // const { NextResponse } = require("next/server")
-import * as Validator from 'validatorjs';
 
 import { getAllProductos, getAllProductsByCategory } from "../models"
 
