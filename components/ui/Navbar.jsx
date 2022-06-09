@@ -18,8 +18,7 @@ export const Navbar = ({ categories = [] }) => {
       <Toolbar>
         <NextLink href="/" passHref>
           <Link display="flex" alignItems="center">
-            <Typography variant="h6">Teslo |</Typography>
-            <Typography sx={{ ml: 0.5 }}>Shop</Typography>
+            <Typography variant="h6">El Fogón de COZ </Typography>
           </Link>
         </NextLink>
 

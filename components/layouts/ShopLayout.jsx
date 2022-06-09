@@ -8,7 +8,7 @@ export const ShopLayout = ({
   children,
   title,
   pageDescription,
-  imageFullUrl,
+  imageFullUrl = null,
   categories,
 }) => {
   return (
@@ -28,7 +28,7 @@ export const ShopLayout = ({
         style={{
           margin: "60px auto auto 0",
           maxWidth: "1440px",
-          padding: "0 30px 30px 30px",
+          padding: "20px 30px 30px 30px",
           minHeight: "400px",
           background: "#111111"
         }}

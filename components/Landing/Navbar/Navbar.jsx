@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import NavBarItem from "./NavBarItem";
-import logoNavbar from "../../../public/Img/logo_navbar.png"
+import logoNavbar from "../../../public/Img/logo_navbar.png";
 
 import styles from "../../../styles/Navbar.module.scss";
 
@@ -43,7 +43,7 @@ export const Navbar = () => {
           </ul>
 
           <div className="d-flex">
-            <Link href="/menu">
+            <Link href="/orders">
               <a className={`btn ${styles.btn_menu}`}>
                 <i className="bi bi-grid-3x3-gap-fill"></i>
                 <span className="ms-2">Ver menú</span>
@@ -61,27 +61,16 @@ export const Navbar = () => {
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
+                  <Link href="/auth/login">
+                    <a className="dropdown-item">Login</a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Separated link
-                  </a>
+                  <Link href="/auth/register">
+                    <a className="dropdown-item" href="#">
+                      Register
+                    </a>
+                  </Link>
                 </li>
               </ul>
             </div>
