@@ -42,11 +42,11 @@ export const ProductCard = ({ product }) => {
             {product.DETAIL}
           </Typography>
         </CardContent>
-        <Divider />
         <CardActions style={{display: "flex", justifyContent:"center"}}>
           <Button
             variant="contained"
             startIcon={<ShoppingCartCheckoutOutlinedIcon />}
+            style={{padding:"10px 20px"}}
           >
             Agregar al carrito
           </Button>

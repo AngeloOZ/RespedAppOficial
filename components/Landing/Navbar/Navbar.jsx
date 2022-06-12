@@ -43,7 +43,7 @@ export const Navbar = () => {
           </ul>
 
           <div className="d-flex">
-            <Link href="/orders">
+            <Link href="/menu">
               <a className={`btn ${styles.btn_menu}`}>
                 <i className="bi bi-grid-3x3-gap-fill"></i>
                 <span className="ms-2">Ver menú</span>

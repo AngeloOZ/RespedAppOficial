@@ -1,13 +1,17 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CategoryProvider } from "../../context/categories";
+import { UIProvider } from "../../context/ui";
 import { lightTheme } from "../../themes/ligth-theme";
 
 export const MaterialUILayout = ({ children }) => {
   return (
-    <>
-      <ThemeProvider theme={lightTheme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </>
+    <CategoryProvider>
+      <UIProvider>
+        <ThemeProvider theme={lightTheme}>
+          <CssBaseline />
+          {children}
+        </ThemeProvider>
+      </UIProvider>
+    </CategoryProvider>
   );
 };

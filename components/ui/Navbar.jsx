@@ -1,4 +1,7 @@
+import { useContext } from "react";
+
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 
 import {
   AppBar,
@@ -12,7 +15,12 @@ import {
 } from "@mui/material";
 import { ShoppingCartOutlined, MenuOutlined } from "@mui/icons-material";
 
+import { UIContext } from "../../context/ui";
+
 export const Navbar = ({ categories = [] }) => {
+  const {asPath} = useRouter();
+  const {toggleSideMenu} = useContext(UIContext)
+
   return (
     <AppBar>
       <Toolbar>
@@ -52,7 +60,7 @@ export const Navbar = ({ categories = [] }) => {
             </IconButton>
           </Link>
         </NextLink>
-        <IconButton style={{ marginLeft: "10px" }}>
+        <IconButton style={{ marginLeft: "10px" }} onClick={toggleSideMenu}>
           <MenuOutlined fontSize="large" />
         </IconButton>
       </Toolbar>
