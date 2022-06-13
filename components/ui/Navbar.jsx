@@ -17,9 +17,8 @@ import { ShoppingCartOutlined, MenuOutlined } from "@mui/icons-material";
 
 import { UIContext } from "../../context/ui";
 
-export const Navbar = ({ categories = [] }) => {
-  const {asPath} = useRouter();
-  const {toggleSideMenu} = useContext(UIContext)
+export const Navbar = ({ categories }) => {
+  const { toggleSideMenu } = useContext(UIContext);
 
   return (
     <AppBar>
@@ -32,17 +31,24 @@ export const Navbar = ({ categories = [] }) => {
 
         <Box flex={1} />
 
-        <Box sx={{ display: { xs: "none", sm: "block" } }}>
-          <NextLink href="#" passHref>
+        <Box sx={{ display: { sm: "none", md: "block" } }}>
+          <NextLink href="/menu" passHref>
             <Link mr={1}>
               <Button>Todos</Button>
             </Link>
           </NextLink>
           {categories.map((category) => {
+            const url = `/menu/${category.IDCATEGORIA}?name=${category.NAME.toLowerCase()}`;
             return (
-              <NextLink href="#" passHref key={category.IDCATEGORIA}>
+              <NextLink
+                href={url}
+                passHref
+                key={category.IDCATEGORIA}
+              >
                 <Link mr={1}>
-                  <Button>{category.NAME}</Button>
+                  <Button style={{ textTransform: "capitalize" }}>
+                    {category.NAME.toLowerCase()}
+                  </Button>
                 </Link>
               </NextLink>
             );

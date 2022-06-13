@@ -6,7 +6,10 @@ export const categoryReducer = (state = [], action) => {
         ...state,
       }
     case 'SET_CATEGORIES':
-      return [action.payload]
+      return {
+        ...state,
+        categories: action.payload
+      }
     default:
       return state;
   }

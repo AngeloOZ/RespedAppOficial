@@ -1,7 +1,11 @@
 import Head from "next/head";
 import { Footer, Navbar } from "../Landing";
 
-export const LandingLayout = ({ title = "Fogón de COZ", desc = "", children }) => {
+export const LandingLayout = ({
+  title = "Fogón de COZ",
+  desc = "",
+  children,
+}) => {
   return (
     <>
       <Head>

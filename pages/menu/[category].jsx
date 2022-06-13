@@ -1,38 +1,27 @@
-import { LandingLayout } from "../../components/layouts/LandingLayout";
-import { GridItemsMenu } from "../../components/menu/GridItemsMenu";
-import { MenuCategorias } from "../../components/menu/MenuCategorias";
+import { useRouter } from "next/router";
 
-import { getCategories, getProducts } from "../../helpers/axios/requestMenu";
+import { Box, Typography } from "@mui/material";
 
+import { ShopLayout } from "../../components/layouts/ShopLayout";
+import { useProducts } from "../../Hooks";
+import { ProductPlaceHolder } from "../../components/products/ProductPlaceHolder";
+import { ProductList } from "../../components/products";
 
-export default function MenuIndex({ categories, productos }) {
+export default function MenuIndex() {
+  const { query } = useRouter();
+  const { products, isLoading } = useProducts(query.category);
   return (
-    <LandingLayout>
-      <main className="container-fluid py-3 px-md-5">
-        <MenuCategorias categorias={categories} />
-        {/* <GridItemsMenu productos={productos} /> */}
-      </main>
-    </LandingLayout>
+    <ShopLayout title={query.name}>
+      <Box textAlign="center" component="div" paddingY={2}>
+        <Typography variant="h1" component="h1" textTransform="capitalize">
+          Categoria <span className="toLowerCase">de</span> {query.name}
+        </Typography>
+        {isLoading ? (
+          <ProductPlaceHolder />
+        ) : (
+          <ProductList products={products} />
+        )}
+      </Box>
+    </ShopLayout>
   );
-}
-
-export async function getServerSideProps() {
-  try {
-    const categories = await getCategories();
-    const producst = await getProducts();
-
-    return {
-      props: {
-        categories,
-        productos: [],
-      },
-    };
-  } catch (error) {
-    if(error.response){
-      console.error(error.response.data);
-    }
-    return {
-      props: {},
-    };
-  }
 }

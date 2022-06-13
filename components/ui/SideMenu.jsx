@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { useRouter } from "next/router";
 import {
   Box,
   Divider,
@@ -16,19 +18,21 @@ import {
   AdminPanelSettings,
   CategoryOutlined,
   ConfirmationNumberOutlined,
-  EscalatorWarningOutlined,
-  FemaleOutlined,
   LoginOutlined,
-  MaleOutlined,
-  SearchOutlined,
+  RestaurantOutlined,
   VpnKeyOutlined,
 } from "@mui/icons-material";
-import { useContext } from "react";
+
 import { UIContext } from "../../context/ui";
 
 export const SideMenu = ({ categories = [] }) => {
+  const router = useRouter();
+  const { isMenuOpen, toggleSideMenu } = useContext(UIContext);
 
-  const {isMenuOpen,toggleSideMenu} = useContext(UIContext)
+  const navigateTo = (url) => {
+    toggleSideMenu();
+    router.push(url);
+  };
 
   return (
     <Drawer
@@ -66,17 +70,34 @@ export const SideMenu = ({ categories = [] }) => {
             <ListItemText primary={"Salir"} />
           </ListItem>
 
-          <Box sx={{ display: { xs: "", sm: "none" } }}>
+          <Box sx={{ display: { sm: "block", md: "none" } }}>
             <Divider />
             <ListSubheader>Categorias</ListSubheader>
             <Divider />
+
+            <ListItem button onClick={() => navigateTo("/menu")}>
+              <ListItemIcon>
+                <RestaurantOutlined />
+              </ListItemIcon>
+              <ListItemText primary="Todos" />
+            </ListItem>
             {categories.map((category) => {
+              const url = `/menu/${
+                category.IDCATEGORIA
+              }?name=${category.NAME.toLowerCase()}`;
               return (
-                <ListItem button key={category.IDCATEGORIA}>
+                <ListItem
+                  button
+                  key={category.IDCATEGORIA}
+                  onClick={() => navigateTo(url)}
+                >
                   <ListItemIcon>
-                    <MaleOutlined />
+                    <RestaurantOutlined />
                   </ListItemIcon>
-                  <ListItemText primary={category.NAME} />
+                  <ListItemText
+                    style={{ textTransform: "capitalize" }}
+                    primary={category.NAME.toLowerCase()}
+                  />
                 </ListItem>
               );
             })}

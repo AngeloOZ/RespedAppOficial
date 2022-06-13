@@ -10,7 +10,7 @@ export const NavbarTop = ({ setOpenSidebar }) => {
         <ion-icon name="menu-outline"></ion-icon>
       </div>
       <div className="admin-user">
-        <img src="imgs/customer01.jpg" alt="" />
+        {/* <img src="imgs/customer01.jpg" alt="" /> */}
       </div>
     </div>
   );

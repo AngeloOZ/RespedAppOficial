@@ -25,7 +25,7 @@ export const Reservation = () => {
                         type="time"
                         className="form-control"
                         placeholder="13:00"
-                        value={hora}
+                        // value={hora}
                         min="12:30"
                         max="23:00"
                       />

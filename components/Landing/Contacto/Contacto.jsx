@@ -10,7 +10,7 @@ export const Contacto = () => {
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d255267.41257061885!2d-78.3342501540625!3d-1.442838173714416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sfogon%20de%20coz!5e0!3m2!1ses-419!2sec!4v1650577331160!5m2!1ses-419!2sec"
                 loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
+                referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
           </div>

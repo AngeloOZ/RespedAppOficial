@@ -23,7 +23,7 @@ export const ProductCard = ({ product }) => {
     userSelect: "none",
   };
   return (
-    <Grid item xs={12} sm={6} md={5} lg={4}>
+    <Grid item xs={12} sm={6} md={5} lg={4} className="fadeIn">
       <Card style={{ position: "relative" }}>
         <CardMedia
           component="img"
