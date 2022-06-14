@@ -8,6 +8,10 @@ import ListItemText from '@mui/material/ListItemText';
 
 
 export default function Admin() {
+   const [open, setOpen] = React.useState(true);
+   const handleClick = () => {
+      setOpen(!open);
+   };
   return (
     <AdminLayout>
         <h1>Usuarios</h1>
