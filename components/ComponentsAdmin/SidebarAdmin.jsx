@@ -24,8 +24,8 @@ export const SidebarAdmin = ({ showSide }) => {
           icon="home-outline"
         />
         <ItemSidebar
-          href="#"
-          name="Customers"
+          href="/admin/usuarios"
+          name="Usuarios"
           icon="people-outline"
         />
         <ItemSidebar
