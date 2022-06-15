@@ -1,0 +1,112 @@
+@use "../../../styles/scss/colors"as *;
+
+.cartButton {
+	position: relative;
+	padding: 25px 10px;
+	width: 300px;
+	height: 40px;
+	border: 0;
+	border-radius: 10px;
+	background-color: $bg-orange;
+	outline: none;
+	cursor: pointer;
+	color: #fff;
+	transition: .3s ease-in-out all;
+	overflow: hidden;
+}
+.cartButton:hover {
+	background-color: $bg-organge-hover;
+}
+.cartButton:active {
+	transform: scale(.9);
+}
+
+.cartButton .aux1 {
+	position: absolute;
+	z-index: 2;
+	top: 50%;
+	left: -10%;
+	font-size: 1.5em;
+	transform: translate(-50%,-50%);
+}
+.cartButton .aux2 {
+	position: absolute;
+	z-index: 3;
+	top: -20%;
+	left: 52%;
+	font-size: 0.8em;
+	transform: translate(-55%,-50%);
+}
+.cartButton span {
+	position: absolute;
+	display: block;
+	z-index: 3;
+	width: 100%;
+	left: 50%;
+	top: 50%;
+	font-size: 1.2em;
+	color: #fff;
+	transform: translate(-50%,-50%);
+	user-select: none;
+}
+.cartButton span.addToCart {
+	opacity: 1;
+}
+.cartButton span.added {
+	opacity: 0;
+}
+.cartButton.clicked{
+	cursor: not-allowed;
+}
+.cartButton.clicked .aux1 {
+	animation: cart 1.5s ease-in-out forwards;
+}
+.cartButton.clicked .aux2 {
+	animation: box 1.5s ease-in-out forwards;
+}
+.cartButton.clicked span.addToCart {
+	animation: txt1 1.5s ease-in-out forwards;
+}
+.cartButton.clicked span.added {
+	animation: txt2 1.5s ease-in-out forwards;
+}
+@keyframes cart {
+	0% {
+		left: -10%;
+	}
+	40%, 60% {
+		left: 50%;
+	}
+	100% {
+		left: 110%;
+	}
+}
+@keyframes box {
+	0%, 40% {
+		top: -20%;
+	}
+	60% {
+		top: 40%;
+		left: 51%;
+	}
+	100% {
+		top: 40%;
+		left: 112%;
+	}
+}
+@keyframes txt1 {
+	0% {
+		opacity: 1;
+	}
+	20%, 100% {
+		opacity: 0;
+	}
+}
+@keyframes txt2 {
+	0%, 80% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

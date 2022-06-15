@@ -100,3 +100,18 @@ a {
 .toCapitalize{
   text-transform: capitalize;
 }
+.itemModal{
+  width: 450px;
+  background-color: #fff;
+  border: 2px solid transparent;
+  padding: 16px 32px 24px 32px;
+  text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+  .itemModal{
+    width: 90%;
+    margin: auto;
+    padding: 16px 15px;
+  }
+}

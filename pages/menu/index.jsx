@@ -20,30 +20,3 @@ export default function Index() {
     </ShopLayout>
   );
 }
-
-// export async function getServerSideProps() {
-//   let categories = [];
-//   let products = [];
-//   try {
-//     categories = await obtenerCategorias();
-//     products = await obtenerProductos();
-//     return {
-//       props: {
-//         categories,
-//         products,
-//       },
-//     };
-//   } catch (error) {
-//     if (error.response) {
-//       console.error(error.response.data);
-//     } else {
-//       console.error(error);
-//     }
-//     return {
-//       props: {
-//         categories,
-//         products,
-//       },
-//     };
-//   }
-// }

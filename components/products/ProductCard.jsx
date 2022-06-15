@@ -1,27 +1,42 @@
+import { useContext } from "react";
+
 import {
   Card,
-  Button,
   CardActions,
   CardContent,
   CardMedia,
   Grid,
   Typography,
-  Divider,
 } from "@mui/material";
-import AddShoppingCartOutlinedIcon  from "@mui/icons-material/AddShoppingCartOutlined";
-import ShoppingCartCheckoutOutlinedIcon from '@mui/icons-material/ShoppingCartCheckoutOutlined';
+
+import { ButtonCart } from "../Components/buttonAnimate/ButtonCart";
+import { CartContext } from "../../context";
+
+const styleC = {
+  position: "absolute",
+  right: 14,
+  top: 155,
+  background: "rgba(0,0,0,0.85)",
+  padding: "5px 10px",
+  color: "white",
+  borderRadius: "10px",
+  userSelect: "none",
+};
 
 export const ProductCard = ({ product }) => {
-  const styleC = {
-    position: "absolute",
-    right: 14,
-    top: 155,
-    background: "rgba(0,0,0,0.85)",
-    padding: "5px 10px",
-    color: "white",
-    borderRadius: "10px",
-    userSelect: "none",
+  const { addProductToCart } = useContext(CartContext);
+
+  const addCurrentProduct = () => {
+    const newProduct = {
+      idItem: new Date().getTime(),
+      idProduct: product.IDPRODUCTO,
+      name: product.NAME,
+      price: product.PRICE,
+      image: product.IMAGE,
+    };
+    addProductToCart(newProduct);
   };
+
   return (
     <Grid item xs={12} sm={6} md={5} lg={4} className="fadeIn">
       <Card style={{ position: "relative" }}>
@@ -42,14 +57,11 @@ export const ProductCard = ({ product }) => {
             {product.DETAIL}
           </Typography>
         </CardContent>
-        <CardActions style={{display: "flex", justifyContent:"center"}}>
-          <Button
-            variant="contained"
-            startIcon={<ShoppingCartCheckoutOutlinedIcon />}
-            style={{padding:"10px 20px"}}
-          >
-            Agregar al carrito
-          </Button>
+        <CardActions style={{ display: "flex", justifyContent: "center" }}>
+          <ButtonCart
+            style={{ padding: "20px 10px", width: "250px" }}
+            onClick={addCurrentProduct}
+          />
         </CardActions>
       </Card>
     </Grid>

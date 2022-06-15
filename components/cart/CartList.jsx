@@ -1,4 +1,8 @@
-import NextLink from "next/link";
+import { useContext } from "react";
+
+import { useRouter } from "next/router";
+import { CartContext } from "../../context";
+
 import {
   Box,
   Button,
@@ -10,30 +14,24 @@ import {
 } from "@mui/material";
 import { RenderIf } from "../Components/RenderIf";
 
-const productsInCart = [
-  "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1652393339/website/61e1c889d30b4f841271c899_image-6-menu-qrcode-template-p-1080_qovxpe.jpg",
-  "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1652393339/website/61e1c889d30b4f841271c899_image-6-menu-qrcode-template-p-1080_qovxpe.jpg",
-  "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1652393339/website/61e1c889d30b4f841271c899_image-6-menu-qrcode-template-p-1080_qovxpe.jpg",
-];
-
 export const CartList = ({ editable = false }) => {
+  const { cart, removeCartProduct } = useContext(CartContext);
   return (
     <>
-      {productsInCart.map((product, i) => (
-        <Grid container spacing={2} key={i} sx={{ mb: 1.5 }}>
+      {cart.map((item) => (
+        <Grid container spacing={2} key={item.idItem} sx={{ mb: 1.5 }}>
           <Grid item xs={3}>
             <CardActionArea>
               <CardMedia
-                image={product}
+                image={item.image}
                 component="img"
                 sx={{ borderRadius: "5px" }}
               />
             </CardActionArea>
           </Grid>
           <Grid item xs={7}>
-            <Typography variant="body1" mt={1} fontWeight={600}>
-              {product.title} Lorem ipsum, dolor sit amet consectetur
-              adipisicing elit. Veritatis.
+            <Typography variant="body1" fontWeight={600}>
+              {item.name}
             </Typography>
           </Grid>
           <Grid
@@ -43,9 +41,12 @@ export const CartList = ({ editable = false }) => {
             alignItems="center"
             flexDirection="column"
           >
-            <Typography variant="subtitle1" mb={1}>{`$230`}</Typography>
+            <Typography
+              variant="subtitle1"
+              mb={1}
+            >{`$${item.price}`}</Typography>
             <RenderIf isTrue={editable}>
-              <Button variant="outlined" color="secondary">
+              <Button variant="outlined" color="secondary" onClick={()=>removeCartProduct(item.idItem)}>
                 Remover
               </Button>
             </RenderIf>

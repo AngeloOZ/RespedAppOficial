@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import NextLink from "next/link";
-import { useRouter } from "next/router";
+import { UIContext, CartContext } from "../../context";
 
 import {
   AppBar,
@@ -13,13 +13,12 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { ShoppingCartOutlined, MenuOutlined } from "@mui/icons-material";
 
-import { UIContext } from "../../context/ui";
+import { ShoppingCartOutlined, MenuOutlined } from "@mui/icons-material";
 
 export const Navbar = ({ categories }) => {
   const { toggleSideMenu } = useContext(UIContext);
-
+  const { numberOfItems } = useContext(CartContext);
   return (
     <AppBar>
       <Toolbar>
@@ -31,20 +30,18 @@ export const Navbar = ({ categories }) => {
 
         <Box flex={1} />
 
-        <Box sx={{ display: { sm: "none", md: "block" } }}>
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
           <NextLink href="/menu" passHref>
             <Link mr={1}>
               <Button>Todos</Button>
             </Link>
           </NextLink>
           {categories.map((category) => {
-            const url = `/menu/${category.IDCATEGORIA}?name=${category.NAME.toLowerCase()}`;
+            const url = `/menu/${
+              category.IDCATEGORIA
+            }?name=${category.NAME.toLowerCase()}`;
             return (
-              <NextLink
-                href={url}
-                passHref
-                key={category.IDCATEGORIA}
-              >
+              <NextLink href={url} passHref key={category.IDCATEGORIA}>
                 <Link mr={1}>
                   <Button style={{ textTransform: "capitalize" }}>
                     {category.NAME.toLowerCase()}
@@ -60,7 +57,7 @@ export const Navbar = ({ categories }) => {
         <NextLink href="/cart" passHref>
           <Link>
             <IconButton>
-              <Badge badgeContent={2} color="secondary">
+              <Badge badgeContent={numberOfItems} color="secondary">
                 <ShoppingCartOutlined />
               </Badge>
             </IconButton>
