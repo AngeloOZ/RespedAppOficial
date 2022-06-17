@@ -133,3 +133,20 @@ const CartPage = () => {
 };
 
 export default CartPage;
+
+export const getServerSideProps = async ({ req }) => {
+  const cookies = req.cookies;
+  const cart = cookies.cart ? JSON.parse(cookies.cart) : [];
+
+  if (cart.length == 0) {
+    return {
+      redirect: {
+        destination: "/cart/empty",
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

@@ -7,11 +7,13 @@ export const Input = function ({
   id,
   placeholder,
   styles = "",
-  errors = "",
-  styleErrors = {}
+  errors = false,
+  helperText="",
+  styleErrors = {},
+  useFormRegister
 }) {
   const isError = useMemo(() => {
-    return errors.length == 0 ? false : true;
+    return errors
   }, [errors]);
 
   return (
@@ -22,8 +24,9 @@ export const Input = function ({
         name={name}
         id={id}
         placeholder={placeholder}
+        {...useFormRegister}
       />
-      {isError && <span className={css.error} style={styleErrors}>{errors}</span>}
+      {isError && <span className={css.error} style={styleErrors}>{helperText}</span>}
     </div>
   );
 };

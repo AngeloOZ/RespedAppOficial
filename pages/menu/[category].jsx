@@ -19,9 +19,16 @@ export default function MenuIndex() {
         {isLoading ? (
           <ProductPlaceHolder />
         ) : (
-          <ProductList products={products} />
+          <ProductList products={products?.data || []} />
         )}
       </Box>
     </ShopLayout>
   );
 }
+
+export const getServerSideProps = async ({ req }) => {
+  console.log(req.params);
+  return {
+    props: {},
+  };
+};

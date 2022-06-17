@@ -4,6 +4,7 @@ export const cartReducer = (state, action) => {
          return {
             ...state,
             cart: [...action.payload],
+            isLoaded: true,
          }
       case 'ADD_CART_PRODUCT':
          return {
@@ -19,6 +20,11 @@ export const cartReducer = (state, action) => {
          return {
             ...state,
             ...action.payload,
+         }
+      case 'UPDATE_ADDRESS_CART':
+         return {
+            ...state,
+            address: action.payload,
          }
       default:
          return state;

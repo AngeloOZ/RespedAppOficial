@@ -6,10 +6,6 @@ $button-bg: #E84C21;
 $light-pink: #e95931;
 $image-bg: #fcb364;
 
-// *{
-//     font-family: 'Poppins', sans-serif;
-// }
-
 .main_layaout {
     height: 100vh;
     background-color: #e95931;
@@ -17,6 +13,7 @@ $image-bg: #fcb364;
     justify-content: center;
     align-items: center;
     margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 .login_container {
@@ -27,6 +24,7 @@ $image-bg: #fcb364;
     display: flex;
     justify-content: space-between;
     overflow: hidden;
+    font-family: 'Poppins', sans-serif;
 }
 
 .login_info_container {
@@ -36,6 +34,7 @@ $image-bg: #fcb364;
     align-items: center;
     text-align: center;
     background-color: $login-bg;
+    font-family: 'Poppins', sans-serif;
 }
 
 .image_container {
@@ -53,6 +52,7 @@ $image-bg: #fcb364;
     letter-spacing: 1px;
     color: $title-bg;
     margin: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .social_login {
@@ -94,6 +94,7 @@ $image-bg: #fcb364;
 
 .login_info_container>p {
     font-size: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .inputs_container {
@@ -103,6 +104,7 @@ $image-bg: #fcb364;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    font-family: 'Poppins', sans-serif;
 }
 
 .input,
@@ -110,6 +112,7 @@ $image-bg: #fcb364;
     width: 90%;
     height: 3.125rem;
     font-size: 1em;
+    font-family: 'Poppins', sans-serif;
 }
 
 .input {
@@ -135,20 +138,38 @@ $image-bg: #fcb364;
     border-radius: 5px;
     background-color: $button-bg;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
 }
 
 .inputs_container p {
     margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 .span {
     color: $light-pink;
     font-weight: 600;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
 }
 
 .span:hover {
     text-decoration: underline;
+}
+
+.display_error{
+    background-color: #d33f3f;
+    background-color: #dc3545;
+    width: 90%;
+    padding: 10px;
+    color: #fff;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+}
+.display_error i{
+    font-size: 22px;
+    margin-right: 8px;
 }
 
 @media screen and (max-width: 1000px) {
@@ -190,10 +211,13 @@ $image-bg: #fcb364;
     .social_login {
         flex-direction: column;
         align-items: center;
-        height: 30%;
+        height: 22%;
     }
 
     .login_info_container>p {
         margin: 0;
+    }
+    .social_login_element{
+        width: 90%;
     }
 }

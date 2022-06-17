@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-
 import axios from 'axios';
-import { SWRConfig } from "swr";
+
+import { AuthProvider } from "../context";
 
 import '../styles/globals.css';
 import "../styles/globalsAdmin.css";
@@ -17,7 +17,9 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <Component {...pageProps} />
+    <AuthProvider>
+      <Component {...pageProps} />
+    </AuthProvider>
   );
 }
 

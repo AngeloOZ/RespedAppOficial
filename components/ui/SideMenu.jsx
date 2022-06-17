@@ -1,33 +1,25 @@
 import { useContext } from "react";
+
 import { useRouter } from "next/router";
+import { UIContext, AuthContext } from "../../context";
+
 import {
   Box,
-  Divider,
   Drawer,
-  IconButton,
-  Input,
-  InputAdornment,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
   ListSubheader,
 } from "@mui/material";
-import {
-  AccountCircleOutlined,
-  AdminPanelSettings,
-  CategoryOutlined,
-  ConfirmationNumberOutlined,
-  LoginOutlined,
-  RestaurantOutlined,
-  VpnKeyOutlined,
-} from "@mui/icons-material";
+import { LoginOutlined, RestaurantOutlined } from "@mui/icons-material";
 
-import { UIContext } from "../../context/ui";
+import { ListItemAdmin, ListItemsClient, ListItemsAuth } from "./";
 
 export const SideMenu = ({ categories = [] }) => {
   const router = useRouter();
   const { isMenuOpen, toggleSideMenu } = useContext(UIContext);
+  const { isLoggedIn, logoutUser, rol } = useContext(AuthContext);
 
   const navigateTo = (url) => {
     toggleSideMenu();
@@ -41,40 +33,24 @@ export const SideMenu = ({ categories = [] }) => {
       sx={{ backdropFilter: "blur(4px)", transition: "all 0.5s ease-out" }}
       onClose={toggleSideMenu}
     >
-      <Box sx={{ width: 250, paddingTop: 5 }}>
+      <Box sx={{ width: 250 }}>
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <AccountCircleOutlined />
-            </ListItemIcon>
-            <ListItemText primary={"Perfil"} />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <ConfirmationNumberOutlined />
-            </ListItemIcon>
-            <ListItemText primary={"Mis Ordenes"} />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <VpnKeyOutlined />
-            </ListItemIcon>
-            <ListItemText primary={"Ingresar"} />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <LoginOutlined />
-            </ListItemIcon>
-            <ListItemText primary={"Salir"} />
-          </ListItem>
+          {isLoggedIn && rol == 1 && <ListItemAdmin navigateTo={navigateTo} />}
+          {isLoggedIn && rol == 3 && (
+            <ListItemsClient navigateTo={navigateTo} />
+          )}
+          {isLoggedIn && (
+            <ListItem button onClick={logoutUser}>
+              <ListItemIcon>
+                <LoginOutlined />
+              </ListItemIcon>
+              <ListItemText primary={"Salir"} />
+            </ListItem>
+          )}
+          {!isLoggedIn && <ListItemsAuth navigateTo={navigateTo} />}
 
           <Box sx={{ display: { sm: "block", md: "none" } }}>
-            <Divider />
             <ListSubheader>Categorias</ListSubheader>
-            <Divider />
-
             <ListItem button onClick={() => navigateTo("/menu")}>
               <ListItemIcon>
                 <RestaurantOutlined />
@@ -102,28 +78,6 @@ export const SideMenu = ({ categories = [] }) => {
               );
             })}
           </Box>
-
-          <Divider />
-          <ListSubheader>Admin Panel</ListSubheader>
-          <ListItem button>
-            <ListItemIcon>
-              <CategoryOutlined />
-            </ListItemIcon>
-            <ListItemText primary={"Productos"} />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <ConfirmationNumberOutlined />
-            </ListItemIcon>
-            <ListItemText primary={"Ordenes"} />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <AdminPanelSettings />
-            </ListItemIcon>
-            <ListItemText primary={"Usuarios"} />
-          </ListItem>
         </List>
       </Box>
     </Drawer>

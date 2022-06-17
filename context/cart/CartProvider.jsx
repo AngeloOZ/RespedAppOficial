@@ -1,8 +1,11 @@
 import { useEffect, useReducer } from "react";
 import { CartContext, cartReducer } from "./";
+import Cookies from "js-cookie";
 
 const CART_INITIAL_STATE = {
+  isLoaded: false,
   cart: [],
+  address: undefined,
   numberOfItems: 0,
   subTotal: 0,
 };
@@ -12,8 +15,8 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     try {
-      const localProducts = localStorage.getItem("cart")
-        ? JSON.parse(localStorage.getItem("cart"))
+      const localProducts = Cookies.get("cart")
+        ? JSON.parse(Cookies.get("cart"))
         : [];
 
       dispatch({
@@ -30,7 +33,7 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     if (state.cart.length > 0) {
-      localStorage.setItem("cart", JSON.stringify(state.cart));
+      Cookies.set("cart", JSON.stringify(state.cart));
     }
   }, [state.cart]);
 
@@ -52,14 +55,23 @@ export const CartProvider = ({ children }) => {
 
   const removeCartProduct = (productID) => {
     dispatch({ type: "REMOVE_CART_PRODUCT", payload: productID });
-    if(state.cart.length === 1){
-      localStorage.setItem("cart", JSON.stringify([]));
+    if (state.cart.length === 1) {
+      Cookies.set("cart", JSON.stringify([]));
     }
+  };
+
+  const updateAddressCart = (idAddress) => {
+    dispatch({ type: "UPDATE_ADDRESS_CART", payload: idAddress });
   };
 
   return (
     <CartContext.Provider
-      value={{ ...state, addProductToCart, removeCartProduct }}
+      value={{
+        ...state,
+        addProductToCart,
+        removeCartProduct,
+        updateAddressCart
+      }}
     >
       {children}
     </CartContext.Provider>

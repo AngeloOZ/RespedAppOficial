@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { Input } from "../../components/Components";
 import { AuthLayout } from "../../components/layouts/AuthLayout";
@@ -17,6 +18,8 @@ export default function Register() {
     imgContainer:
       "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1653754753/website/login_kzexeq.svg",
   };
+
+  const router = useRouter();
 
   return (
     <AuthLayout config={config}>
@@ -39,10 +42,19 @@ export default function Register() {
           placeholder="Contraseña"
           styleErrors={styles}
         />
-        <button type="submit" className={css.btn_login}>Registrarse</button>
+        <button type="submit" className={css.btn_login}>
+          Registrarse
+        </button>
         <p>
           ¿Ya estás registrado?
-          <Link href="/auth/login" passHref>
+          <Link
+            href={
+              router.query.p
+                ? `/auth/login?p=${router.query.p}`
+                : "/auth/login"
+            }
+            passHref
+          >
             <span className={css.span}> Inicia sesión</span>
           </Link>
         </p>

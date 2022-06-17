@@ -7,7 +7,7 @@ export const useProducts = (url = "", config = []) => {
    const newUrl = (url === "")? "/producto":`/producto/categoria/${url}`
    const { data, error } = useSWR(newUrl, fetcher, config);
    return {
-      products: data?.data,
+      products: data,
       isLoading: !error && !data,
       isError: error
    }
