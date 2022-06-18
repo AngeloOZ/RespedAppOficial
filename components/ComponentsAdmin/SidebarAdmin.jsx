@@ -1,4 +1,3 @@
-import Link from "next/link";
 import ItemSidebar from "./ItemSidebar";
 
 export const SidebarAdmin = ({ showSide }) => {
@@ -10,7 +9,7 @@ export const SidebarAdmin = ({ showSide }) => {
             <span className="admin-icon">
               <ion-icon name="logo-apple"></ion-icon>
             </span>
-            <span className="admin-title">Brand Name</span>
+            <span className="admin-title">El fogón de COZ</span>
           </a>
         </li>
         <ItemSidebar
@@ -19,24 +18,24 @@ export const SidebarAdmin = ({ showSide }) => {
           icon="grid-outline"
         />
         <ItemSidebar
-          href="/admin"
-          name="Blank"
-          icon="home-outline"
-        />
-        <ItemSidebar
-          href="#"
-          name="Customers"
+          href="/admin/usuarios"
+          name="Usuarios"
           icon="people-outline"
         />
         <ItemSidebar
-          href="#"
-          name="Messages"
-          icon="chatbubble-outline"
+          href="/admin/pedidos"
+          name="Pedidos"
+          icon="create-outline"
         />
         <ItemSidebar
-          href="#"
-          name="Settings"
-          icon="settings-outline"
+          href="/admin/reservas"
+          name="Reservas"
+          icon="calendar-outline"
+        />
+         <ItemSidebar
+          href="/admin/productos"
+          name="Productos"
+          icon="fast-food-outline"
         />
         <ItemSidebar
           href="/"
