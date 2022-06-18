@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 export const Acciones = () => {
    return (
-       <TableCell>
+       <TableCell width={100}>
             <EditIcon color='warning'>
          
             </EditIcon>

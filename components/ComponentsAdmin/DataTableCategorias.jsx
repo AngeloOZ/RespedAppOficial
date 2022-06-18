@@ -5,9 +5,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Acciones } from './Acciones';
 
 
- const DataTableUsuario = ({users}) => {
-  if (users === undefined) {
-    users= [];
+ const DataTableCategorias = ({categories}) => {
+  if (categories === undefined) {
+    categories= [];
 }
   return (
     <div style={{ height: 700, width: '100%' }}>
@@ -18,23 +18,15 @@ import { Acciones } from './Acciones';
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Username</TableCell>
               <TableCell>Nombre</TableCell>
-              <TableCell>Apellido</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Teléfono</TableCell>
               <TableCell>Acciones</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {
-               users.map(user => (
-                <TableRow key={user.IDUSUARIO}>
-                  <TableCell>{user.USERNAME}</TableCell>
-                  <TableCell>{user.NAME}</TableCell>
-                  <TableCell>{user.LASTNAME}</TableCell>
-                  <TableCell>{user.EMAIL}</TableCell>
-                  <TableCell>{user.PHONE}</TableCell>
+               categories.map(categoria => (
+                <TableRow key={categoria.IDCATEGORIA}>
+                  <TableCell>{categoria.NAME}</TableCell>
                   <Acciones/>
                 </TableRow>
               ))
@@ -49,4 +41,4 @@ import { Acciones } from './Acciones';
 }
 
 
-export default DataTableUsuario;
+export default DataTableCategorias;
