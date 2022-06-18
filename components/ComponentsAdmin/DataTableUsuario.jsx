@@ -7,19 +7,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
  const DataTableUsuario = ({users}) => {
   if (users === undefined) {
-    users= [{
-      USERNAME: '',
-      NAME: '',
-      LASTNAME: '',
-      USERNAME: '',
-      EMAIL: '',
-      PHONE: '',
-    }];
+    users= [];
 }
   return (
     <div style={{ height: 700, width: '100%' }}>
       <br/>
-      <Button>Insertar</Button>
+      <Button color="warning">Insertar</Button>
       <br/>
       <TableContainer>
         <Table>
@@ -34,7 +27,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {
+            {
                users.map(user => (
                 <TableRow key={user.IDUSUARIO}>
                   <TableCell>{user.USERNAME}</TableCell>
@@ -42,24 +35,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
                   <TableCell>{user.LASTNAME}</TableCell>
                   <TableCell>{user.EMAIL}</TableCell>
                   <TableCell>{user.PHONE}</TableCell>
-                </TableRow>
-              ))
-            } */}
-            <TableRow>
-                  <TableCell>emilych</TableCell>
-                  <TableCell>Emily</TableCell>
-                  <TableCell>Chimbo</TableCell>
-                  <TableCell>emily@gmail.com</TableCell>
-                  <TableCell>0960508018</TableCell>
                   <TableCell>
-                    <EditIcon>
+                    <EditIcon color='warning'>
 
                     </EditIcon>
-                    <DeleteIcon>
+                    <DeleteIcon color='warning'>
 
                     </DeleteIcon>
-                  </TableCell>
+                    </TableCell>
                 </TableRow>
+              ))
+            }
           </TableBody>
 
         </Table>

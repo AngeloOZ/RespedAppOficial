@@ -6,11 +6,12 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { Collapse } from "@mui/material";
 import ListItemText from '@mui/material/ListItemText';
-import { useUsuarios } from "../../Hooks/useUsuarios";
-
+import { useUsuarios } from "../../Hooks";
 
 export default function Admin() {
-   const {users} = useUsuarios()
+   const usersAdmin = useUsuarios(1).users;
+   const usersMeseros = useUsuarios(2).users;
+   const usersClient = useUsuarios(3).users;
    const [open, setOpen] = React.useState(true);
    const handleClick = () => {
       setOpen(!open);
@@ -30,25 +31,24 @@ export default function Admin() {
          <List>
          <ListItem button onClick={handleClick}>
 			<ListItemText primary="Ver Administradores" />
-			{/*code to open and closed list*/}
 		</ListItem>
          <Collapse in={!open} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTableUsuario users ={users}/>
+         <DataTableUsuario users ={usersAdmin}/>
 
          </List>
          </Collapse>
          </List>
          <List>
-         <ListItem button onClick={handleClick1}>
+         <ListItem button onClick={handleClick1} >
 			<ListItemText primary="Ver Meseros" />
 			{/*code to open and closed list*/}
 		</ListItem>
          <Collapse in={!open1} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTableUsuario users ={users}/>
+         <DataTableUsuario users ={usersMeseros}/>
 
          </List>
          </Collapse>
@@ -61,7 +61,7 @@ export default function Admin() {
          <Collapse in={!open2} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTableUsuario users ={users}/>
+         <DataTableUsuario users ={usersClient}/>
 
          </List>
          </Collapse>

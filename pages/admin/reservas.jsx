@@ -1,16 +1,18 @@
 
 import React from "react";
 import { AdminLayout } from "../../components/layouts/AdminLayout";
-import  DataTable from "../../components/ComponentsAdmin/DataTableUsuario";
+import  DataTableReservas from "../../components/ComponentsAdmin/DataTableReservas";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { Collapse } from "@mui/material";
 import ListItemText from '@mui/material/ListItemText';
-import { useUsuarios } from "../../Hooks/useUsuarios";
+import { useReservas } from "../../Hooks/useReservas";
 
 
 export default function Admin() {
-   const {users} = useUsuarios()
+   const reservasPendiente = useReservas(1).reservas;
+   const reservasConfirmada = useReservas(2).reservas;
+   const reservasFinalizada = useReservas(3).reservas;
    const [open, setOpen] = React.useState(true);
    const handleClick = () => {
       setOpen(!open);
@@ -35,7 +37,7 @@ export default function Admin() {
          <Collapse in={!open} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTable users ={users}/>
+         <DataTableReservas reservas ={reservasPendiente} tipo ={1}/>
 
          </List>
          </Collapse>
@@ -48,7 +50,7 @@ export default function Admin() {
          <Collapse in={!open1} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTable users ={users}/>
+         <DataTableReservas reservas ={reservasConfirmada} tipo ={2}/>
 
          </List>
          </Collapse>
@@ -61,7 +63,7 @@ export default function Admin() {
          <Collapse in={!open2} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTable users ={users}/>
+         <DataTableReservas reservas ={reservasFinalizada} tipo ={3}/>
 
          </List>
          </Collapse>
