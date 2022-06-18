@@ -18,6 +18,7 @@ const AddressPage = () => {
         {isLoading ? (
           <ListAddressSkeleton />
         ) : (
+          // TODO: revisar que la lista de direcciones se desaparece
           <>
             <ListAddress addresses={addresses.data || []} />
           </>
