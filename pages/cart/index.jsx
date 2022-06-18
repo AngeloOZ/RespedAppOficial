@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 
 import NextLink from "next/link";
 
@@ -19,6 +20,7 @@ import FoodBankOutlinedIcon from "@mui/icons-material/FoodBankOutlined";
 
 import { CartList, OrderSummary } from "../../components/cart";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
+import { CartContext } from "../../context";
 
 const styleModal = {
   position: "fixed",
@@ -34,7 +36,18 @@ const styleModal = {
 
 const CartPage = () => {
   const [openModal, setOpenModal] = useState(false);
+  const { numberOfItems } = useContext(CartContext);
+  const router = useRouter();
+  useEffect(() => {
+    if(numberOfItems == 0){
+      router.replace('/cart/empty')
+    }
+  }, [numberOfItems, router]);
 
+  if(numberOfItems == 0){
+    return <></>;
+  }
+  
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
@@ -135,17 +148,6 @@ const CartPage = () => {
 export default CartPage;
 
 export const getServerSideProps = async ({ req }) => {
-  const cookies = req.cookies;
-  const cart = cookies.cart ? JSON.parse(cookies.cart) : [];
-
-  if (cart.length == 0) {
-    return {
-      redirect: {
-        destination: "/cart/empty",
-      },
-    };
-  }
-
   return {
     props: {},
   };

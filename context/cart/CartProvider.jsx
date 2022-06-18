@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 const CART_INITIAL_STATE = {
   isLoaded: false,
   cart: [],
-  address: undefined,
   numberOfItems: 0,
   subTotal: 0,
 };

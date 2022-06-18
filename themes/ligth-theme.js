@@ -90,6 +90,14 @@ export const lightTheme = createTheme({
                fontSize: 16,
                fontWeight: 600
             },
+            subtitle2: {
+               fontSize: 16,
+               fontWeight: 600
+            },
+            subtitle3: {
+               fontSize: 16,
+               fontWeight: 400
+            },
             root: {
                color: "#fff",
             }

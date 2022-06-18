@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid, Skeleton, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
 import { AddAddress } from "../../components/checkout/AddAddress";
 import { ListAddress } from "../../components/checkout";
@@ -18,10 +18,7 @@ const AddressPage = () => {
         {isLoading ? (
           <ListAddressSkeleton />
         ) : (
-          // TODO: revisar que la lista de direcciones se desaparece
-          <>
-            <ListAddress addresses={addresses.data || []} />
-          </>
+          <ListAddress addresses={addresses?.data || []} />
         )}
         <AddAddress />
       </Grid>

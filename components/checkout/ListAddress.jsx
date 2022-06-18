@@ -3,7 +3,9 @@ import { ItemAddress } from "./ItemAddress";
 
 export const ListAddress = ({ addresses }) => {
   return (
-    <Grid item xs={8}>
+    <Grid item xs={12} md={8} >
+      {console.clear()}
+      {console.log("ListAddress %j", addresses)}
       <Box>
         <Typography
           variant="h2"
@@ -14,7 +16,10 @@ export const ListAddress = ({ addresses }) => {
         >
           Seleccione la Dirección de Envío
         </Typography>
-        <List sx={{ width: "100%", padding: 0 }}>
+        <List
+          className="customScrollBar"
+          sx={{ width: "100%", padding: 0, overflow: "auto", maxHeight: 380 }}
+        >
           {addresses.map((address) => (
             <ItemAddress address={address} key={address.IDDIRECCION} />
           ))}

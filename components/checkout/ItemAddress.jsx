@@ -2,8 +2,9 @@ import { useRouter } from "next/router";
 
 import {
   Avatar,
+  Box,
   Button,
-  ListItem,
+  Grid,
   ListItemAvatar,
   ListItemButton,
   ListItemText,
@@ -19,53 +20,79 @@ export const ItemAddress = ({ address }) => {
   const router = useRouter();
   const defaulDir = address.DEFAULTDIR;
   const handleClickSender = (IDDIRECCION, IDRELACIONUD) => {
-    const address = {
+    const address2 = {
       idAdress: IDDIRECCION,
       idRelacion: IDRELACIONUD,
     };
-    const dir = btoa(JSON.stringify(address));
-    router.push(`/checkout/summary?dir=${dir}`);
+    const dir = btoa(JSON.stringify(address2));
+    console.log(dir);
+    // router.push(`/checkout/summary?dir=${dir}`);
   };
   return (
-    <ListItem
-      secondaryAction={
-        <Button
-          variant="outlined"
-          color="primary"
-          endIcon={<SendIcon />}
-          onClick={() =>
-            handleClickSender(address.IDDIRECCION, address.IDRELACIONUD)
-          }
-        >
-          Seleccionar
-        </Button>
-      }
-      disablePadding
-    >
-      <ListItemButton>
-        <ListItemAvatar>
-          <Avatar className={defaulDir ? css.defaultAddress : ""}>
-            {defaulDir ? <StarIcon /> : <LocationOnIcon />}
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText>
-          <Typography variant="h3" mb={1}>
-            {address.NAME}
-          </Typography>
-          <p className={css.textAddress}>
-            <strong>Direccion: </strong>
-            <span>{`${address.STREET1},${address.STREET2}`}</span>
-          </p>
-          <p className={css.textAddress}>
-            <strong>Teléfono: </strong>
-            <span>{address.PHONEDIR}</span>
-          </p>
-          <p className={css.textAddress}>
-            <strong>Referencia: </strong>
-            <span>{address.REFERENCE}</span>
-          </p>
-        </ListItemText>
-      </ListItemButton>
-    </ListItem>
+    <ListItemButton>
+      <ListItemAvatar>
+        <Avatar className={defaulDir ? css.defaultAddress : ""}>
+          {defaulDir ? <StarIcon /> : <LocationOnIcon />}
+        </Avatar>
+      </ListItemAvatar>
+      <ListItemText>
+        <Grid container p={0} width={"100%"}>
+          <Grid item xs={12} md={6} lg={9}>
+            <AddressInformation address={address} />
+          </Grid>
+          <Grid item xs={12} md={6} lg={3}>
+            <ButtonSendAddress
+              handleOnClick={() =>
+                handleClickSender(address.IDDIRECCION, address.IDRELACIONUD)
+              }
+            />
+          </Grid>
+        </Grid>
+      </ListItemText>
+    </ListItemButton>
+  );
+};
+
+const ButtonSendAddress = ({ handleOnClick }) => {
+  return (
+    <Box component="div" height={"100%"} mt={1} display="flex" alignItems={"center"} justifyContent="flex-end">
+      <Button
+        variant="outlined"
+        color="primary"
+        endIcon={<SendIcon />}
+        onClick={handleOnClick}
+        fullWidth
+        style={{alignSelf: "center"}}
+      >
+        Seleccionar
+      </Button>
+    </Box>
+  );
+};
+const AddressInformation = ({ address }) => {
+  return (
+    <>
+      <Typography variant="h3" mb={1}>
+        {address.NAME}
+      </Typography>
+      <Typography variant="subtitle2" component="p">
+        Direccion:
+        <Typography variant="subtitle3" ml={1} component="span">
+          {`${address.STREET1}, ${address.STREET2}`}
+        </Typography>
+      </Typography>
+      <Typography variant="subtitle2" component="p">
+        Teléfono:
+        <Typography variant="subtitle3" ml={1} component="span">
+          {address.PHONEDIR}
+        </Typography>
+      </Typography>
+      <Typography variant="subtitle2" component="p">
+        Referencia:
+        <Typography variant="subtitle3" ml={1} component="span">
+          {address.REFERENCE}
+        </Typography>
+      </Typography>
+    </>
   );
 };

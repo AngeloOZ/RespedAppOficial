@@ -77,30 +77,88 @@ a {
   animation-iteration-count: infinite;
 }
 
+.customScrollBar::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.customScrollBar ::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+.customScrollBar::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+
+.customScrollBar::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+
+.customScrollBar::-webkit-scrollbar-thumb {
+  background: #EC4D20;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+
+.customScrollBar::-webkit-scrollbar-thumb:hover {
+  background: #DF4013;
+}
+
+.customScrollBar::-webkit-scrollbar-thumb:active {
+  background: #EC4D20;
+}
+
+.customScrollBar::-webkit-scrollbar-track {
+  background: #020202;
+  border: 35px none #ffffff;
+  border-radius: 50px;
+}
+
+.customScrollBar::-webkit-scrollbar-track:hover {
+  background: #020202;
+}
+
+.customScrollBar::-webkit-scrollbar-track:active {
+  background: #020202;
+}
+
+.customScrollBar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
 @keyframes placeholder {
   0% {
     background: #282828;
 
   }
+
   50% {
     background: #1c1c1c;
 
   }
+
   100% {
     background: #282828;
 
   }
 }
-.toLowerCase{
+
+.toLowerCase {
   text-transform: lowercase;
 }
-.toUpperCase{
+
+.toUpperCase {
   text-transform: uppercase;
 }
-.toCapitalize{
+
+.toCapitalize {
   text-transform: capitalize;
 }
-.itemModal{
+
+.itemModal {
   width: 450px;
   background-color: #fff;
   border: 2px solid transparent;
@@ -109,7 +167,7 @@ a {
 }
 
 @media screen and (max-width: 500px) {
-  .itemModal{
+  .itemModal {
     width: 90%;
     margin: auto;
     padding: 16px 15px;
