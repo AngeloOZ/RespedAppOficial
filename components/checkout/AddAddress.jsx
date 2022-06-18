@@ -2,8 +2,14 @@ import { Button, Grid, TextField, Typography } from "@mui/material";
 
 export const AddAddress = () => {
   return (
-    <Grid item xs={4} spacing={2}>
-      <Typography variant="h2" fontSize={24} mb={2} fontWeight="bold" component="h2">
+    <Grid item xs={4}>
+      <Typography
+        variant="h2"
+        fontSize={24}
+        mb={2}
+        fontWeight="bold"
+        component="h2"
+      >
         Registrar Dirección
       </Typography>
       <Grid container spacing={2}>

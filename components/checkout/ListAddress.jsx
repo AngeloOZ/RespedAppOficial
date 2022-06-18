@@ -1,10 +1,9 @@
 import { Box, Grid, List, Typography } from "@mui/material";
-
 import { ItemAddress } from "./ItemAddress";
 
-export const ListAddress = () => {
+export const ListAddress = ({ addresses }) => {
   return (
-    <Grid xs={8} item>
+    <Grid item xs={8}>
       <Box>
         <Typography
           variant="h2"
@@ -16,7 +15,9 @@ export const ListAddress = () => {
           Seleccione la Dirección de Envío
         </Typography>
         <List sx={{ width: "100%", padding: 0 }}>
-          <ItemAddress defaultAddress={true} />
+          {addresses.map((address) => (
+            <ItemAddress address={address} key={address.IDDIRECCION} />
+          ))}
         </List>
       </Box>
     </Grid>

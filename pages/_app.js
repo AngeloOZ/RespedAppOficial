@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import axios from 'axios';
+import Cookies from "js-cookie";
 
 import { AuthProvider } from "../context";
 
@@ -11,6 +12,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MyApp({ Component, pageProps }) {
   axios.defaults.baseURL = 'https://respedapp.onrender.com/api';
+  if(Cookies.get('SESSION_ID')){
+    axios.defaults.headers.common['Authorization'] = `Bearer ${Cookies.get('SESSION_ID')}`;
+  }
 
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap");

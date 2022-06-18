@@ -99,7 +99,7 @@ const CartPage = () => {
             ¿Dónde te encuentras?
           </Typography>
           <Grid item xs={12} sm={6}>
-            <NextLink href="/checkout/summary" passHref>
+            <NextLink href="/checkout/address" passHref>
               <Link>
                 <Button
                   variant="contained"

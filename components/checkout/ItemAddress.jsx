@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { CartContext } from "../../context";
+import { useRouter } from "next/router";
 
 import {
   Avatar,
@@ -16,8 +15,17 @@ import SendIcon from "@mui/icons-material/Send";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import css from "./ItemAddress.module.scss";
 
-export const ItemAddress = ({ defaultAddress }) => {
-  const { updateAddressCart } = useContext(CartContext);
+export const ItemAddress = ({ address }) => {
+  const router = useRouter();
+  const defaulDir = address.DEFAULTDIR;
+  const handleClickSender = (IDDIRECCION, IDRELACIONUD) => {
+    const address = {
+      idAdress: IDDIRECCION,
+      idRelacion: IDRELACIONUD,
+    };
+    const dir = btoa(JSON.stringify(address));
+    router.push(`/checkout/summary?dir=${dir}`);
+  };
   return (
     <ListItem
       secondaryAction={
@@ -25,7 +33,9 @@ export const ItemAddress = ({ defaultAddress }) => {
           variant="outlined"
           color="primary"
           endIcon={<SendIcon />}
-          onClick={() => updateAddressCart(1)}
+          onClick={() =>
+            handleClickSender(address.IDDIRECCION, address.IDRELACIONUD)
+          }
         >
           Seleccionar
         </Button>
@@ -34,25 +44,25 @@ export const ItemAddress = ({ defaultAddress }) => {
     >
       <ListItemButton>
         <ListItemAvatar>
-          <Avatar className={defaultAddress && css.defaultAddress}>
-            {defaultAddress ? <StarIcon /> : <LocationOnIcon />}
+          <Avatar className={defaulDir ? css.defaultAddress : ""}>
+            {defaulDir ? <StarIcon /> : <LocationOnIcon />}
           </Avatar>
         </ListItemAvatar>
         <ListItemText>
           <Typography variant="h3" mb={1}>
-            Casa
+            {address.NAME}
           </Typography>
           <p className={css.textAddress}>
             <strong>Direccion: </strong>
-            <span>Lorem ipsum dolor sit amet.</span>
+            <span>{`${address.STREET1},${address.STREET2}`}</span>
           </p>
           <p className={css.textAddress}>
             <strong>Teléfono: </strong>
-            <span>0987654321</span>
+            <span>{address.PHONEDIR}</span>
           </p>
           <p className={css.textAddress}>
             <strong>Referencia: </strong>
-            <span>Lorem ipsum dolor sit amet.</span>
+            <span>{address.REFERENCE}</span>
           </p>
         </ListItemText>
       </ListItemButton>
