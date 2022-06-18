@@ -1,7 +1,7 @@
 
 import React from "react";
 import { AdminLayout } from "../../components/layouts/AdminLayout";
-import  DataTableUsuario from "../../components/ComponentsAdmin/DataTableUsuario";
+import  DataTable from "../../components/ComponentsAdmin/DataTableUsuario";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { Collapse } from "@mui/material";
@@ -25,43 +25,43 @@ export default function Admin() {
    };
   return (
     <AdminLayout>
-        <h1>Usuarios</h1>
+        <h1>Reservas</h1>
         <div>
-         <List>
+        <List>
          <ListItem button onClick={handleClick}>
-			<ListItemText primary="Ver Administradores" />
+			<ListItemText primary="Ver Reservas Pendientes" />
 			{/*code to open and closed list*/}
 		</ListItem>
          <Collapse in={!open} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTableUsuario users ={users}/>
+         <DataTable users ={users}/>
 
          </List>
          </Collapse>
          </List>
          <List>
          <ListItem button onClick={handleClick1}>
-			<ListItemText primary="Ver Meseros" />
+			<ListItemText primary="Ver Reservas Confirmadas" />
 			{/*code to open and closed list*/}
 		</ListItem>
          <Collapse in={!open1} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTableUsuario users ={users}/>
+         <DataTable users ={users}/>
 
          </List>
          </Collapse>
          </List>
          <List>
          <ListItem button onClick={handleClick2}>
-			<ListItemText primary="Ver Clientes" />
+			<ListItemText primary="Ver Reservas Finalizadas" />
 			{/*code to open and closed list*/}
 		</ListItem>
          <Collapse in={!open2} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTableUsuario users ={users}/>
+         <DataTable users ={users}/>
 
          </List>
          </Collapse>

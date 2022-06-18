@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
- const DataTable = ({users}) => {
+ const DataTableUsuario = ({users}) => {
   if (users === undefined) {
     users= [{
       USERNAME: '',
@@ -70,4 +70,4 @@ import DeleteIcon from '@mui/icons-material/Delete';
 }
 
 
-export default DataTable;
+export default DataTableUsuario;
