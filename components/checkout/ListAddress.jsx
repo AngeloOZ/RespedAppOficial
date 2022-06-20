@@ -4,8 +4,6 @@ import { ItemAddress } from "./ItemAddress";
 export const ListAddress = ({ addresses }) => {
   return (
     <Grid item xs={12} md={8} >
-      {console.clear()}
-      {console.log("ListAddress %j", addresses)}
       <Box>
         <Typography
           variant="h2"

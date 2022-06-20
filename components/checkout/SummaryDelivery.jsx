@@ -2,12 +2,15 @@ import { useState } from "react";
 import NextLink from "next/link";
 import { Box, Divider, Grid, Link, TextField, Typography } from "@mui/material";
 
-export const SummaryDelivery = ({ order, address, setValue, value }) => {
+export const SummaryDelivery = ({ order, address, children}) => {
+  
   return (
     <>
       <Box display="flex" justifyContent="space-between">
         <Typography variant="h2">Orden Nro:</Typography>
-        <Typography variant="h2" textAlign={"end"}>{order.NUMPEDIDO}</Typography>
+        <Typography variant="h2" textAlign={"end"}>
+          {order.NUMPEDIDO}
+        </Typography>
       </Box>
       <Typography variant="h3" fontWeight={400} mt={2}>
         Resumen
@@ -28,19 +31,6 @@ export const SummaryDelivery = ({ order, address, setValue, value }) => {
       <Typography>{address.PHONEDIR}</Typography>
 
       <Divider sx={{ my: 1 }} />
-      <TextField
-        id="outlined-multiline-flexible"
-        label="Notas para la orden"
-        multiline
-        maxRows={4}
-        margin="dense"
-        fullWidth
-        placeholder={"El restaurante intentara seguirlas"}
-        value={value}
-        onChange={setValue}
-      />
-
-      <Divider sx={{ my: 1 }} />
       <Grid container>
         <Grid item xs={6}>
           <Typography>Cantidad</Typography>
@@ -55,6 +45,8 @@ export const SummaryDelivery = ({ order, address, setValue, value }) => {
           <Typography variant="subtitle1">{`$${order.VALORTOTAL}`}</Typography>
         </Grid>
       </Grid>
+      <Divider sx={{ my: 1 }} />
+      {children}
     </>
   );
 };

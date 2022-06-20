@@ -61,6 +61,8 @@ export const CartProvider = ({ children }) => {
 
   const emptyCart = () => {
     dispatch({ type: "EMPTY_CART_PRODUCTS" });
+    Cookies.remove("cart");
+    Cookies.remove("summary_order");
     Cookies.set("cart", JSON.stringify([]));
   };
 

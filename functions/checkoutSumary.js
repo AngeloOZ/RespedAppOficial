@@ -6,7 +6,10 @@ export function getItemsCart(request) {
       try {
          const products = JSON.parse(cart);
          const arrayProducts = products.map((product) => product.idProduct);
-         return arrayProducts;
+         if(arrayProducts.length !== 0){
+            return arrayProducts;
+         }
+         return undefined;
       } catch (error) {
          return undefined;
       }

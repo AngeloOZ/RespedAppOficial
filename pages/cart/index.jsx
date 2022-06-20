@@ -20,6 +20,7 @@ import FoodBankOutlinedIcon from "@mui/icons-material/FoodBankOutlined";
 import { CartList, OrderSummary } from "../../components/cart";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
 import { checkout } from "../../functions";
+import { FullScreenloader } from "../../components/Components/FullScreenloader/FullScreenloader";
 
 const styleModal = {
   position: "fixed",
@@ -33,8 +34,9 @@ const styleModal = {
   justifyContent: "center",
 };
 
-const CartPage = ({numbsOfItems}) => {
-  const [openModal, setOpenModal] = useState(false);  
+const CartPage = ({ numbsOfItems }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [displayLoader, setDisplayLoader] = useState(false);
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
@@ -44,6 +46,7 @@ const CartPage = ({numbsOfItems}) => {
       title={`Carrito - ${numbsOfItems}`}
       pageDescription={"Carrito de compras de la tienda"}
     >
+      <FullScreenloader display={displayLoader} />
       <Typography variant="h1" component="h1" my={3}>
         Carrito
       </Typography>
@@ -106,6 +109,7 @@ const CartPage = ({numbsOfItems}) => {
                   fullWidth
                   startIcon={<MopedOutlinedIcon />}
                   size="large"
+                  onClick={() => setDisplayLoader(true)}
                 >
                   Domicilio
                 </Button>
@@ -120,6 +124,7 @@ const CartPage = ({numbsOfItems}) => {
                   fullWidth
                   startIcon={<FoodBankOutlinedIcon />}
                   size="large"
+                  onClick={() => setDisplayLoader(true)}
                 >
                   En el local
                 </Button>
@@ -136,17 +141,17 @@ export default CartPage;
 
 export const getServerSideProps = async ({ req }) => {
   const items = checkout.getItemsCart(req);
-  if(!items){
+  if (!items) {
     return {
       redirect: {
         destination: "/cart/empty",
         permanent: false,
       },
-    }
+    };
   }
   return {
     props: {
-      numbsOfItems: items.length
+      numbsOfItems: items.length,
     },
   };
 };
