@@ -7,8 +7,18 @@ import ListItem from '@mui/material/ListItem';
 import { Collapse } from "@mui/material";
 import ListItemText from '@mui/material/ListItemText';
 import { useUsuarios } from "../../Hooks";
+import { makeStyles } from '@mui/styles'
+
+const useStyles = makeStyles(() => ({
+   listItem: {
+     backgroundColor: '#f57c00',
+     cursor: 'pointer',
+     color: 'white'
+   }
+ }));
 
 export default function Admin() {
+   const styles= useStyles();
    const usersAdmin = useUsuarios(1).users;
    const usersMeseros = useUsuarios(2).users;
    const usersClient = useUsuarios(3).users;
@@ -28,40 +38,51 @@ export default function Admin() {
     <AdminLayout>
         <h1>Usuarios</h1>
         <div>
-         <List>
-         <ListItem button onClick={handleClick}>
-			<ListItemText primary="Ver Administradores" />
-		</ListItem>
+         <List >
+            {
+               (open==false) ? 
+               <ListItem className={styles.listItem}  onClick={handleClick}> <ListItemText primary="Ver Administradores" />
+               </ListItem>
+               : <ListItem   onClick={handleClick}><ListItemText primary="Ver Administradores" />
+               </ListItem>
+            }
+			
          <Collapse in={!open} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTableUsuario users ={usersAdmin}/>
+         <DataTableUsuario users ={usersAdmin}  tipo ={1}/>
 
          </List>
          </Collapse>
          </List>
          <List>
-         <ListItem button onClick={handleClick1} >
-			<ListItemText primary="Ver Meseros" />
-			{/*code to open and closed list*/}
-		</ListItem>
+         {
+               (open1==false) ? 
+               <ListItem className={styles.listItem}  onClick={handleClick1}> <ListItemText primary="Ver Meseros" />
+               </ListItem>
+               : <ListItem   onClick={handleClick1}><ListItemText primary="Ver Meseros" />
+               </ListItem>
+            }
          <Collapse in={!open1} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTableUsuario users ={usersMeseros}/>
+         <DataTableUsuario users ={usersMeseros}  tipo ={2}/>
 
          </List>
          </Collapse>
          </List>
          <List>
-         <ListItem button onClick={handleClick2}>
-			<ListItemText primary="Ver Clientes" />
-			{/*code to open and closed list*/}
-		</ListItem>
+         {
+               (open2==false) ? 
+               <ListItem className={styles.listItem}  onClick={handleClick2}> <ListItemText primary="Ver Clientes" />
+               </ListItem>
+               : <ListItem   onClick={handleClick2}><ListItemText primary="Ver Clientes" />
+               </ListItem>
+            }
          <Collapse in={!open2} timeout="auto" unmountOnExit>
          <List component="div" disablePadding>
          
-         <DataTableUsuario users ={usersClient}/>
+         <DataTableUsuario users ={usersClient}  tipo ={3}/>
 
          </List>
          </Collapse>
