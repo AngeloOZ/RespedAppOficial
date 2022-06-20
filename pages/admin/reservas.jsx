@@ -1,74 +1,28 @@
 
 import React from "react";
 import { AdminLayout } from "../../components/layouts/AdminLayout";
-import  DataTable from "../../components/ComponentsAdmin/DataTableUsuario";
+import  DataTableReservas from "../../components/ComponentsAdmin/DataTableReservas";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { Collapse } from "@mui/material";
 import ListItemText from '@mui/material/ListItemText';
-import { useUsuarios } from "../../Hooks/useUsuarios";
+import { useReservas } from "../../Hooks/useReservas";
+import ListReservas from "../../components/ComponentsAdmin/ListReservas";
 
 
 export default function Admin() {
-   const {users} = useUsuarios()
-   const [open, setOpen] = React.useState(true);
-   const handleClick = () => {
-      setOpen(!open);
-   };
-   const [open1, setOpen1] = React.useState(true);
-   const handleClick1 = () => {
-      setOpen1(!open1);
-   };
-   const [open2, setOpen2] = React.useState(true);
-   const handleClick2 = () => {
-      setOpen2(!open2);
-   };
+   const reservasPendiente = useReservas(1).reservas;
+   const reservasConfirmada = useReservas(2).reservas;
+   const reservasFinalizada = useReservas(3).reservas;
+   const reservasRechazada = useReservas(4).reservas;
   return (
     <AdminLayout>
         <h1>Reservas</h1>
         <div>
-        <List>
-         <ListItem button onClick={handleClick}>
-			<ListItemText primary="Ver Reservas Pendientes" />
-			{/*code to open and closed list*/}
-		</ListItem>
-         <Collapse in={!open} timeout="auto" unmountOnExit>
-         <List component="div" disablePadding>
-         
-         <DataTable users ={users}/>
-
-         </List>
-         </Collapse>
-         </List>
-         <List>
-         <ListItem button onClick={handleClick1}>
-			<ListItemText primary="Ver Reservas Confirmadas" />
-			{/*code to open and closed list*/}
-		</ListItem>
-         <Collapse in={!open1} timeout="auto" unmountOnExit>
-         <List component="div" disablePadding>
-         
-         <DataTable users ={users}/>
-
-         </List>
-         </Collapse>
-         </List>
-         <List>
-         <ListItem button onClick={handleClick2}>
-			<ListItemText primary="Ver Reservas Finalizadas" />
-			{/*code to open and closed list*/}
-		</ListItem>
-         <Collapse in={!open2} timeout="auto" unmountOnExit>
-         <List component="div" disablePadding>
-         
-         <DataTable users ={users}/>
-
-         </List>
-         </Collapse>
-         </List>
-         
-       
-        
+        <ListReservas reservas ={reservasPendiente} tipo ={1}/>
+        <ListReservas reservas ={reservasConfirmada} tipo ={2}/>
+        <ListReservas reservas ={reservasFinalizada} tipo ={3}/>
+        <ListReservas reservas ={reservasRechazada} tipo ={4}/>
          
     </div>
     </AdminLayout>
