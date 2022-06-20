@@ -25,9 +25,6 @@ const useStyles = makeStyles(() => ({
     color: '#f57c00',
     fontWeight: 'bold',
     letterSpacing: '2px'
-  }, 
-  inputMaterial:{
-    width: '100%'
   }
 }));
 
@@ -37,7 +34,7 @@ const useStyles = makeStyles(() => ({
 
   const url = '/usuario/'
 
-  const [usuarioSeleccionada, setUsuarioSeleccionada]=useState({
+  const [usuarioSeleccionade, setUsuarioSeleccionade]=useState({
     IDTIPOUSUARIO: tipo,
     USERNAME: '',
     NAME:'',
@@ -48,13 +45,13 @@ const useStyles = makeStyles(() => ({
   })
   
   const handleChange=e=>{
-    let value = event.target.value;
-    let name = event.target.name;
-    setUsuarioSeleccionada(prevState=>({
+    let value = e.target.value;
+    let name = e.target.name;
+    setUsuarioSeleccionade(prevState=>({
       ...prevState,
       [name]: value
     }))
-    console.log(usuarioSeleccionada);
+    console.log(usuarioSeleccionade);
   }
   
   let nombreTipo;
@@ -86,7 +83,7 @@ const abrirCerrarModalEliminar=()=>{
 }
 
 const seleccionarusuario=(user, caso)=>{
-  setUsuarioSeleccionada(user);
+  setUsuarioSeleccionade(user);
   (caso==='Editar')?abrirCerrarModalEditar():abrirCerrarModalEliminar()
 }
 
@@ -113,12 +110,12 @@ const bodyEditar = (
     {
       <Typography sx={{ margin: 2 }} className={styles.tipografia}> EDITAR {nombreTipo} </Typography>
     }
-    <TextField label="Username" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'USERNAME' value={usuarioSeleccionada && usuarioSeleccionada.USERNAME}> </TextField>
-    <TextField label="Nombre" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'NAME' value={usuarioSeleccionada && usuarioSeleccionada.NAME}> </TextField>
-    <TextField label="Apellido" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'LASTNAME' value={usuarioSeleccionada && usuarioSeleccionada.LASTNAME}> </TextField>
-    <TextField label="Email" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'EMAIL' value={usuarioSeleccionada && usuarioSeleccionada.EMAIL}> </TextField>
-    <TextField label="Teléfono" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PHONE' value={usuarioSeleccionada && usuarioSeleccionada.PHONE}> </TextField>
-    <TextField label="Contraseña" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PASSWORD' value={usuarioSeleccionada && usuarioSeleccionada.PASSWORD}> </TextField>
+    <TextField label="Username" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'USERNAME' value={usuarioSeleccionade && usuarioSeleccionade.USERNAME}> </TextField>
+    <TextField label="Nombre" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'NAME' value={usuarioSeleccionade && usuarioSeleccionade.NAME}> </TextField>
+    <TextField label="Apellido" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'LASTNAME' value={usuarioSeleccionade && usuarioSeleccionade.LASTNAME}> </TextField>
+    <TextField label="Email" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'EMAIL' value={usuarioSeleccionade && usuarioSeleccionade.EMAIL}> </TextField>
+    <TextField label="Teléfono" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PHONE' value={usuarioSeleccionade && usuarioSeleccionade.PHONE}> </TextField>
+    <TextField label="Contraseña" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PASSWORD' value={usuarioSeleccionade && usuarioSeleccionade.PASSWORD}> </TextField>
     <div>
       <Button  variant="outlined" color='warning' sx={{m: 2}} onClick={()=>peticionPut()}>Aceptar</Button>
       <Button onClick={()=>abrirCerrarModalEditar()} variant="outlined" color='warning' sx={{m: 2}}>Cancelar</Button>
@@ -128,7 +125,7 @@ const bodyEditar = (
 
 const bodyEliminar=(
   <div className={styles.modal} align='center'>
-      <p>¿Estás seguro que deseas eliminar el usuario <b>{usuarioSeleccionada && usuarioSeleccionada.USERNAME}</b> ? </p>
+      <p>¿Estás seguro que deseas eliminar el usuario <b>{usuarioSeleccionade && usuarioSeleccionade.USERNAME}</b> ? </p>
     
     <div>
       <Button variant="outlined" color="error" sx={{m: 2}} onClick={()=>peticionDelete()} >Sí</Button>
@@ -140,16 +137,16 @@ const bodyEliminar=(
 )
 
 const peticionDelete=async()=>{
-  await axios.delete(url+usuarioSeleccionada.IDUSUARIO)
+  await axios.delete(url+usuarioSeleccionade.IDUSUARIO)
   .then(response=>{
-    setData(data.filter(usuario=>usuario.IDUSUARIO!==usuarioSeleccionada.IDUSUARIO));
+    setData(data.filter(usuario=>usuario.IDUSUARIO!==usuarioSeleccionade.IDUSUARIO));
     abrirCerrarModalEliminar();
   })
 }
 
 const peticionPost=async()=>{
-  console.log(usuarioSeleccionada)
-  await axios.post(url, usuarioSeleccionada)
+  console.log(usuarioSeleccionade)
+  await axios.post(url, usuarioSeleccionade)
   .then(response=>{
     setData(data.concat(response.data))
     abrirCerrarModalInsertar()
@@ -157,17 +154,17 @@ const peticionPost=async()=>{
 }
 
 const peticionPut=async()=>{
-  await axios.put(url, usuarioSeleccionada)
+  await axios.put(url, usuarioSeleccionade)
   .then(response=>{
     var dataNueva=data;
     dataNueva.map(usuario=>{
-      if(usuarioSeleccionada.IDUSUARIO===usuario.IDUSUARIO){
-        usuario.USERNAME=usuarioSeleccionada.USERNAME;
-        usuario.NAME=usuarioSeleccionada.NAME;
-        usuario.LASTNAME=usuarioSeleccionada.LASTNAME;
-        usuario.EMAIL=usuarioSeleccionada.EMAIL;
-        usuario.PHONE=usuarioSeleccionada.PHONE;
-        usuario.PASSWORD=usuarioSeleccionada.PASSWORD;
+      if(usuarioSeleccionade.IDUSUARIO===usuario.IDUSUARIO){
+        usuario.USERNAME=usuarioSeleccionade.USERNAME;
+        usuario.NAME=usuarioSeleccionade.NAME;
+        usuario.LASTNAME=usuarioSeleccionade.LASTNAME;
+        usuario.EMAIL=usuarioSeleccionade.EMAIL;
+        usuario.PHONE=usuarioSeleccionade.PHONE;
+        usuario.PASSWORD=usuarioSeleccionade.PASSWORD;
       }
     })
     setData(dataNueva);
@@ -175,7 +172,7 @@ const peticionPut=async()=>{
   })
 }
   return (
-    <div style={{ height: 700, width: '100%' }}>
+    <div style={{width: '100%' }}>
      
       {
         
@@ -204,14 +201,13 @@ const peticionPut=async()=>{
                   <TableCell>{user.LASTNAME}</TableCell>
                   <TableCell>{user.EMAIL}</TableCell>
                   <TableCell>{user.PHONE}</TableCell>
-                  <TableCell width={100}>
+                  <TableCell width={100} align='center'>
                   {
                   (tipo!=3) ?
                   <EditIcon  className={styles.iconos} onClick={()=>seleccionarusuario(user, 'Editar')}/> : null
                   }
                     
-                  <DeleteIcon color='error' className={styles.iconos} onClick={()=>seleccionarusuario(user, 'Eliminar')}>
-                  </DeleteIcon>
+                  <DeleteIcon color='error' className={styles.iconos} onClick={()=>seleccionarusuario(user, 'Eliminar')}/>
                  </TableCell>
                 </TableRow>
               ))
