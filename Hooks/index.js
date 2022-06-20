@@ -3,3 +3,4 @@ export * from "./useProducts";
 export * from "./useAddress";
 export * from "./useUsuarios";
 export * from "./useHandleOrders";
+export * from "./usePedidos";

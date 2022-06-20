@@ -1,26 +1,185 @@
 
-import { Table, TableRow, TableCell, TableContainer, TableHead, TableBody, Modal, Button, TextField, makeStyles} from '@mui/material';
+import { Table, TableRow, TableCell, TableContainer, TableHead, TableBody, Modal, Button, TextField, Typography} from '@mui/material';
+import { makeStyles } from '@mui/styles'
+import { useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import axios from 'axios';
+
+const useStyles = makeStyles(() => ({
+  modal: {
+    position: 'absolute',
+    width: 350,
+    backgroundColor: '#ffff',
+    border: '2px solid #000',
+    boxShadow: 1,
+    padding: 10,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
+  },
+  iconos:{
+    cursor: 'pointer'
+  }, 
+  tipografia:{
+    color: '#f57c00',
+    fontWeight: 'bold',
+    letterSpacing: '2px'
+  }
+}));
 
 
+ const DataTableUsuario = ({users, tipo}) => {
+  const [data, setData]=useState([]);
 
- const DataTableUsuario = ({users}) => {
+  const url = '/usuario/'
+
+  const [usuarioSeleccionade, setUsuarioSeleccionade]=useState({
+    IDTIPOUSUARIO: tipo,
+    USERNAME: '',
+    NAME:'',
+    LASTNAME: '',
+    EMAIL: '',
+    PASSWORD: '',
+    PHONE: ''
+  })
+  
+  const handleChange=e=>{
+    let value = e.target.value;
+    let name = e.target.name;
+    setUsuarioSeleccionade(prevState=>({
+      ...prevState,
+      [name]: value
+    }))
+    console.log(usuarioSeleccionade);
+  }
+  
+  let nombreTipo;
+  if(tipo==1){
+    nombreTipo='ADMINISTRADOR'
+  }
+  if(tipo==2){
+    nombreTipo='MESERO'
+  }
+  if(tipo==3){
+    nombreTipo='CLIENTE'
+  }
+  const styles= useStyles();
+  const [modalInsertar, setModalInsertar]=useState(false);
+  const [modalEditar, setModalEditar]=useState(false);
+  const [modalEliminar, setModalEliminar]=useState(false);
+
   if (users === undefined) {
-    users= [{
-      USERNAME: '',
-      NAME: '',
-      LASTNAME: '',
-      USERNAME: '',
-      EMAIL: '',
-      PHONE: '',
-    }];
+    users= [];
+}
+const abrirCerrarModalInsertar=()=>{
+  setModalInsertar(!modalInsertar);
+}
+const abrirCerrarModalEditar=()=>{
+  setModalEditar(!modalEditar);
+}
+const abrirCerrarModalEliminar=()=>{
+  setModalEliminar(!modalEliminar);
+}
+
+const seleccionarusuario=(user, caso)=>{
+  setUsuarioSeleccionade(user);
+  (caso==='Editar')?abrirCerrarModalEditar():abrirCerrarModalEliminar()
+}
+
+const bodyInsertar = (
+  <div className={styles.modal} align='center'>
+    {
+      <Typography sx={{ margin: 2 }} className={styles.tipografia}> INSERTAR {nombreTipo} </Typography>
+    }
+    <TextField label="Username" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'USERNAME'> </TextField>
+    <TextField label="Nombre" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'NAME'> </TextField>
+    <TextField label="Apellido" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'LASTNAME'> </TextField>
+    <TextField label="Email" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'EMAIL'> </TextField>
+    <TextField label="Teléfono" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PHONE'> </TextField>
+    <TextField label="Contraseña" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PASSWORD'> </TextField>
+    <div>
+      <Button  variant="outlined" color='warning' sx={{m: 2}} onClick={()=>peticionPost()}>Aceptar</Button>
+      <Button onClick={()=>abrirCerrarModalInsertar()} variant="outlined" color='warning' sx={{m: 2}}>Cancelar</Button>
+    </div>
+  </div>
+)
+
+const bodyEditar = (
+  <div className={styles.modal} align='center'>
+    {
+      <Typography sx={{ margin: 2 }} className={styles.tipografia}> EDITAR {nombreTipo} </Typography>
+    }
+    <TextField label="Username" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'USERNAME' value={usuarioSeleccionade && usuarioSeleccionade.USERNAME}> </TextField>
+    <TextField label="Nombre" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'NAME' value={usuarioSeleccionade && usuarioSeleccionade.NAME}> </TextField>
+    <TextField label="Apellido" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'LASTNAME' value={usuarioSeleccionade && usuarioSeleccionade.LASTNAME}> </TextField>
+    <TextField label="Email" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'EMAIL' value={usuarioSeleccionade && usuarioSeleccionade.EMAIL}> </TextField>
+    <TextField label="Teléfono" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PHONE' value={usuarioSeleccionade && usuarioSeleccionade.PHONE}> </TextField>
+    <TextField label="Contraseña" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PASSWORD' value={usuarioSeleccionade && usuarioSeleccionade.PASSWORD}> </TextField>
+    <div>
+      <Button  variant="outlined" color='warning' sx={{m: 2}} onClick={()=>peticionPut()}>Aceptar</Button>
+      <Button onClick={()=>abrirCerrarModalEditar()} variant="outlined" color='warning' sx={{m: 2}}>Cancelar</Button>
+    </div>
+  </div>
+)
+
+const bodyEliminar=(
+  <div className={styles.modal} align='center'>
+      <p>¿Estás seguro que deseas eliminar el usuario <b>{usuarioSeleccionade && usuarioSeleccionade.USERNAME}</b> ? </p>
+    
+    <div>
+      <Button variant="outlined" color="error" sx={{m: 2}} onClick={()=>peticionDelete()} >Sí</Button>
+      <Button variant="outlined" color="warning" sx={{m: 2}} onClick={()=>abrirCerrarModalEliminar()}>No</Button>
+
+    </div>
+
+  </div>
+)
+
+const peticionDelete=async()=>{
+  await axios.delete(url+usuarioSeleccionade.IDUSUARIO)
+  .then(response=>{
+    setData(data.filter(usuario=>usuario.IDUSUARIO!==usuarioSeleccionade.IDUSUARIO));
+    abrirCerrarModalEliminar();
+  })
+}
+
+const peticionPost=async()=>{
+  console.log(usuarioSeleccionade)
+  await axios.post(url, usuarioSeleccionade)
+  .then(response=>{
+    setData(data.concat(response.data))
+    abrirCerrarModalInsertar()
+  })
+}
+
+const peticionPut=async()=>{
+  await axios.put(url, usuarioSeleccionade)
+  .then(response=>{
+    var dataNueva=data;
+    dataNueva.map(usuario=>{
+      if(usuarioSeleccionade.IDUSUARIO===usuario.IDUSUARIO){
+        usuario.USERNAME=usuarioSeleccionade.USERNAME;
+        usuario.NAME=usuarioSeleccionade.NAME;
+        usuario.LASTNAME=usuarioSeleccionade.LASTNAME;
+        usuario.EMAIL=usuarioSeleccionade.EMAIL;
+        usuario.PHONE=usuarioSeleccionade.PHONE;
+        usuario.PASSWORD=usuarioSeleccionade.PASSWORD;
+      }
+    })
+    setData(dataNueva);
+    abrirCerrarModalEditar();
+  })
 }
   return (
-    <div style={{ height: 700, width: '100%' }}>
-      <br/>
-      <Button>Insertar</Button>
-      <br/>
+    <div style={{width: '100%' }}>
+     
+      {
+        
+         (tipo!=3) ? <div><Button onClick={abrirCerrarModalInsertar} color="warning">Insertar</Button> <br/></div>: null
+         
+      }
+     
       <TableContainer>
         <Table>
           <TableHead>
@@ -34,7 +193,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {
+            {
                users.map(user => (
                 <TableRow key={user.IDUSUARIO}>
                   <TableCell>{user.USERNAME}</TableCell>
@@ -42,29 +201,40 @@ import DeleteIcon from '@mui/icons-material/Delete';
                   <TableCell>{user.LASTNAME}</TableCell>
                   <TableCell>{user.EMAIL}</TableCell>
                   <TableCell>{user.PHONE}</TableCell>
+                  <TableCell width={100} align='center'>
+                  {
+                  (tipo!=3) ?
+                  <EditIcon  className={styles.iconos} onClick={()=>seleccionarusuario(user, 'Editar')}/> : null
+                  }
+                    
+                  <DeleteIcon color='error' className={styles.iconos} onClick={()=>seleccionarusuario(user, 'Eliminar')}/>
+                 </TableCell>
                 </TableRow>
               ))
-            } */}
-            <TableRow>
-                  <TableCell>emilych</TableCell>
-                  <TableCell>Emily</TableCell>
-                  <TableCell>Chimbo</TableCell>
-                  <TableCell>emily@gmail.com</TableCell>
-                  <TableCell>0960508018</TableCell>
-                  <TableCell>
-                    <EditIcon>
-
-                    </EditIcon>
-                    <DeleteIcon>
-
-                    </DeleteIcon>
-                  </TableCell>
-                </TableRow>
+            }
           </TableBody>
 
         </Table>
 
       </TableContainer>
+
+      <Modal
+      open = {modalInsertar}
+      onClose = {abrirCerrarModalInsertar}>
+        {bodyInsertar}
+      </Modal>
+
+      <Modal
+     open={modalEditar}
+     onClose={abrirCerrarModalEditar}>
+        {bodyEditar}
+     </Modal>
+
+     <Modal
+     open={modalEliminar}
+     onClose={abrirCerrarModalEliminar}>
+        {bodyEliminar}
+     </Modal>
     </div>
   )
 }
