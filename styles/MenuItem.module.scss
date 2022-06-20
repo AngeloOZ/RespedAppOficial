@@ -2,7 +2,9 @@
 // $bg-menu-item: #0c0c0c;
 $bg-menu-item: #141414;
 
-
+.active{
+    color: crimson;
+}
 .menuItem {
     background-color: $bg-light-black;
     background-color: $bg-menu-item;

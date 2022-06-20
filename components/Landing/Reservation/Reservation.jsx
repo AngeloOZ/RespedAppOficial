@@ -1,12 +1,24 @@
 import Image from "next/image";
+import { useForm } from "react-hook-form";
 import css from "../../../styles/Reservation.module.scss";
 import dinner from "../../../public/Img/dinner2.jpg";
+import { Grid, TextField } from "@mui/material";
 
 const date = new Date();
 
 export const Reservation = () => {
   const fecha = date.toISOString().split("T")[0];
-  const hora = date.toTimeString().split(' ')[0].slice(0,-3);
+  const hora = date.toTimeString().split(" ")[0].slice(0, -3);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const registerReservation = (data) => {
+    console.log(data);
+  };
+
   return (
     <section className={css.section} id="reservaciones">
       <div className="container-lg">
@@ -15,58 +27,51 @@ export const Reservation = () => {
             <div className={`${css.sub_contenedor}`}>
               <div className={css.reserva}>
                 <h2>Hacer una reserva</h2>
-                <form>
-                  <div className="row">
-                    <div className="col mt-4">
-                      <input type="date" className="form-control" min={fecha} placeholder={fecha} value={fecha}/>
-                    </div>
-                    <div className="col mt-4">
-                      <input
-                        type="time"
-                        className="form-control"
-                        placeholder="13:00"
-                        // value={hora}
-                        min="12:30"
-                        max="23:00"
+                <form onSubmit={handleSubmit(registerReservation)}>
+                  <Grid container spacing={1}>
+                    <Grid item xs={12}>
+                      <TextField
+                        variant="filled"
+                        label="Fecha"
+                        type={"date"}
+                        fullWidth
+                        inputProps={{ min: fecha }}
+                        defaultValue={fecha}
+                        {...register("fecha")}
                       />
-                    </div>
-                    <div className="col mt-4">
-                      <input
-                        type="number"
-                        className="form-control"
-                        placeholder="Personas"
-                        min="1"
-                        max="50"
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        variant="filled"
+                        label="Hora de la reserva"
+                        type={"time"}
+                        fullWidth
+                        inputProps={{ min: "12:30", max: "23:00" }}
+                        defaultValue={hora}
+                        {...register("hora")}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        variant="filled"
+                        type={"number"}
+                        label="Número de personas"
+                        fullWidth
+                        inputProps={{ min: 1, max: 50 }}
+                        {...register("personas")}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        variant="filled"
+                        label="Notas de la reserva"
+                        multiline
+                        maxRows={5}
+                        fullWidth
+                        {...register("notas")}
                       />
-                    </div>
-                  </div>
-                  <div className="row mt-4">
-                    <div className="col">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Nombres y Apellidos"
-                      />
-                    </div>
-                  </div>
-                  <div className="row mt-4">
-                    <div className="col">
-                      <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Correo electrónico"
-                      />
-                    </div>
-                  </div>
-                  <div className="row mt-4">
-                    <div className="col">
-                      <input
-                        type="telf"
-                        className="form-control"
-                        placeholder="Télefono"
-                      />
-                    </div>
-                  </div>
+                    </Grid>
+                  </Grid>
                   <div className="row mt-4">
                     <div className="col">
                       <button

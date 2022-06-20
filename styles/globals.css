@@ -17,6 +17,10 @@ a {
   box-sizing: border-box;
 }
 
+.navbar-dark .navbar-nav .nav-item .nav-link.active_link_cs{
+  color: crimson;
+}
+
 .text-uppercase {
   text-transform: uppercase;
 }

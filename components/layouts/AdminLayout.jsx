@@ -3,7 +3,6 @@ import Head from "next/head";
 import Script from "next/script";
 import { SidebarAdmin } from "../ComponentsAdmin/SidebarAdmin";
 import { NavbarTop } from "../ComponentsAdmin/NavbarTop";
-//import { GridSumary } from "../ComponentsAdmin/GridSumary";
 
 export const AdminLayout = ({
   title = "Fogón de COZ",

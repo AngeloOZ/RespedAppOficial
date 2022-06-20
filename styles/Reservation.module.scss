@@ -28,17 +28,6 @@
             form{
                 padding: 25px;
                 padding-top: 0;
-                input{
-                    border-radius: 25px;
-                    border: none;
-                    background-color: #ffffff50;
-                    color: #fff;
-                    font-weight: bold;
-                    &::placeholder{
-                        color: #fff;
-                        font-weight: bold;
-                    }
-                }
                 .button_reserve{
                     background-color: $bg-black;
                     color: $color-white;

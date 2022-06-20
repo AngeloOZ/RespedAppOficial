@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { Footer, Navbar } from "../Landing";
+import { MaterialUILayout } from "./MaterialUILayout";
 
 export const LandingLayout = ({
   title = "Fogón de COZ",
@@ -7,7 +8,7 @@ export const LandingLayout = ({
   children,
 }) => {
   return (
-    <>
+    <MaterialUILayout>
       <Head>
         <title>{title}</title>
         <meta charSet="UTF-8" />
@@ -18,6 +19,6 @@ export const LandingLayout = ({
       <Navbar />
       <main className="main_layout">{children}</main>
       <Footer />
-    </>
+    </MaterialUILayout>
   );
 };
