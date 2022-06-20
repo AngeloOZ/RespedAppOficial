@@ -1,12 +1,12 @@
-import NextLink from "next/link";
+import { useState, useContext } from "react";
+import { CartContext } from "../../context";
+
 import {
   Box,
   Button,
   Card,
   CardContent,
-  Divider,
   Grid,
-  Link,
   Typography,
 } from "@mui/material";
 
@@ -16,73 +16,50 @@ import axios from "axios";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
 import { CartList } from "../../components/cart/CartList";
 import { checkout } from "../../functions";
+import { SummaryDelivery } from "../../components/checkout";
 
 const Summary = ({ address, order }) => {
+  const [textNote, setTextNote] = useState("");
+  const { emptyCart } = useContext(CartContext);
+
+  const handleChangeNote = (event) => {
+    setTextNote(event.target.value);
+  };
+
   const handleSubmitOrder = () => {
     const dataOrder = {
       IDPEDIDOTOTAL: order.IDPEDIDOTOTAL,
       IDRELACIONUD: address.IDRELACIONUD,
-      NOTE: "",
+      NOTE: textNote,
     };
-
-    axios.post("/pedido/domicilio", dataOrder)
-    .then(response => response.data)
-    .then(console.log)
-    .catch(console.error);
+    emptyCart();
+    axios
+      .post("/pedido/domicilio", dataOrder)
+      .then((response) => response.data)
+      .then(console.log)
+      .catch(console.error);
   };
   return (
     <ShopLayout
       title="Resumen de orden"
       pageDescription={"Resumen de la orden"}
     >
-      <Typography variant="h1" component="h1" mb={1}>
-        Resumen de la orden
-      </Typography>
       <Grid container>
         <Grid item xs={12} sm={7}>
+        <Typography variant="h1" component="h1" mb={2}>
+          Resumen de la orden
+        </Typography>
           <CartList />
         </Grid>
         <Grid item xs={12} sm={5}>
           <Card className="summary-card">
             <CardContent>
-              <Typography variant="h2">Orden Nro: {order.NUMPEDIDO}</Typography>
-              <Typography variant="h3" fontWeight={400} mt={2}>
-                Resumen
-              </Typography>
-              <Divider sx={{ my: 1 }} />
-
-              <Box display="flex" justifyContent="space-between">
-                <Typography variant="subtitle1">
-                  Dirección de entrega
-                </Typography>
-                <NextLink href="/checkout/address" passHref>
-                  <Link underline="always">Editar</Link>
-                </NextLink>
-              </Box>
-
-              <Typography>{address.NAME}</Typography>
-              <Typography>{address.STREET1}</Typography>
-              <Typography>{address.STREET2}</Typography>
-              <Typography>{address.REFERENCE}</Typography>
-              <Typography>{address.PHONEDIR}</Typography>
-
-              <Divider sx={{ my: 1 }} />
-
-              <Grid container>
-                <Grid item xs={6}>
-                  <Typography>Cantidad</Typography>
-                </Grid>
-                <Grid item xs={6} display="flex" justifyContent="end">
-                  <Typography>{order.NUMITEMS} productos </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="subtitle1">Total:</Typography>
-                </Grid>
-                <Grid item xs={6} display="flex" justifyContent="end">
-                  <Typography variant="subtitle1">{`$${order.VALORTOTAL}`}</Typography>
-                </Grid>
-              </Grid>
-
+              <SummaryDelivery
+                address={address}
+                order={order}
+                value={textNote}
+                setValue={handleChangeNote}
+              />
               <Box sx={{ mt: 3 }}>
                 <Button
                   color="secondary"

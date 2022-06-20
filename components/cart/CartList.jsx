@@ -20,17 +20,19 @@ export const CartList = ({ editable = false }) => {
     <>
       {cart.map((item) => (
         <Grid container spacing={2} key={item.idItem} sx={{ mb: 1.5 }}>
-          <Grid item xs={3}>
+          <Grid item xs={4} md={3}>
             <CardActionArea>
               <CardMedia
                 image={item.image}
                 component="img"
+                height={140}
+                width="100%"
                 sx={{ borderRadius: "5px" }}
               />
             </CardActionArea>
           </Grid>
-          <Grid item xs={7}>
-            <Typography variant="body1" fontWeight={600}>
+          <Grid item xs={5} md={7}>
+            <Typography variant="subtitle1" fontSize={18} fontWeight={500}>
               {item.name}
             </Typography>
           </Grid>
@@ -46,7 +48,11 @@ export const CartList = ({ editable = false }) => {
               mb={1}
             >{`$${item.price}`}</Typography>
             <RenderIf isTrue={editable}>
-              <Button variant="outlined" color="secondary" onClick={()=>removeCartProduct(item.idItem)}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={() => removeCartProduct(item.idItem)}
+              >
                 Remover
               </Button>
             </RenderIf>

@@ -59,8 +59,9 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const updateAddressCart = (idAddress) => {
-    dispatch({ type: "UPDATE_ADDRESS_CART", payload: idAddress });
+  const emptyCart = () => {
+    dispatch({ type: "EMPTY_CART_PRODUCTS" });
+    Cookies.set("cart", JSON.stringify([]));
   };
 
   return (
@@ -69,7 +70,7 @@ export const CartProvider = ({ children }) => {
         ...state,
         addProductToCart,
         removeCartProduct,
-        updateAddressCart
+        emptyCart,
       }}
     >
       {children}

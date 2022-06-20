@@ -2,13 +2,11 @@ import { useContext, useState } from "react";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
-
 import { useForm } from "react-hook-form";
-import axios from "axios";
 
 import { AuthContext } from "../../context/Auth";
 import { AuthLayout } from "../../components/layouts/AuthLayout";
-import { Input } from "../../components/Components";
+import { FullScreenloader, Input } from "../../components/Components";
 import css from "../../styles/Auth.module.scss";
 import { RenderIf } from "../../components/Components/RenderIf";
 import { ListErrors } from "../../components/AuthComponents/ListErrors";
@@ -33,24 +31,26 @@ export default function Login() {
   } = useForm();
 
   const router = useRouter();
-
   const [showError, setShowError] = useState(false);
+  const [displayLoader, setDisplayLoader] = useState(false);
   const [showMessageError, setShowMessageError] = useState("");
   const { loginUser } = useContext(AuthContext);
 
   const onLoginUser = async ({ username, password }) => {
+    setDisplayLoader(true);
     setShowError(false);
     const isValidLogin = await loginUser(username, password);
     if (!isValidLogin.state) {
-      console.log(isValidLogin.message);
+      setDisplayLoader(false);
       setShowMessageError("El usuario y/o contraseña no son válidos");
       setShowError(true);
       setTimeout(() => setShowError(false), 3000);
       const response = isValidLogin.message;
       switch (response.status) {
         case 400:
+          const listError = response.errors ? response.errors : [];
           return setShowMessageError(
-            <ListErrors errors={response.errors} message={response.message} />
+            <ListErrors errors={listError} message={response.message} />
           );
         case 404:
           return setShowMessageError(
@@ -66,6 +66,7 @@ export default function Login() {
 
   return (
     <AuthLayout config={config}>
+      <FullScreenloader display={displayLoader} />
       <form
         className={css.inputs_container}
         onSubmit={handleSubmit(onLoginUser)}

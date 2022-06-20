@@ -3,6 +3,7 @@ import NextLink from "next/link";
 import { RemoveShoppingCartOutlined } from "@mui/icons-material";
 import { Box, Link, Typography } from "@mui/material";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
+import { checkout } from "../../functions";
 
 const EmptyPage = () => {
   return (
@@ -21,10 +22,7 @@ const EmptyPage = () => {
         <Box display="flex" flexDirection="column" alignItems="center">
           <Typography>Su carrito está vació</Typography>
           <NextLink href="/menu" passHref>
-            <Link
-              typography="h4"
-              color="secondary"
-            >
+            <Link typography="h4" color="secondary">
               Regresar
             </Link>
           </NextLink>
@@ -35,3 +33,19 @@ const EmptyPage = () => {
 };
 
 export default EmptyPage;
+
+export const getServerSideProps = async ({ req }) => {
+  const items = checkout.getItemsCart(req);
+  if(items){
+    return {
+      redirect: {
+        destination: "/cart",
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  };
+};

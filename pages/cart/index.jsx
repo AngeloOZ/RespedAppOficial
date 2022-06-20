@@ -1,5 +1,4 @@
-import { useState, useContext, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useState } from "react";
 
 import NextLink from "next/link";
 
@@ -20,7 +19,7 @@ import FoodBankOutlinedIcon from "@mui/icons-material/FoodBankOutlined";
 
 import { CartList, OrderSummary } from "../../components/cart";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
-import { CartContext } from "../../context";
+import { checkout } from "../../functions";
 
 const styleModal = {
   position: "fixed",
@@ -34,27 +33,15 @@ const styleModal = {
   justifyContent: "center",
 };
 
-const CartPage = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const { numberOfItems } = useContext(CartContext);
-  const router = useRouter();
-  useEffect(() => {
-    if(numberOfItems == 0){
-      router.replace('/cart/empty')
-    }
-  }, [numberOfItems, router]);
-
-  if(numberOfItems == 0){
-    return <></>;
-  }
-  
+const CartPage = ({numbsOfItems}) => {
+  const [openModal, setOpenModal] = useState(false);  
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
 
   return (
     <ShopLayout
-      title="Carrito"
+      title={`Carrito - ${numbsOfItems}`}
       pageDescription={"Carrito de compras de la tienda"}
     >
       <Typography variant="h1" component="h1" my={3}>
@@ -148,7 +135,18 @@ const CartPage = () => {
 export default CartPage;
 
 export const getServerSideProps = async ({ req }) => {
+  const items = checkout.getItemsCart(req);
+  if(!items){
+    return {
+      redirect: {
+        destination: "/cart/empty",
+        permanent: false,
+      },
+    }
+  }
   return {
-    props: {},
+    props: {
+      numbsOfItems: items.length
+    },
   };
 };

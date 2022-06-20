@@ -1,3 +1,4 @@
+
 export const cartReducer = (state, action) => {
    switch (action.type) {
       case 'LOAD_CART_FROM_LOCALSTORAGE':
@@ -21,10 +22,13 @@ export const cartReducer = (state, action) => {
             ...state,
             ...action.payload,
          }
-      case 'UPDATE_ADDRESS_CART':
+      case 'EMPTY_CART_PRODUCTS':
          return {
             ...state,
-            address: action.payload,
+            isLoaded: false,
+            cart: [],
+            numberOfItems: 0,
+            subTotal: 0,
          }
       default:
          return state;

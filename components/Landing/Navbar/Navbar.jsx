@@ -5,8 +5,11 @@ import NavBarItem from "./NavBarItem";
 import logoNavbar from "../../../public/Img/logo_navbar.png";
 
 import styles from "../../../styles/Navbar.module.scss";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/Auth";
 
 export const Navbar = () => {
+  const { isLoggedIn, logoutUser } = useContext(AuthContext);
   return (
     <nav
       className={`navbar sticky-top navbar-expand-lg navbar-dark bg-dark ${styles.bg_navbar}`}
@@ -60,23 +63,56 @@ export const Navbar = () => {
                 <span className="ms-2">Mi cuenta</span>
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
-                <li>
-                  <Link href="/auth/login">
-                    <a className="dropdown-item">Login</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/auth/register">
-                    <a className="dropdown-item" href="#">
-                      Register
-                    </a>
-                  </Link>
-                </li>
+                {isLoggedIn ? (
+                  <ItemsUser logout={logoutUser} />
+                ) : (
+                  <ItemsLogin />
+                )}
               </ul>
             </div>
           </div>
         </div>
       </div>
     </nav>
+  );
+};
+
+const ItemsLogin = () => {
+  return (
+    <>
+      <li>
+        <Link href="/auth/login">
+          <a className="dropdown-item">Iniciar sesión</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/auth/register">
+          <a className="dropdown-item" href="#">
+            Registrarse
+          </a>
+        </Link>
+      </li>
+    </>
+  );
+};
+const ItemsUser = ({ logout }) => {
+  return (
+    <>
+      <li>
+        <Link href="#">
+          <a className="dropdown-item">Perfil</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="#">
+          <a className="dropdown-item">Mis ordenes</a>
+        </Link>
+      </li>
+      <li onClick={logout}>
+        <span className="dropdown-item" href="#">
+          Salir
+        </span>
+      </li>
+    </>
   );
 };

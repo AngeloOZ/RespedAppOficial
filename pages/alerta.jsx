@@ -1,3 +1,4 @@
+import { FullScreenloader } from "../components/Components";
 import { SweetAlert } from "../helpers";
 
 const Alerta = () => {
