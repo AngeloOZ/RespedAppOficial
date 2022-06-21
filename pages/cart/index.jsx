@@ -34,7 +34,7 @@ const styleModal = {
   justifyContent: "center",
 };
 
-const CartPage = ({ numbsOfItems }) => {
+const CartPage = ({ numbsOfItems, reservation }) => {
   const [openModal, setOpenModal] = useState(false);
   const [displayLoader, setDisplayLoader] = useState(false);
   const handleOpenModal = () => {
@@ -65,14 +65,29 @@ const CartPage = ({ numbsOfItems }) => {
               <OrderSummary />
 
               <Box sx={{ mt: 3 }}>
-                <Button
-                  color="success"
-                  className="circular-btn"
-                  fullWidth
-                  onClick={handleOpenModal}
-                >
-                  Checkout
-                </Button>
+                {reservation ? (
+                  <NextLink href="/checkout/summary/reservacion" passHref>
+                    <Link>
+                      <Button
+                        color="success"
+                        className="circular-btn"
+                        fullWidth
+                        onClick={()=>setDisplayLoader(true)}
+                      >
+                        Checkout
+                      </Button>
+                    </Link>
+                  </NextLink>
+                ) : (
+                  <Button
+                    color="success"
+                    className="circular-btn"
+                    fullWidth
+                    onClick={handleOpenModal}
+                  >
+                    Checkout
+                  </Button>
+                )}
               </Box>
             </CardContent>
           </Card>
@@ -117,7 +132,7 @@ const CartPage = ({ numbsOfItems }) => {
             </NextLink>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <NextLink href="/checkout/summary" passHref>
+            <NextLink href="/checkout/summary/local" passHref>
               <Link>
                 <Button
                   variant="contained"
@@ -141,6 +156,8 @@ export default CartPage;
 
 export const getServerSideProps = async ({ req }) => {
   const items = checkout.getItemsCart(req);
+  const reservation = checkout.getReservationCookies(req);
+
   if (!items) {
     return {
       redirect: {
@@ -152,6 +169,7 @@ export const getServerSideProps = async ({ req }) => {
   return {
     props: {
       numbsOfItems: items.length,
+      reservation: !!reservation,
     },
   };
 };

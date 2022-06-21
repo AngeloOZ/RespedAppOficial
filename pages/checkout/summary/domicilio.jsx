@@ -12,12 +12,12 @@ import {
 
 import { setCookies } from "cookies-next";
 
-import { ShopLayout } from "../../components/layouts/ShopLayout";
-import { CartList } from "../../components/cart/CartList";
-import { checkout } from "../../functions";
-import { SummaryDelivery } from "../../components/checkout";
-import { FullScreenloader } from "../../components/Components";
-import { useHandleOrders } from "../../Hooks";
+import { ShopLayout } from "../../../components/layouts/ShopLayout";
+import { CartList } from "../../../components/cart/CartList";
+import { checkout } from "../../../functions";
+import { SummaryDelivery } from "../../../components/checkout";
+import { FullScreenloader } from "../../../components/Components";
+import { useHandleOrders } from "../../../Hooks";
 
 const Summary = ({ address, order }) => {
   const [displayLoader, setDisplayLoader] = useState(false);
@@ -37,8 +37,8 @@ const Summary = ({ address, order }) => {
 
   return (
     <ShopLayout
-      title="Resumen de orden"
-      pageDescription={"Resumen de la orden"}
+      title="Resumen de orden a domicilio"
+      pageDescription={"Resumen de la orden  a domicilio"}
     >
       <FullScreenloader display={displayLoader} />
       <Grid container>

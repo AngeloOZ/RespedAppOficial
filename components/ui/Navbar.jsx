@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import NextLink from "next/link";
 import { UIContext, CartContext } from "../../context";
@@ -15,8 +15,10 @@ import {
 } from "@mui/material";
 
 import { ShoppingCartOutlined, MenuOutlined } from "@mui/icons-material";
+import { FullScreenloader } from "../Components";
 
 export const Navbar = ({ categories }) => {
+  const [displayLoader, setDisplayLoader] = useState(false);
   const { toggleSideMenu } = useContext(UIContext);
   const { numberOfItems } = useContext(CartContext);
   return (
@@ -27,6 +29,7 @@ export const Navbar = ({ categories }) => {
             <Typography variant="h6">El Fogón de COZ </Typography>
           </Link>
         </NextLink>
+        <FullScreenloader display={displayLoader} />
 
         <Box flex={1} />
 
@@ -56,7 +59,7 @@ export const Navbar = ({ categories }) => {
 
         <NextLink href="/cart" passHref>
           <Link>
-            <IconButton>
+            <IconButton onClick={() => setDisplayLoader(true)}>
               <Badge badgeContent={numberOfItems} color="secondary">
                 <ShoppingCartOutlined />
               </Badge>

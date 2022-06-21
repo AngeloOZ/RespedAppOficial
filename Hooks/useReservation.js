@@ -1,8 +1,11 @@
+import { useRouter } from "next/router";
+
 import axios from "axios";
 import { SweetAlert } from "../helpers";
 import Cookies from "js-cookie";
 
 export const useReservation = (displayLoading) => {
+   const router = useRouter();
 
    const registerReservation = async (data) => {
       displayLoading(true);
@@ -14,7 +17,8 @@ export const useReservation = (displayLoading) => {
          RESERVATIONTIME: hora
       }
       try {
-         // const { data } = await axios.post('/reserva', body);
+         const { data } = await axios.post('/reserva', body);
+         body.IDRESERVA = data.data;
          displayLoading(false);
          await SweetAlert.success({
             title: "Reservación realizada con exito",
@@ -29,8 +33,9 @@ export const useReservation = (displayLoading) => {
             confirmButtonColor: "#2e7d32"
          })
          if (response.isConfirmed) {
+            displayLoading(true);
             Cookies.set('reservation', JSON.stringify(body), { expires: 0.2, secure: true })
-            console.log('Agregando pedido');
+            router.push('/menu');
          }
       } catch (error) {
          console.error(error)

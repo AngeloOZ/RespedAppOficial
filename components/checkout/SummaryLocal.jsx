@@ -1,8 +1,6 @@
-import NextLink from "next/link";
-import { Box, Divider, Grid, Link, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 
-export const SummaryDelivery = ({ order, address, children}) => {
-  
+export const SummaryLocal = ({ order, children = null }) => {
   return (
     <>
       <Box display="flex" justifyContent="space-between">
@@ -11,26 +9,15 @@ export const SummaryDelivery = ({ order, address, children}) => {
           {order.NUMPEDIDO}
         </Typography>
       </Box>
-      <Typography variant="h3" fontWeight={400} mt={2}>
-        Resumen
-      </Typography>
       <Divider sx={{ my: 1 }} />
-
-      <Box display="flex" justifyContent="space-between">
-        <Typography variant="subtitle1">Dirección de entrega</Typography>
-        <NextLink href="/checkout/address" passHref>
-          <Link underline="always">Editar</Link>
-        </NextLink>
-      </Box>
-
-      <Typography>{address.NAME}</Typography>
-      <Typography>{address.STREET1}</Typography>
-      <Typography>{address.STREET2}</Typography>
-      <Typography>{address.REFERENCE}</Typography>
-      <Typography>{address.PHONEDIR}</Typography>
 
       <Divider sx={{ my: 1 }} />
       <Grid container>
+        <Grid item xs={12}>
+          <Box display="flex" justifyContent="space-between">
+            <Typography variant="subtitle1">Resumen de productos</Typography>
+          </Box>
+        </Grid>
         <Grid item xs={6}>
           <Typography>Cantidad</Typography>
         </Grid>

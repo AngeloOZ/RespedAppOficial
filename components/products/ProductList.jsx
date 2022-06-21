@@ -1,4 +1,4 @@
-import { Grid, NoSsr } from "@mui/material";
+import { Grid } from "@mui/material";
 import { ProductCard } from "./ProductCard";
 
 export const ProductList = ({ products }) => {

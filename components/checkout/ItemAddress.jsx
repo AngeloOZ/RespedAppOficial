@@ -31,7 +31,7 @@ export const ItemAddress = ({ address }) => {
       idRelacion: IDRELACIONUD,
     };
     const dir = btoa(JSON.stringify(address2));
-    router.push(`/checkout/summary?dir=${dir}`);
+    router.push(`/checkout/summary/domicilio?dir=${dir}`);
   };
   return (
     <>

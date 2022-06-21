@@ -124,7 +124,7 @@ export const Reservation = () => {
                         fullWidth
                         {...register("notas", {
                           pattern: {
-                            value: /^[A-Za-z 0-9]+$/i,
+                            value: /^[A-Za-z 0-9ñ ,.;áéíóú]+$/i,
                             message:
                               "Solo es permitido caracteres alfanuméricos",
                           },
