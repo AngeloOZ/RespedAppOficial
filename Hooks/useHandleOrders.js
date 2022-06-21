@@ -2,10 +2,9 @@ import { useContext } from "react";
 
 import { useRouter } from "next/router";
 import { SweetAlert } from "../helpers";
-import Cookies from "js-cookie";
 
 import axios from "axios";
-import { AuthContext, CartContext } from "../context";
+import { CartContext } from "../context";
 
 const dataOrder = {
    IDPEDIDOTOTAL: undefined,

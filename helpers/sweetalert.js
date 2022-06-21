@@ -6,20 +6,24 @@ const MySwal = withReactContent(Swal);
 const confiSwal = {
    title: "title",
    text: "text",
+   icon: "",
    confirmButtonText: "Ok",
    showCloseButton: true,
+   showCancelButton: false,
    cancelButtonText: "Cancelar",
    confirmButtonColor: "#EC4D20",
+   cancelButtonColor: "#d33",
    timer: 0,
    onClose: () => { }
 }
 
 export function success(config = confiSwal) {
+   confiSwal.icon = "success";
    const defultConfigAlert = { ...confiSwal, ...config }
    return MySwal.fire({
       title: defultConfigAlert.title,
       text: defultConfigAlert.text,
-      icon: "success",
+      icon: defultConfigAlert.icon,
       timer: defultConfigAlert.timer,
       showCloseButton: defultConfigAlert.showCloseButton,
       confirmButtonColor: defultConfigAlert.confirmButtonColor,
@@ -39,12 +43,10 @@ export function error(config = confiSwal) {
       showCloseButton: defultConfigAlert.showCloseButton,
       confirmButtonText: defultConfigAlert.confirmButtonText,
       didClose: () => {
-         console.log('Se cerró');
          defultConfigAlert.onClose();
       }
    })
 }
-
 export function deleteConfirm(config = confiSwal) {
 
    const defultConfigAlert = { ...confiSwal, ...config }
@@ -59,7 +61,25 @@ export function deleteConfirm(config = confiSwal) {
       cancelButtonColor: '#d33',
       cancelButtonText: defultConfigAlert.cancelButtonText,
       didClose: () => {
-         console.log('Se cerró');
+         defultConfigAlert.onClose();
+      }
+   })
+}
+export function successConfirm(config = confiSwal) {
+   confiSwal.icon = "info"
+   confiSwal.showCancelButton = true;
+   const defultConfigAlert = { ...confiSwal, ...config }
+   return MySwal.fire({
+      title: defultConfigAlert.title,
+      text: defultConfigAlert.text,
+      icon: defultConfigAlert.icon,
+      timer: defultConfigAlert.timer,
+      confirmButtonText: defultConfigAlert.confirmButtonText,
+      confirmButtonColor: defultConfigAlert.confirmButtonColor,
+      showCancelButton: defultConfigAlert.showCancelButton,
+      cancelButtonColor: defultConfigAlert.cancelButtonColor,
+      cancelButtonText: defultConfigAlert.cancelButtonText,
+      didClose: () => {
          defultConfigAlert.onClose();
       }
    })

@@ -70,7 +70,6 @@ export const lightTheme = createTheme({
             },
          }
       },
-
       MuiTypography: {
          styleOverrides: {
             h1: {
