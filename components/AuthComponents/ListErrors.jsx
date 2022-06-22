@@ -1,4 +1,4 @@
-export const ListErrors = ({ message, errors }) => {
+export const ListErrors = ({ message, errors = [] }) => {
   return (
     <div style={{ textAlign: "start" }}>
       <p

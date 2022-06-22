@@ -51,16 +51,47 @@ export const AuthProvider = ({ children }) => {
       const { username, rol, token, id } = data.data;
       Cookies.set("SESSION_ID", token, { expires: 1 });
       dispatch({ type: "AUTH_LOGIN", payload: { username, rol, id } });
-      return { state: true, message: data.data };
+      return {
+        hasError: false,
+      };
     } catch (error) {
-      if (error.response.data) {
-        return { state: false, message: error.response.data };
-      } else {
+      if (axios.isAxiosError(error)) {
         return {
-          state: false,
-          message: "El usuario y/o contraseña no son correctos",
+          hasError: true,
+          response: error.response?.data,
         };
       }
+
+      return {
+        hasError: true,
+        response: { message: "El usuario y/o contraseña no son válidos" },
+      };
+    }
+  };
+
+  const registerUser = async (body) => {
+    try {
+      const { data } = await axios.post("/usuario/cliente", body);
+      const { username, rol, token, id } = data.data;
+      Cookies.set("SESSION_ID", token, { expires: 1 });
+
+      dispatch({ type: "AUTH_LOGIN", payload: { username, rol, id } });
+
+      return {
+        hasError: false,
+      };
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return {
+          hasError: true,
+          response: error.response?.data,
+        };
+      }
+
+      return {
+        hasError: true,
+        response: { message: "No se pudo crear el usuario - intente de nuevo" },
+      };
     }
   };
 
@@ -77,6 +108,7 @@ export const AuthProvider = ({ children }) => {
         //Methods
         loginUser,
         logoutUser,
+        registerUser,
       }}
     >
       {children}

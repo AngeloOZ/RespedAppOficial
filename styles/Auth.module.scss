@@ -17,7 +17,7 @@ $image-bg: #fcb364;
 }
 
 .login_container {
-    height: 560px;
+    height: 590px;
     width: 90%;
     max-width: 900px;
     border-radius: 10px;
@@ -44,14 +44,19 @@ $image-bg: #fcb364;
     background-color: $image-bg;
     box-sizing: border-box;
 }
-
+.container_logo{
+    margin-top: 20px;
+    position: relative;
+    width: 130px;
+    height: 130px;
+}
 .title {
     text-transform: capitalize;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 600;
     letter-spacing: 1px;
     color: $title-bg;
-    margin: 20px;
+    margin: 10px;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -99,6 +104,9 @@ $image-bg: #fcb364;
 
 .inputs_container {
     height: 55%;
+    &.register{
+        height: 60%;
+    }
     width: 85%;
     display: flex;
     flex-direction: column;
@@ -106,6 +114,7 @@ $image-bg: #fcb364;
     align-items: center;
     font-family: 'Poppins', sans-serif;
 }
+
 
 .input,
 .btn_login {

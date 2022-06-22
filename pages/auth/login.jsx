@@ -38,28 +38,19 @@ export default function Login() {
 
   const onLoginUser = async ({ username, password }) => {
     setDisplayLoader(true);
-    setShowError(false);
-    const isValidLogin = await loginUser(username, password);
-    if (!isValidLogin.state) {
+    const { hasError, response } = await loginUser(username, password);
+    if (hasError) {
       setDisplayLoader(false);
-      setShowMessageError("El usuario y/o contraseña no son válidos");
       setShowError(true);
-      setTimeout(() => setShowError(false), 3000);
-      const response = isValidLogin.message;
-      switch (response.status) {
-        case 400:
-          const listError = response.errors ? response.errors : [];
-          return setShowMessageError(
-            <ListErrors errors={listError} message={response.message} />
-          );
-        case 404:
-          return setShowMessageError(
-            "El usuario y/o contraseña no son válidos"
-          );
-        default:
-          return setShowMessageError("Error generico");
-      }
+      const sms =
+        typeof response.data == "string" ? response.data : response.message;
+      setShowMessageError(
+        <ListErrors message={sms} errors={response?.errors || []} />
+      );
+      setTimeout(() => setShowError(false), 4000);
+      return;
     }
+
     const destination = router.query.p?.toString() || "/";
     router.replace(destination);
   };
@@ -85,6 +76,10 @@ export default function Login() {
           useFormRegister={{
             ...register("username", {
               required: "El nombre de usuario es requerido",
+              pattern: {
+                value: /^[A-Za-z0-9ñ]+$/i,
+                message: "Solo es permitido caracteres alfanuméricos",
+              },
             }),
           }}
           errors={!!errors.username}
@@ -108,7 +103,7 @@ export default function Login() {
           ¿He olvidado mi contraseña?
           <span className={css.span}> Clic aquí</span>
         </p>
-        <button type="submit" disabled={showError} className={css.btn_login}>
+        <button type="submit" className={css.btn_login}>
           Iniciar sesión
         </button>
         <p>

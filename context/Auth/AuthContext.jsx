@@ -7,6 +7,7 @@ const AUTH_INITIAL_STATE = {
   id: undefined,
   loginUser: () => {},
   logoutUser: () => {},
+  registerUser: () => {},
 };
 
 export const AuthContext = createContext(({} = AUTH_INITIAL_STATE));
