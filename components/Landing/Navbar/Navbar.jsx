@@ -1,19 +1,22 @@
+import { useContext, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { AuthContext } from "../../../context/Auth";
 import NavBarItem from "./NavBarItem";
 import logoNavbar from "../../../public/Img/logo_navbar.png";
 
 import styles from "../../../styles/Navbar.module.scss";
-import { useContext } from "react";
-import { AuthContext } from "../../../context/Auth";
+import { FullScreenloader } from "../../Components";
 
 export const Navbar = () => {
   const { isLoggedIn, logoutUser } = useContext(AuthContext);
+  const [loader, setLoader] = useState(false);
   return (
     <nav
       className={`navbar sticky-top navbar-expand-lg navbar-dark bg-dark ${styles.bg_navbar}`}
     >
+      <FullScreenloader display={loader} />
       <div className="container-fluid">
         <Link href="/">
           <a className="navbar-brand">
@@ -47,7 +50,10 @@ export const Navbar = () => {
 
           <div className="d-flex">
             <Link href="/menu">
-              <a className={`btn ${styles.btn_menu}`}>
+              <a
+                className={`btn ${styles.btn_menu}`}
+                onClick={() => setLoader(true)}
+              >
                 <i className="bi bi-grid-3x3-gap-fill"></i>
                 <span className="ms-2">Ver menú</span>
               </a>
@@ -82,12 +88,14 @@ const ItemsLogin = () => {
     <>
       <li>
         <Link href="/auth/login">
-          <a className="dropdown-item">Iniciar sesión</a>
+          <a className="dropdown-item" onClick={() => setLoader(true)}>
+            Iniciar sesión
+          </a>
         </Link>
       </li>
       <li>
         <Link href="/auth/register">
-          <a className="dropdown-item" href="#">
+          <a className="dropdown-item" onClick={() => setLoader(true)}>
             Registrarse
           </a>
         </Link>
@@ -100,18 +108,20 @@ const ItemsUser = ({ logout }) => {
     <>
       <li>
         <Link href="#">
-          <a className="dropdown-item">Perfil</a>
+          <a className="dropdown-item" onClick={() => setLoader(true)}>
+            Perfil
+          </a>
         </Link>
       </li>
       <li>
         <Link href="#">
-          <a className="dropdown-item">Mis ordenes</a>
+          <a className="dropdown-item" onClick={() => setLoader(true)}>
+            Mis ordenes
+          </a>
         </Link>
       </li>
       <li onClick={logout}>
-        <span className="dropdown-item" href="#">
-          Salir
-        </span>
+        <span className="dropdown-item">Salir</span>
       </li>
     </>
   );

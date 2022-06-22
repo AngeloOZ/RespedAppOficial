@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
 import { Grid, TextField } from "@mui/material";
-import Cookies from "js-cookie";
 
 import { AuthContext } from "../../../context";
 import css from "../../../styles/Reservation.module.scss";

@@ -46,7 +46,9 @@ export const Navbar = ({ categories }) => {
             return (
               <NextLink href={url} passHref key={category.IDCATEGORIA}>
                 <Link mr={1}>
-                  <Button style={{ textTransform: "capitalize" }}>
+                  <Button
+                    style={{ textTransform: "capitalize" }}
+                  >
                     {category.NAME.toLowerCase()}
                   </Button>
                 </Link>

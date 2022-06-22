@@ -1,4 +1,5 @@
 export * from "./useAddress";
+export * from "./useAddAddress";
 export * from "./useCategories";
 export * from "./useHandleOrders";
 export * from "./usePedidos";
