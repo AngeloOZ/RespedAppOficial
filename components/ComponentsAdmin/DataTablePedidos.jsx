@@ -96,12 +96,16 @@ const bodyEditar = (
           <TableHead>
             <TableRow>
               <TableCell>No Pedido</TableCell>
-              <TableCell>Productos</TableCell>
+              {(tipo!=4) ? <TableCell>Productos</TableCell> : null}
               <TableCell>Valor Total</TableCell>
               <TableCell>Nota</TableCell>
-              {(tipo==1) ? <TableCell>Mesa</TableCell> : (tipo==2) ? <TableCell>Direccion</TableCell> : <TableCell>No Reserva</TableCell>}
+              {(tipo==1) ? <TableCell>Mesa</TableCell> : (tipo==2) ? <TableCell>Direccion</TableCell> : (tipo==3) ? <TableCell>No Reserva</TableCell>: null}
               <TableCell>Estado</TableCell>
-              <TableCell>Acciones</TableCell>
+              {
+                      (tipo!=4)?
+                      <TableCell>Acciones</TableCell>:null
+                    }
+              
             </TableRow>
           </TableHead>
           <TableBody>
@@ -109,13 +113,16 @@ const bodyEditar = (
                pedidos.map(pedido => (
                 <TableRow key={pedido.IDPEDIDO}>
                   <TableCell>{pedido.NUMPEDIDO}</TableCell>
-                  <TableCell>
+                  
                   {
+                    (tipo!=4)?
+                    <TableCell>{
                       pedido.PRODUCTOS.map((pedido,index) => (
                         <li key={index}>{pedido}</li>
-                      ))
-                    }
-                    </TableCell>
+                      ))}</TableCell>:null
+                      
+                  }
+                    
                   <TableCell>{pedido.VALORTOTAL}</TableCell>
                   <TableCell>{pedido.NOTE}</TableCell>
                   {
@@ -126,8 +133,9 @@ const bodyEditar = (
                     <li>{pedido.DIRECCION.STREET2}</li>
                     <li>{pedido.DIRECCION.REFERENCE}</li>
                     </>
-                  }</TableCell> : 
-                  <TableCell>{pedido.RESERVA}</TableCell>}
+                  }</TableCell> : (tipo==3) ? 
+                  <TableCell>{pedido.RESERVA}</TableCell>:null
+                  }
                   <TableCell width={100}>
                     {
                       (pedido.IDSTATE==1) ?   <Chip label='EN PROCESO' color="primary"/> :
@@ -139,9 +147,13 @@ const bodyEditar = (
  }
                    
                     </TableCell>
-                    <TableCell width={100} align='center'>
+                    {
+                      (tipo!=4)?
+                      <TableCell width={100} align='center'>
                     <EditIcon cursor='pointer' onClick={()=>seleccionarPedido(pedido)}/>
-                    </TableCell>
+                    </TableCell>:null
+                    }
+                    
                    
                 </TableRow>
               ))

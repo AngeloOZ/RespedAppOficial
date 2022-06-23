@@ -21,6 +21,9 @@ import DataTablePedidos from "./DataTablePedidos";
    if(tipo==3){
       nombreTipo = "Ver Pedidos Reserva";
    }
+   if(tipo==4){
+      nombreTipo = "Ver Pedidos Finalizados";
+   }
   return (
         <div>
          <List>
