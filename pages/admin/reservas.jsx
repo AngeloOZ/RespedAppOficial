@@ -1,11 +1,6 @@
 
 import React from "react";
 import { AdminLayout } from "../../components/layouts/AdminLayout";
-import  DataTableReservas from "../../components/ComponentsAdmin/DataTableReservas";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import { Collapse } from "@mui/material";
-import ListItemText from '@mui/material/ListItemText';
 import { useReservas } from "../../Hooks/useReservas";
 import ListReservas from "../../components/ComponentsAdmin/ListReservas";
 
@@ -19,10 +14,10 @@ export default function Admin() {
     <AdminLayout>
         <h1>Reservas</h1>
         <div>
-        <ListReservas reservas ={reservasPendiente} tipo ={1}/>
-        <ListReservas reservas ={reservasConfirmada} tipo ={2}/>
-        <ListReservas reservas ={reservasFinalizada} tipo ={3}/>
-        <ListReservas reservas ={reservasRechazada} tipo ={4}/>
+        <ListReservas reservas ={reservasPendiente?reservasPendiente:[]} tipo ={1}/>
+        <ListReservas reservas ={reservasConfirmada?reservasConfirmada:[]} tipo ={2}/>
+        <ListReservas reservas ={reservasFinalizada?reservasFinalizada:[]} tipo ={3}/>
+        <ListReservas reservas ={reservasRechazada?reservasRechazada:[]} tipo ={4}/>
          
     </div>
     </AdminLayout>
