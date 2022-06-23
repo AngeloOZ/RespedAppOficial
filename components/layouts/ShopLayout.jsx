@@ -25,9 +25,9 @@ export const ShopLayout = ({
         {imageFullUrl && <meta name="og:image" content={imageFullUrl} />}
       </Head>
       <nav>
-        <Navbar categories={categories?.data || []} />
+        <Navbar categories={categories || []} />
       </nav>
-      <SideMenu categories={categories?.data || []} />
+      <SideMenu categories={categories || []} />
       <main
         style={{
           margin: "60px auto auto 0",

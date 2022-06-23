@@ -16,7 +16,7 @@ export default function Index() {
           Todos <span className="toLowerCase">los</span> productos
         </Typography>
       </Box>
-      {isLoading ? <ProductPlaceHolder /> : <ProductList products={products?.data || []} />}
+      {isLoading ? <ProductPlaceHolder /> : <ProductList products={products || []} />}
     </ShopLayout>
   );
 }

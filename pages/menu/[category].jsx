@@ -19,7 +19,7 @@ export default function MenuIndex() {
         {isLoading ? (
           <ProductPlaceHolder />
         ) : (
-          <ProductList products={products?.data || []} />
+          <ProductList products={products || []} />
         )}
       </Box>
     </ShopLayout>
