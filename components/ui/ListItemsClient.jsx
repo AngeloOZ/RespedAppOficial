@@ -13,13 +13,13 @@ export const ListItemsClient = ({ navigateTo }) => {
   return (
     <>
       <ListSubheader>Panel Cliente</ListSubheader>
-      <ListItem button>
+      <ListItem button onClick={() => navigateTo('/cliente')}>
         <ListItemIcon>
           <AccountCircleOutlined />
         </ListItemIcon>
         <ListItemText primary={"Perfil"} />
       </ListItem>
-      <ListItem button>
+      <ListItem button onClick={() => navigateTo('/cliente/ordenes')}>
         <ListItemIcon>
           <ConfirmationNumberOutlined />
         </ListItemIcon>

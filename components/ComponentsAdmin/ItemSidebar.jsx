@@ -2,9 +2,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 const ItemSidebar = ({ href, name, icon }) => {
-    const {asPath} = useRouter();
-    return (
-    <li className={asPath == href? "hovered":""}>
+  const { asPath } = useRouter();
+  return (
+    <li className={asPath == href ? "hovered" : ""}>
       <Link href={href}>
         <a>
           <span className="admin-icon">

@@ -70,9 +70,9 @@ export const Navbar = () => {
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
                 {isLoggedIn ? (
-                  <ItemsUser logout={logoutUser} />
+                  <ItemsUser logout={logoutUser} loader={setLoader} />
                 ) : (
-                  <ItemsLogin />
+                  <ItemsLogin loader={setLoader} />
                 )}
               </ul>
             </div>
@@ -83,19 +83,19 @@ export const Navbar = () => {
   );
 };
 
-const ItemsLogin = () => {
+const ItemsLogin = ({ loader }) => {
   return (
     <>
       <li>
         <Link href="/auth/login">
-          <a className="dropdown-item" onClick={() => setLoader(true)}>
+          <a className="dropdown-item" onClick={() => loader(true)}>
             Iniciar sesión
           </a>
         </Link>
       </li>
       <li>
         <Link href="/auth/register">
-          <a className="dropdown-item" onClick={() => setLoader(true)}>
+          <a className="dropdown-item" onClick={() => loader(true)}>
             Registrarse
           </a>
         </Link>
@@ -103,19 +103,19 @@ const ItemsLogin = () => {
     </>
   );
 };
-const ItemsUser = ({ logout }) => {
+const ItemsUser = ({ logout, loader }) => {
   return (
     <>
       <li>
-        <Link href="#">
-          <a className="dropdown-item" onClick={() => setLoader(true)}>
+        <Link href="/cliente">
+          <a className="dropdown-item" onClick={() => loader(true)}>
             Perfil
           </a>
         </Link>
       </li>
       <li>
-        <Link href="#">
-          <a className="dropdown-item" onClick={() => setLoader(true)}>
+        <Link href="/cliente/ordenes">
+          <a className="dropdown-item" onClick={() => loader(true)}>
             Mis ordenes
           </a>
         </Link>
