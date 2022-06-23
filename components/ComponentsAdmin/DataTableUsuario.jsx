@@ -1,32 +1,9 @@
 
-import { Table, TableRow, TableCell, TableContainer, TableHead, TableBody, Modal, Button, TextField, Typography} from '@mui/material';
-import { makeStyles } from '@mui/styles'
+import { Table, TableRow, TableCell, TableContainer, TableHead, TableBody, Modal, Button, TextField, Typography,Box} from '@mui/material';
 import { useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
-
-const useStyles = makeStyles(() => ({
-  modal: {
-    position: 'absolute',
-    width: 350,
-    backgroundColor: '#ffff',
-    border: '2px solid #000',
-    boxShadow: 1,
-    padding: 10,
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  },
-  iconos:{
-    cursor: 'pointer'
-  }, 
-  tipografia:{
-    color: '#f57c00',
-    fontWeight: 'bold',
-    letterSpacing: '2px'
-  }
-}));
 
 
  const DataTableUsuario = ({users, tipo}) => {
@@ -64,7 +41,6 @@ const useStyles = makeStyles(() => ({
   if(tipo==3){
     nombreTipo='CLIENTE'
   }
-  const styles= useStyles();
   const [modalInsertar, setModalInsertar]=useState(false);
   const [modalEditar, setModalEditar]=useState(false);
   const [modalEliminar, setModalEliminar]=useState(false);
@@ -88,52 +64,97 @@ const seleccionarusuario=(user, caso)=>{
 }
 
 const bodyInsertar = (
-  <div className={styles.modal} align='center'>
+  <Box sx={{
+    position: 'absolute',
+    width: '350px',
+    backgroundColor: '#ffff',
+    border: '2px solid #000',
+    boxShadow: '1px',
+    padding: '10px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    margin: 'auto',
+    align: 'center'
+  }} >
+    <div align='center'>
     {
-      <Typography sx={{ margin: 2 }} className={styles.tipografia}> INSERTAR {nombreTipo} </Typography>
+      <Typography sx={{color: '#f57c00',margin:1}}><b> INSERTAR {nombreTipo}  </b></Typography>
     }
-    <TextField label="Username" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'USERNAME'> </TextField>
-    <TextField label="Nombre" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'NAME'> </TextField>
-    <TextField label="Apellido" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'LASTNAME'> </TextField>
-    <TextField label="Email" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'EMAIL'> </TextField>
-    <TextField label="Teléfono" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PHONE'> </TextField>
-    <TextField label="Contraseña" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PASSWORD'> </TextField>
-    <div>
+    </div>
+    
+    <TextField required label="Username" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'USERNAME'> </TextField>
+    <TextField  label="Nombre" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'NAME'> </TextField>
+    <TextField  label="Apellido" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'LASTNAME'> </TextField>
+    <TextField required label="Email" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'EMAIL'> </TextField>
+    <TextField required label="Teléfono" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PHONE'> </TextField>
+    <TextField required label="Contraseña" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PASSWORD'> </TextField>
+    <div align='center'>
       <Button  variant="outlined" color='warning' sx={{m: 2}} onClick={()=>peticionPost()}>Aceptar</Button>
       <Button onClick={()=>abrirCerrarModalInsertar()} variant="outlined" color='warning' sx={{m: 2}}>Cancelar</Button>
     </div>
-  </div>
+  </Box>
 )
 
 const bodyEditar = (
-  <div className={styles.modal} align='center'>
+  <Box sx={{
+    position: 'absolute',
+    width: '350px',
+    backgroundColor: '#ffff',
+    border: '2px solid #000',
+    boxShadow: '1px',
+    padding: '10px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    margin: 'auto',
+    align: 'center'
+  }} >
+    <div align='center'>
     {
-      <Typography sx={{ margin: 2 }} className={styles.tipografia}> EDITAR {nombreTipo} </Typography>
+      <Typography sx={{color: '#f57c00',margin:1}}><b> EDITAR {nombreTipo}   </b></Typography>
     }
+    </div>
+    
     <TextField label="Username" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'USERNAME' value={usuarioSeleccionade && usuarioSeleccionade.USERNAME}> </TextField>
     <TextField label="Nombre" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'NAME' value={usuarioSeleccionade && usuarioSeleccionade.NAME}> </TextField>
     <TextField label="Apellido" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'LASTNAME' value={usuarioSeleccionade && usuarioSeleccionade.LASTNAME}> </TextField>
     <TextField label="Email" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'EMAIL' value={usuarioSeleccionade && usuarioSeleccionade.EMAIL}> </TextField>
     <TextField label="Teléfono" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PHONE' value={usuarioSeleccionade && usuarioSeleccionade.PHONE}> </TextField>
     <TextField label="Contraseña" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PASSWORD' value={usuarioSeleccionade && usuarioSeleccionade.PASSWORD}> </TextField>
-    <div>
+    <div align='center'>
       <Button  variant="outlined" color='warning' sx={{m: 2}} onClick={()=>peticionPut()}>Aceptar</Button>
       <Button onClick={()=>abrirCerrarModalEditar()} variant="outlined" color='warning' sx={{m: 2}}>Cancelar</Button>
     </div>
-  </div>
+  </Box>
 )
 
 const bodyEliminar=(
-  <div className={styles.modal} align='center'>
-      <p>¿Estás seguro que deseas eliminar el usuario <b>{usuarioSeleccionade && usuarioSeleccionade.USERNAME}</b> ? </p>
+  <Box sx={{
+    position: 'absolute',
+    width: '350px',
+    backgroundColor: '#ffff',
+    border: '2px solid #000',
+    boxShadow: '1px',
+    padding: '10px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    margin: 'auto',
+    align: 'center'
+  }} >
+    <div align='center'>
+    <p>¿Estás seguro que deseas eliminar el usuario <b>{usuarioSeleccionade && usuarioSeleccionade.USERNAME}</b> ? </p>
+    </div>
+      
     
-    <div>
+    <div align='center'>
       <Button variant="outlined" color="error" sx={{m: 2}} onClick={()=>peticionDelete()} >Sí</Button>
       <Button variant="outlined" color="warning" sx={{m: 2}} onClick={()=>abrirCerrarModalEliminar()}>No</Button>
 
     </div>
 
-  </div>
+  </Box>
 )
 
 const peticionDelete=async()=>{
@@ -204,10 +225,10 @@ const peticionPut=async()=>{
                   <TableCell width={100} align='center'>
                   {
                   (tipo!=3) ?
-                  <EditIcon  className={styles.iconos} onClick={()=>seleccionarusuario(user, 'Editar')}/> : null
+                  <EditIcon  cursor='pointer' onClick={()=>seleccionarusuario(user, 'Editar')}/> : null
                   }
                     
-                  <DeleteIcon color='error' className={styles.iconos} onClick={()=>seleccionarusuario(user, 'Eliminar')}/>
+                  <DeleteIcon color='error' cursor='pointer' onClick={()=>seleccionarusuario(user, 'Eliminar')}/>
                  </TableCell>
                 </TableRow>
               ))

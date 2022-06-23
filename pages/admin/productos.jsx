@@ -13,8 +13,8 @@ export default function Admin() {
     <AdminLayout>
         <h1>Productos</h1>
         <div>
-         <ListCategorias categories ={categories}/>
-         <ListProductos products ={products} categories ={categories}/>
+         <ListCategorias categories = {categories?categories:[]}/>
+         <ListProductos  products ={products?products:[]} categories ={categories?categories:[]}/> 
          
     </div>
     </AdminLayout>

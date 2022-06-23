@@ -1,35 +1,12 @@
 
-import { Table, TableRow, TableCell, TableContainer, TableHead, TableBody, Modal, Button, TextField, Typography} from '@mui/material';
-import { makeStyles } from '@mui/styles'
+import { Table, TableRow, TableCell, TableContainer,Box, TableHead, TableBody, Modal, Button, TextField, Typography} from '@mui/material';
 import { useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
-const useStyles = makeStyles(() => ({
-  modal: {
-    position: 'absolute',
-    width: 350,
-    backgroundColor: '#ffff',
-    border: '2px solid #000',
-    boxShadow: 1,
-    padding: 10,
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  },
-  iconos:{
-    cursor: 'pointer'
-  }, 
-  tipografia:{
-    color: '#f57c00',
-    fontWeight: 'bold',
-    letterSpacing: '2px'
-  }
-}));
 
  const DataTableCategorias = ({categories}) => {
-  const styles= useStyles();
   const [data, setData]=useState([]);
   const url = '/categoria/'
 
@@ -65,39 +42,78 @@ const useStyles = makeStyles(() => ({
   }
   
 const bodyInsertar = (
-  <div className={styles.modal} align='center'>
-      <Typography sx={{ margin: 2 }} className={styles.tipografia}> INSERTAR CATEGORÍA </Typography>
+  <Box sx={{
+    position: 'absolute',
+    width: '350px',
+    backgroundColor: '#ffff',
+    border: '2px solid #000',
+    boxShadow: '1px',
+    padding: '10px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    margin: 'auto',
+    align: 'center'
+  }} >
+     <div align='center'>
+      <Typography sx={{color: '#f57c00',margin:1}}><b> INSERTAR CATEGORÍA </b></Typography>
     <TextField label="Nombre" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'NAME'> </TextField>
-    <div>
+   
       <Button  variant="outlined" color='warning' sx={{m: 2}} onClick={()=>peticionPost()}>Aceptar</Button>
       <Button onClick={()=>abrirCerrarModalInsertar()} variant="outlined" color='warning' sx={{m: 2}}>Cancelar</Button>
     </div>
-  </div>
+  </Box>
 )
 
 const bodyEditar = (
-  <div className={styles.modal} align='center'>
-      <Typography sx={{ margin: 2 }} className={styles.tipografia}> EDITAR CATEGORÍA </Typography>
+  <Box sx={{
+    position: 'absolute',
+    width: '350px',
+    backgroundColor: '#ffff',
+    border: '2px solid #000',
+    boxShadow: '1px',
+    padding: '10px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    margin: 'auto',
+    align: 'center'
+  }} >
+     <div align='center'>
+      <Typography sx={{color: '#f57c00',margin:1}}><b> EDITAR CATEGORÍA </b></Typography>
     
     <TextField label="Nombre" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'NAME' value={categoriaSeleccionade && categoriaSeleccionade.NAME}> </TextField>
-    <div>
+   
       <Button  variant="outlined" color='warning' sx={{m: 2}} onClick={()=>peticionPut()}>Aceptar</Button>
       <Button onClick={()=>abrirCerrarModalEditar()} variant="outlined" color='warning' sx={{m: 2}}>Cancelar</Button>
     </div>
-  </div>
+  </Box>
 )
 
 const bodyEliminar=(
-  <div className={styles.modal} align='center'>
-      <p>¿Estás seguro que deseas eliminar el categoria <b>{categoriaSeleccionade && categoriaSeleccionade.NAME}</b> ? </p>
+  <Box sx={{
+    position: 'absolute',
+    width: '350px',
+    backgroundColor: '#ffff',
+    border: '2px solid #000',
+    boxShadow: '1px',
+    padding: '10px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    margin: 'auto',
+    align: 'center'
+  }} >
+     <div align='center'>
+      <p>¿Estás seguro que deseas eliminar la categoría <b>{categoriaSeleccionade && categoriaSeleccionade.NAME}</b> ? </p>
     
-    <div>
+   
       <Button variant="outlined" color="error" sx={{m: 2}} onClick={()=>peticionDelete()} >Sí</Button>
       <Button variant="outlined" color="warning" sx={{m: 2}} onClick={()=>abrirCerrarModalEliminar()}>No</Button>
 
     </div>
 
-  </div>
+  </Box>
 )
 
 const peticionDelete=async()=>{
@@ -130,12 +146,9 @@ const peticionPut=async()=>{
     abrirCerrarModalEditar();
   })
 }
-  if (categories === undefined) {
-    categories= [];
-}
+  
   return (
     <div style={{ height: 700, width: '100%' }}>
-      <br/>
       <Button onClick={abrirCerrarModalInsertar}  color="warning">Insertar</Button>
       <br/>
       <TableContainer>
@@ -148,12 +161,13 @@ const peticionPut=async()=>{
           </TableHead>
           <TableBody>
             {
-               categories.map(categoria => (
-                <TableRow key={categoria.IDCATEGORIA}>
-                  <TableCell>{categoria.NAME}</TableCell>
+              Object.entries(categories).map(categoria => (
+               
+                <TableRow key={categoria[1].IDCATEGORIA}>
+                  <TableCell>{categoria[1].NAME}</TableCell>
                   <TableCell width={100} align='center'>
-                  <EditIcon  className={styles.iconos} onClick={()=>seleccionarCategoria(categoria, 'Editar')}/>
-                  <DeleteIcon color='error' className={styles.iconos} onClick={()=>seleccionarCategoria(categoria, 'Eliminar')}/>
+                  <EditIcon   onClick={()=>seleccionarCategoria(categoria[1], 'Editar')}/>
+                  <DeleteIcon color='error'  onClick={()=>seleccionarCategoria(categoria[1], 'Eliminar')}/>
                   </TableCell>
                 </TableRow>
               ))

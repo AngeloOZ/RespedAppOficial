@@ -1,30 +1,8 @@
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
-import { Table, TableRow, TableCell,Select, TableContainer, TableHead, TableBody, Modal, Button, TextField, MenuItem, Typography,Chip,FormControl,InputLabel} from '@mui/material';
-import { makeStyles } from '@mui/styles'
-import { useState } from 'react';
+import { Table, TableRow, TableCell,Select, TableContainer, TableHead, TableBody, Modal, Button, Box, MenuItem, Typography,Chip,FormControl,InputLabel} from '@mui/material';
 
-const useStyles = makeStyles(() => ({
-  modal: {
-    position: 'absolute',
-    width: 350,
-    backgroundColor: '#ffff',
-    border: '2px solid #000',
-    boxShadow: 1,
-    padding: 10,
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  },
-  iconos:{
-    cursor: 'pointer'
-  }, 
-  tipografia:{
-    color: '#f57c00',
-    fontWeight: 'bold',
-    letterSpacing: '2px'
-  }
-}));
+import { useState } from 'react';
 
  const DataTableReserva = ({reservas,tipo}) => {
   const [data, setData]=useState([]);
@@ -43,7 +21,6 @@ const useStyles = makeStyles(() => ({
     }))
     console.log(reservaSeleccionade);
   }
-  const styles= useStyles();
   const [modalEditar, setModalEditar]=useState(false);
   if (reservas === undefined) {
     reservas= [];
@@ -73,8 +50,21 @@ const peticionPut=async()=>{
 }
 
 const bodyEditar = (
-  <div className={styles.modal} align='center'>
-    <Typography sx={{ margin: 2 }} className={styles.tipografia}> EDITAR ESTADO DE LA RESERVA </Typography>
+  <Box sx={{
+    position: 'absolute',
+    width: '350px',
+    backgroundColor: '#ffff',
+    border: '2px solid #000',
+    boxShadow: '1px',
+    padding: '10px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    margin: 'auto',
+    align: 'center'
+  }} >
+    <div align='center'>
+    <Typography sx={{color: '#f57c00',margin:1}}><b> EDITAR ESTADO DE LA RESERVA </b></Typography>
     {/* <TextField label="Contraseña" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PASSWORD' value={reservaSeleccionade && reservaSeleccionade.PASSWORD}> </TextField> */}
     <FormControl variant='standard'color='warning' sx={{width: 230}}>
         <InputLabel>Estado</InputLabel>
@@ -90,11 +80,14 @@ const bodyEditar = (
           <MenuItem value={4}>Rechazada</MenuItem>
         </Select>
       </FormControl>
-    <div>
+    </div>
+   
+    <div align='center'>
       <Button  variant="outlined" color='warning' sx={{m: 2}} onClick={()=>peticionPut()}>Aceptar</Button>
       <Button onClick={()=>abrirCerrarModalEditar()} variant="outlined" color='warning' sx={{m: 2}}>Cancelar</Button>
     </div>
-  </div>)
+  </Box>
+  )
 
   return (
     <div style={{ width: '100%' }}>
@@ -132,7 +125,7 @@ const bodyEditar = (
                     <TableCell width={100} align='center'>
                     {
                   ((tipo!=3)&&(tipo!=4)) ?
-                  <EditIcon  className={styles.iconos} onClick={()=>seleccionarReserva(reserva)}/> : null
+                  <EditIcon  cursor='pointer' onClick={()=>seleccionarReserva(reserva)}/> : null
                   }
                     </TableCell>
                 </TableRow>

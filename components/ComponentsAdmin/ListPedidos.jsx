@@ -5,21 +5,8 @@ import ListItem from '@mui/material/ListItem';
 import { Collapse } from "@mui/material";
 import ListItemText from '@mui/material/ListItemText';
 import DataTablePedidos from "./DataTablePedidos";
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles(() => ({
-  listItemAfter: {
-    backgroundColor: '#f57c00',
-    cursor: 'pointer',
-    color: 'white'
-  },
-  listItemBefore: {
-   cursor: 'pointer'
- }
-}));
 
  const  ListPedidos = ({pedidos,tipo}) => {
-   const styles= useStyles();
    const [open, setOpen] = React.useState(true);
    const handleClick = () => {
       setOpen(!open);
@@ -39,9 +26,10 @@ const useStyles = makeStyles(() => ({
          <List>
          {
                (open==false) ? 
-               <ListItem className={styles.listItemAfter}  onClick={handleClick}> <ListItemText primary={nombreTipo} />
+               <ListItem sx={{backgroundColor: '#f57c00',
+               color: 'white', cursor:'pointer'}}  onClick={handleClick}> <ListItemText primary={nombreTipo} />
                </ListItem>
-               : <ListItem  className={styles.listItemBefore} onClick={handleClick}><ListItemText primary={nombreTipo} />
+               : <ListItem sx={{ cursor:'pointer'}}  onClick={handleClick}><ListItemText primary={nombreTipo} />
                </ListItem>
             }
          <Collapse in={!open} timeout="auto" unmountOnExit>

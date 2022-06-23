@@ -1,8 +1,7 @@
 
-import { Table, TableRow, TableCell, TableContainer, TableHead, TableBody, Modal, Button, InputLabel,TextField, Typography,CardMedia,FormControl,MenuItem,Select} from '@mui/material';
+import { Table, TableRow, TableCell, TableContainer, TableHead, TableBody, Modal, Button, InputLabel,TextField, Typography,CardMedia,FormControl,MenuItem,Select, Box} from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { makeStyles } from '@mui/styles'
 import { useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -10,30 +9,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import axios from 'axios';
 
-const useStyles = makeStyles(() => ({
-  modal: {
-    position: 'absolute',
-    width: 350,
-    backgroundColor: '#ffff',
-    border: '2px solid #000',
-    boxShadow: 1,
-    padding: 10,
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  },
-  iconos:{
-    cursor: 'pointer'
-  }, 
-  tipografia:{
-    color: '#f57c00',
-    fontWeight: 'bold',
-    letterSpacing: '2px'
-  }
-}));
-
  const DataTableProducts = ({products,categories}) => {
-  const styles= useStyles();
   const [data, setData]=useState([]);
   const url = '/producto/'
 
@@ -84,9 +60,23 @@ const useStyles = makeStyles(() => ({
   }
   
 const bodyInsertar = (
-  <div className={styles.modal} align='center'>
-      <Typography sx={{ margin: 2 }} className={styles.tipografia}> INSERTAR PRODUCTO </Typography>
-      <FormControl variant='standard'color='warning' sx={{width: 300}}>
+  <Box sx={{
+    position: 'absolute',
+    width: '350px',
+    backgroundColor: '#ffff',
+    border: '2px solid #000',
+    boxShadow: '1px',
+    padding: '10px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    margin: 'auto',
+    align: 'center'
+  }} >
+    <div align='center'>
+    <Typography sx={{color: '#f57c00',margin:1}}><b>INSERTAR PRODUCTO </b></Typography>
+    </div>
+      <FormControl variant='standard'color='warning' sx={{width: 300,margin: 2}}>
         <InputLabel>Categoría</InputLabel>
         <Select
           onChange={handleChange}
@@ -94,31 +84,44 @@ const bodyInsertar = (
         >
           {
             categories.map(categoria =>(
-              <MenuItem value={categoria.IDCATEGORIA}>{categoria.NAME}</MenuItem>
+              <MenuItem key={categoria.IDCATEGORIA} value={categoria.IDCATEGORIA}>{categoria.NAME}</MenuItem>
             ))
           }
         </Select>
       </FormControl>
-       <TextField required label="Nombre" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'NAME'> </TextField>
+    <TextField required label="Nombre" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'NAME'> </TextField>
     <TextField label="Detalle" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'DETAIL'> </TextField>
     <TextField required label="Precio" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PRICE'> </TextField>
     <TextField helperText="Url de la imagen" label="Imagen" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'IMAGE'> </TextField>
-    <div>
+    <div align='center'>
     <FormControlLabel control={<Switch color='warning'
-    defaultChecked='true'
+    defaultChecked={true}
      onChange={handleChange2} name = 'AVAILABILITY' />} label="Disponible" />
   </div>
-    <div>
+    <div align='center'>
       <Button  variant="outlined" color='warning' sx={{m: 2}} onClick={()=>peticionPost()}>Aceptar</Button>
       <Button onClick={()=>abrirCerrarModalInsertar()} variant="outlined" color='warning' sx={{m: 2}}>Cancelar</Button>
     </div>
-  </div>
+  </Box>
 )
 
 const bodyEditar = (
-  <div className={styles.modal} align='center'>
-      <Typography sx={{ margin: 2 }} className={styles.tipografia}> EDITAR PRODUCTO </Typography>
-      <FormControl variant='standard'color='warning' sx={{width: 300}}>
+  <Box sx={{
+    position: 'absolute',
+    width: '350px',
+    backgroundColor: '#ffff',
+    border: '2px solid #000',
+    boxShadow: '1px',
+    padding: '10px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    margin: 'auto',
+    align: 'center'
+  }} >
+     <div align='center'>
+      <Typography sx={{color: '#f57c00',margin:1}}><b> EDITAR PRODUCTO </b> </Typography>
+      <FormControl variant='standard'color='warning' sx={{width: 300, margin: 2}}>
         <InputLabel>Categoría</InputLabel>
         <Select
           value={productoSeleccionade &&productoSeleccionade.IDCATEGORIA}
@@ -128,7 +131,7 @@ const bodyEditar = (
         >
           {
             categories.map(categoria =>(
-              <MenuItem value={categoria.IDCATEGORIA}>{categoria.NAME}</MenuItem>
+              <MenuItem key={categoria.IDCATEGORIA} value={categoria.IDCATEGORIA}>{categoria.NAME}</MenuItem>
             ))
           }
         </Select>
@@ -139,29 +142,42 @@ const bodyEditar = (
     <TextField helperText="Url de la imagen" label="Imagen" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'IMAGE' value={productoSeleccionade && productoSeleccionade.IMAGE}> </TextField>
     <div>
     <FormControlLabel control={<Switch color='warning'
-    defaultChecked={productoSeleccionade.AVAILABILITY}
+    defaultChecked={(productoSeleccionade.AVAILABILITY==1)?true:false}
      onChange={handleChange2} name = 'AVAILABILITY' />} label="Disponible" />
   </div>
     
     
-    <div>
+   
       <Button  variant="outlined" color='warning' sx={{m: 2}} onClick={()=>peticionPut()}>Aceptar</Button>
       <Button onClick={()=>abrirCerrarModalEditar()} variant="outlined" color='warning' sx={{m: 2}}>Cancelar</Button>
     </div>
-  </div>
+  </Box>
 )
 
 const bodyEliminar=(
-  <div className={styles.modal} align='center'>
+  <Box sx={{
+    position: 'absolute',
+    width: '350px',
+    backgroundColor: '#ffff',
+    border: '2px solid #000',
+    boxShadow: '1px',
+    padding: '10px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    margin: 'auto',
+    align: 'center'
+  }} >
+     <div align='center'>
       <p>¿Estás seguro que deseas eliminar el producto <b>{productoSeleccionade && productoSeleccionade.NAME}</b> ? </p>
     
-    <div>
+   
       <Button variant="outlined" color="error" sx={{m: 2}} onClick={()=>peticionDelete()} >Sí</Button>
       <Button variant="outlined" color="warning" sx={{m: 2}} onClick={()=>abrirCerrarModalEliminar()}>No</Button>
 
     </div>
 
-  </div>
+  </Box>
 )
 
 const peticionDelete=async()=>{
@@ -203,7 +219,6 @@ if (categories === undefined) {
 }
   return (
     <div style={{ height: 700, width: '100%' }}>
-      <br/>
       <Button onClick={abrirCerrarModalInsertar} color="warning">Insertar</Button>
       <br/>
       <TableContainer>
@@ -232,8 +247,8 @@ if (categories === undefined) {
                     {(producto.AVAILABILITY==1) ? <CheckIcon/> : <DoNotDisturbIcon/>}
                     </TableCell>
                     <TableCell width={100} align='center'>
-                  <EditIcon  className={styles.iconos} onClick={()=>seleccionarProducto(producto, 'Editar')}/>
-                  <DeleteIcon color='error' className={styles.iconos} onClick={()=>seleccionarProducto(producto, 'Eliminar')}/>
+                  <EditIcon  cursor='pointer' onClick={()=>seleccionarProducto(producto, 'Editar')}/>
+                  <DeleteIcon color='error' cursor='pointer' onClick={()=>seleccionarProducto(producto, 'Eliminar')}/>
                   </TableCell>
                 </TableRow>
               ))
