@@ -31,7 +31,7 @@ const SummaryLocalPage = ({ order }) => {
   const [numeroMesa, setNumeroMesa] = useState("");
   const [errorChoseTable, setErrorChoseTable] = useState(false);
   const [textNote, setTextNote] = useState("");
-  const { registerOrderLocal } = useHandleOrders(
+  const { registerOrderLocal, cancelOrder } = useHandleOrders(
     {
       IDPEDIDOTOTAL: order.IDPEDIDOTOTAL,
       MESA: numeroMesa,
@@ -130,7 +130,7 @@ const SummaryLocalPage = ({ order }) => {
                   color="error"
                   className="circular-btn"
                   fullWidth
-                  // onClick={handleCancelOrder}
+                  onClick={()=>cancelOrder(order.IDPEDIDOTOTAL)}
                 >
                   Cancelar Orden
                 </Button>

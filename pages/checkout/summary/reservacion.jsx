@@ -22,7 +22,7 @@ import { useHandleOrders } from "../../../Hooks";
 const SummaryReservationPage = ({ reservation, order }) => {
   const [displayLoader, setDisplayLoader] = useState(false);
   const [textNote, setTextNote] = useState("");
-  const { registerOrderRerservation } = useHandleOrders(
+  const { registerOrderRerservation, cancelOrder } = useHandleOrders(
     {
       IDPEDIDOTOTAL: order.IDPEDIDOTOTAL,
       IDRESERVA: reservation.IDRESERVA,
@@ -78,7 +78,7 @@ const SummaryReservationPage = ({ reservation, order }) => {
                   color="error"
                   className="circular-btn"
                   fullWidth
-                  // onClick={handleCancelOrder}
+                  onClick={() => cancelOrder(order.IDPEDIDOTOTAL)}
                 >
                   Cancelar Orden
                 </Button>

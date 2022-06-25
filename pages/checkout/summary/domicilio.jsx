@@ -22,7 +22,7 @@ import { useHandleOrders } from "../../../Hooks";
 const Summary = ({ address, order }) => {
   const [displayLoader, setDisplayLoader] = useState(false);
   const [textNote, setTextNote] = useState("");
-  const { registerOrder } = useHandleOrders(
+  const { registerOrder, cancelOrder } = useHandleOrders(
     {
       IDPEDIDOTOTAL: order.IDPEDIDOTOTAL,
       IDRELACIONUD: address.IDRELACIONUD,
@@ -79,7 +79,7 @@ const Summary = ({ address, order }) => {
                   color="error"
                   className="circular-btn"
                   fullWidth
-                  // onClick={handleCancelOrder}
+                  onClick={() => cancelOrder(order.IDPEDIDOTOTAL)}
                 >
                   Cancelar Orden
                 </Button>

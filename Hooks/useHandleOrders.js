@@ -86,13 +86,37 @@ export const useHandleOrders = (order = dataOrder, setDisplay) => {
       }
    }
 
-   const cancelOrder = async () => {
-      SweetAlert.deleteConfirm({
+   const cancelOrder = async (idOrder) => {
+      const confirm = await SweetAlert.deleteConfirm({
          title: "¿Está seguro de cancelar la orden?",
          text: "Esta acción no puede revertirse",
          confirmButtonText: "Cancelar orden",
          cancelButtonText: "No cancelar",
       });
+      if (confirm.isConfirmed) {
+         try {
+            setDisplay(true);
+            const { data } = await axios.delete(`pedido/${idOrder}`);
+            setDisplay(false);
+            SweetAlert.success({
+               title: "Orden cancelada",
+               text: "La orde fue cancelada con exito",
+               onClose: () => {
+                  setDisplay(true);
+                  emptyCart();
+                  Cookies.remove('reservation');
+                  router.push('/menu');
+               }
+            });
+         } catch (error) {
+            setDisplay(false);
+            console.log(error);
+            SweetAlert.error({
+               title: "Oppss hubo un error",
+               text: "Parece que hubo un error al cancelar la orden"
+            });
+         }
+      }
    }
 
    return { registerOrder, cancelOrder, registerOrderRerservation, registerOrderLocal }
