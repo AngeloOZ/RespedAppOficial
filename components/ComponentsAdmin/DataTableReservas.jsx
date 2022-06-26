@@ -100,6 +100,7 @@ const bodyEditar = (
               <TableCell>Personas</TableCell>
               <TableCell>Fecha</TableCell>
               <TableCell>Hora</TableCell>
+              <TableCell>Nota</TableCell>
               <TableCell>Estado</TableCell>
               {((tipo!=3)&&(tipo!=4)) ? <TableCell>Acciones</TableCell> : null}
             </TableRow>
@@ -113,6 +114,7 @@ const bodyEditar = (
                   <TableCell>{reserva.PEOPLE}</TableCell>
                   <TableCell>{reserva.RESERVATIONDATE}</TableCell>
                   <TableCell>{reserva.RESERVATIONTIME}</TableCell>
+                  <TableCell>{reserva.NOTE}</TableCell>
                   <TableCell width={100}>
                     {
                       (reserva.STATE==1) ?   <Chip label='PENDIENTE' color="primary"/> :
