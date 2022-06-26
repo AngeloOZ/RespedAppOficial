@@ -4,6 +4,8 @@ import ListItem from "@mui/material/ListItem";
 import { Collapse } from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
 import DataTableUsuario from "./DataTableUsuario";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const ListUsuarios = ({ users, tipo }) => {
   const [open, setOpen] = React.useState(true);
@@ -34,10 +36,12 @@ const ListUsuarios = ({ users, tipo }) => {
           >
             {" "}
             <ListItemText primary={nombreTipo} />
+            <KeyboardArrowUpIcon/>
           </ListItem>
         ) : (
-          <ListItem sx={{ cursor: "pointer" }} onClick={handleClick}>
+          <ListItem sx={{backgroundColor: '#D6D6D6', cursor: "pointer" }} onClick={handleClick}>
             <ListItemText primary={nombreTipo} />
+            <KeyboardArrowDownIcon/>
           </ListItem>
         )}
 

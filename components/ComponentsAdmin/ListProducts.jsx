@@ -5,6 +5,8 @@ import ListItem from '@mui/material/ListItem';
 import { Collapse } from "@mui/material";
 import ListItemText from '@mui/material/ListItemText';
 import DataTableProducts from "./DataTableProducts";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 
 
@@ -19,9 +21,9 @@ import DataTableProducts from "./DataTableProducts";
           {
                (open==false) ? 
                <ListItem sx={{backgroundColor: '#f57c00',
-               color: 'white', cursor:'pointer'}}  onClick={handleClick}> <ListItemText primary="Ver Productos" />
+               color: 'white', cursor:'pointer'}}  onClick={handleClick}> <ListItemText primary="Ver Productos" /><KeyboardArrowUpIcon/>
                </ListItem>
-               : <ListItem sx={{cursor:'pointer'}} onClick={handleClick}><ListItemText primary="Ver Productos" />
+               : <ListItem sx={{backgroundColor: '#D6D6D6',cursor:'pointer'}} onClick={handleClick}><ListItemText primary="Ver Productos" /><KeyboardArrowDownIcon/>
                </ListItem>
             }         
          <Collapse in={!open} timeout="auto" unmountOnExit>

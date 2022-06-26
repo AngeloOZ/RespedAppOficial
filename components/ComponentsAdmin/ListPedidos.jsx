@@ -2,9 +2,11 @@
 import React from "react";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import { Collapse } from "@mui/material";
+import { Collapse, Accordion, AccordionSummary, AccordionDetails, Typography} from "@mui/material";
 import ListItemText from '@mui/material/ListItemText';
 import DataTablePedidos from "./DataTablePedidos";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
  const  ListPedidos = ({pedidos,tipo}) => {
    const [open, setOpen] = React.useState(true);
@@ -26,13 +28,14 @@ import DataTablePedidos from "./DataTablePedidos";
    }
   return (
         <div>
+
          <List>
          {
                (open==false) ? 
                <ListItem sx={{backgroundColor: '#f57c00',
-               color: 'white', cursor:'pointer'}}  onClick={handleClick}> <ListItemText primary={nombreTipo} />
+               color: 'white', cursor:'pointer'}}  onClick={handleClick}> <ListItemText primary={nombreTipo} /><KeyboardArrowUpIcon/>
                </ListItem>
-               : <ListItem sx={{ cursor:'pointer'}}  onClick={handleClick}><ListItemText primary={nombreTipo} />
+               : <ListItem sx={{backgroundColor: '#D6D6D6', cursor:'pointer'}}  onClick={handleClick}><ListItemText primary={nombreTipo} /><KeyboardArrowDownIcon/>
                </ListItem>
             }
          <Collapse in={!open} timeout="auto" unmountOnExit>
