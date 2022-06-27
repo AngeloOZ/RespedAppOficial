@@ -23,7 +23,7 @@ export const SideMenuClient = ({ showSide }) => {
           icon="fast-food-outline"
         />
         <ItemSidebar
-          href="#"
+          href="/cliente/direcciones"
           name="Direcciones"
           icon="map-outline"
         />

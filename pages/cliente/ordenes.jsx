@@ -15,7 +15,7 @@ const OrdenesPage = () => {
       {console.log(ordersDelivery)}
       <AccordionItem title={"Ordenes locales"}>
         {isLoadingLocal ? (
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
             <CircularProgress />
           </Box>
         ) : (
@@ -24,7 +24,7 @@ const OrdenesPage = () => {
       </AccordionItem>
       <AccordionItem title={"Ordenes a domicilio"}>
         {isLoadingDelivery ? (
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
             <CircularProgress />
           </Box>
         ) : (
@@ -33,7 +33,7 @@ const OrdenesPage = () => {
       </AccordionItem>
       <AccordionItem title={"Ordenes en  reservas"}>
         {isLoadingReserva ? (
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
             <CircularProgress />
           </Box>
         ) : (

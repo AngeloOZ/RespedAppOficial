@@ -8,8 +8,8 @@ const SWRConfig = {
    revalidateOnMount: true,
 }
 
-export const useAddress = (config = SWRConfig) => {
-   const { data, error } = useSWR("/direccion", fetcher, config);
+export const useAddress = () => {
+   const { data, error } = useSWR("/direccion", fetcher, {refreshInterval: 500});
 
    return {
       addresses: data,
