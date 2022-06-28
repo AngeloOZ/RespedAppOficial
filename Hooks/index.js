@@ -8,5 +8,3 @@ export * from "./useProducts";
 export * from "./useReservas";
 export * from "./useReservation";
 export * from "./useUsuarios";
-export * from "./useVerifyToken";
-
