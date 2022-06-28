@@ -1,4 +1,3 @@
-
 import React from "react";
 import { AdminLayout } from "../../components/layouts/AdminLayout";
 import { usePedidos } from "../../Hooks";
@@ -14,9 +13,9 @@ export default function Admin() {
         <h1>Pedidos</h1>
         <div>
          <ListPedidos pedidos={pedidosLocales?pedidosLocales:[]} tipo={1} />
-         {/* <ListPedidos pedidos={pedidosDomicilio?pedidosDomicilio:[]} tipo={2} />
+         <ListPedidos pedidos={pedidosDomicilio?pedidosDomicilio:[]} tipo={2} />
          <ListPedidos pedidos={pedidosReserva?pedidosReserva:[]} tipo={3} />
-         <ListPedidos pedidos={pedidosFinalizados?pedidosFinalizados:[]} tipo={4} /> */}
+         <ListPedidos pedidos={pedidosFinalizados?pedidosFinalizados:[]} tipo={4} />
     </div>
     </AdminLayout>
   )
