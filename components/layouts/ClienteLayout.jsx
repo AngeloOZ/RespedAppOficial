@@ -1,11 +1,12 @@
 import { useState } from "react";
-
 import Head from "next/head";
 import Script from "next/script";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import { SideMenuClient } from "../Cliente";
 import { NavbarTop } from "../ComponentsAdmin/NavbarTop";
-import { MaterialUILayout } from "./MaterialUILayout";
+import { lightTheme2 } from "../../themes";
+
 
 export const ClienteLayout = ({
   title = "Fogón de COZ",
@@ -15,7 +16,8 @@ export const ClienteLayout = ({
   const [openSidebar, setOpenSidebar] = useState(false);
 
   return (
-    <>
+    <ThemeProvider theme={lightTheme2}>
+      <CssBaseline />
       <Head>
         <title>{title}</title>
         <meta charSet="UTF-8" />
@@ -39,6 +41,6 @@ export const ClienteLayout = ({
         nomodule
         src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
       ></Script>
-    </>
+    </ThemeProvider>
   );
 };

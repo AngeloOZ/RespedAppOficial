@@ -32,7 +32,7 @@ export const useHandleOrders = (order = dataOrder, setDisplay) => {
          SweetAlert.success({
             title: "La orden ha sido registrada",
             text: "Su orden será procesada pronto por el personal del restaurante",
-            confirmButtonText: "<Cerr></Cerr>ar",
+            confirmButtonText: "Cerrar",
             onClose: handleCloseRegisterOrder,
          });
       } catch (error) {

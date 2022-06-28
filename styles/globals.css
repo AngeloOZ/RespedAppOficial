@@ -17,7 +17,7 @@ a {
   box-sizing: border-box;
 }
 
-.navbar-dark .navbar-nav .nav-item .nav-link.active_link_cs{
+.navbar-dark .navbar-nav .nav-item .nav-link.active_link_cs {
   color: crimson;
 }
 
@@ -90,6 +90,7 @@ a {
   width: 0px;
   height: 0px;
 }
+
 .customScrollBar::-webkit-scrollbar-button {
   width: 0px;
   height: 0px;
@@ -160,6 +161,20 @@ a {
 
 .toCapitalize {
   text-transform: capitalize;
+}
+
+.modalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalItem {
+  background: #fff;
+  min-height: 300px;
+  max-width: 600px;
+  width: 90%;
+  border-radius: 10px;
 }
 
 .itemModal {

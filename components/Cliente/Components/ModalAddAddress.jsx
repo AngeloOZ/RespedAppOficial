@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import {
+  Box,
   Button,
   Checkbox,
   FormControlLabel,
@@ -7,40 +8,65 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useAddAddress } from "../../Hooks";
+import { useAddAddress } from "../../../Hooks";
 
-export const AddAddress = () => {
+const initDataForm = {
+  NAME: "",
+  STREET1: "",
+  STREET2: "",
+  PHONEDIR: "",
+  REFERENCE: "",
+  DEFAULTDIR: false,
+};
+
+export const ModalAddAddress = ({
+  isEdit = false,
+  initData = initDataForm,
+  setIsEdit,
+  setOpen,
+  setLoader,
+}) => {
+  const title = isEdit ? "Editar dirección" : "Agregar dirección";
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
-  const { addAddress } = useAddAddress();
+  } = useForm({ defaultValues: initData });
 
-  const handleAddRegisterAddress = (data) => {
-    addAddress(data);
-    reset();
+  const { addAddress, editAddress } = useAddAddress(setLoader);
+
+  const handleClickCancel = () => {
+    setLoader(false);
+    setIsEdit(false);
+    setOpen(false);
   };
-
+  const handleSubmitAddress = (data) => {
+    if (isEdit) {
+      editAddress(data);
+      setIsEdit(false);
+    } else {
+      addAddress(data);
+    }
+    reset();
+    setOpen(false);
+  };
   return (
-    <Grid item xs={12} md={4}>
-      <Typography
-        variant="h2"
-        fontSize={24}
-        mb={2}
-        mt={{ xs: 5, md: 0 }}
-        fontWeight="bold"
-        component="h2"
-      >
-        Registrar Dirección
+    <Box
+      component={"div"}
+      className="modalItem"
+      textAlign={"center"}
+      padding="10px 25px"
+    >
+      <Typography variant="h1" component="h2">
+        {title}
       </Typography>
-      <form onSubmit={handleSubmit(handleAddRegisterAddress)} noValidate>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={12}>
+      <form onSubmit={handleSubmit(handleSubmitAddress)} noValidate>
+        <Grid container spacing={2} mt={1}>
+          <Grid item xs={12}>
             <TextField
               label="Nombre de la dirección"
-              variant="filled"
+              color="warning"
               fullWidth
               required
               {...register("NAME", {
@@ -54,10 +80,10 @@ export const AddAddress = () => {
               helperText={errors.NAME?.message}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} md={6}>
             <TextField
               label="Calle principal"
-              variant="filled"
+              color="warning"
               fullWidth
               required
               {...register("STREET1", {
@@ -71,10 +97,10 @@ export const AddAddress = () => {
               helperText={errors.STREET1?.message}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} md={6}>
             <TextField
               label="Calle secundaria"
-              variant="filled"
+              color="warning"
               fullWidth
               required
               {...register("STREET2", {
@@ -91,7 +117,7 @@ export const AddAddress = () => {
           <Grid item xs={12}>
             <TextField
               label="Teléfono"
-              variant="filled"
+              color="warning"
               fullWidth
               required
               {...register("PHONEDIR", {
@@ -116,10 +142,10 @@ export const AddAddress = () => {
           <Grid item xs={12}>
             <TextField
               label="Referencia"
-              variant="filled"
-              multiline
-              rows={2}
+              color="warning"
               fullWidth
+              multiline
+              maxRows={4}
               required
               {...register("REFERENCE", {
                 required: "La referencia es requerida",
@@ -132,21 +158,29 @@ export const AddAddress = () => {
               helperText={errors.REFERENCE?.message}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} display="flex" justifyContent={"flex-start"}>
             <FormControlLabel
               label="Seleccionar dirección como predefinida"
               labelPlacement="start"
-              control={<Checkbox defaultChecked />}
-              {...register("DEFAULTDIR")}
+              control={<Checkbox {...register("DEFAULTDIR")} />}
             />
           </Grid>
-          <Grid item xs={12}>
-            <Button size="large" type="submit" fullWidth>
-              Guardar dirección
-            </Button>
-          </Grid>
         </Grid>
+        {isEdit && (
+          <Button
+            sx={{ marginTop: "10px", marginRight: "10px" }}
+            color="error"
+            size="large"
+            variant="outlined"
+            onClick={handleClickCancel}
+          >
+            Cancelar
+          </Button>
+        )}
+        <Button type="submit" sx={{ marginTop: "10px" }} size="large">
+          Guardar dirección
+        </Button>
       </form>
-    </Grid>
+    </Box>
   );
 };
