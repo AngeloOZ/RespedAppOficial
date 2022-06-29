@@ -1,7 +1,6 @@
+import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import ListObjeto from "./ListObjeto";
-import React from "react";
-import styled from "styled-components";
 import { Grid, Typography} from "@mui/material";
 
 const DraggableElement = ({ prefix, elements,color0,tipo}) => (
