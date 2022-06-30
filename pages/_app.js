@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
   if (Cookies.get('SESSION_ID')) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${Cookies.get('SESSION_ID')}`;
   }
-
+  
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap");
   }, []);

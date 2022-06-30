@@ -1,6 +1,18 @@
 import css from "../../../styles/Contacto.module.scss";
-
+import emailjs from "@emailjs/browser";
+import React from 'react';
 export const Contacto = () => {
+  function sendEmail(e) {
+    e.preventDefault();
+
+emailjs.sendForm('service_3yycfvc', 'template_8q2jual', e.target, 'vXddR9uNczkmMp5MM')
+    .then((result) => {
+        console.log(result.text);
+    }, (error) => {
+        console.log(error.text);
+    });
+    e.target.reset()
+}
   return (
     <section className={css.contenedor_contacto} id="contacto">
       <div className="container-fluid" data-height-100>
@@ -20,13 +32,14 @@ export const Contacto = () => {
                 <h2>PÓNGANSE EN CONTACTO CON NOSOTROS</h2>
                 <p>Su dirección de correo electrónico no será publicada. Los campos obligatorios están marcados *</p>
               </div>
-              <form>
+              <form onSubmit={sendEmail}>
                 <div className="row mt-3">
                   <div className="col">
                     <input
                       type="text"
                       className="form-control"
                       placeholder="Nombres y Apellidos*"
+                      name="from_name"
                     />
                   </div>
                 </div>
@@ -36,6 +49,7 @@ export const Contacto = () => {
                       type="email"
                       className="form-control"
                       placeholder="Correo electrónico*"
+                      name="to_name"
                     />
                   </div>
                 </div>
@@ -45,6 +59,7 @@ export const Contacto = () => {
                       type="telf"
                       className="form-control"
                       placeholder="Télefono*"
+                      name="reply_to"
                     />
                   </div>
                 </div>
@@ -53,6 +68,7 @@ export const Contacto = () => {
                     <textarea
                       className="form-control"
                       placeholder="Mensaje"
+                      name="message"
                     ></textarea>
                   </div>
                 </div>

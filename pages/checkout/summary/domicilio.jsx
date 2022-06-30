@@ -15,11 +15,15 @@ import { setCookies } from "cookies-next";
 import { ShopLayout } from "../../../components/layouts/ShopLayout";
 import { CartList } from "../../../components/cart/CartList";
 import { checkout } from "../../../functions";
-import { SummaryDelivery } from "../../../components/checkout";
+import { SummaryDelivery,PagosBox } from "../../../components/checkout";
 import { FullScreenloader } from "../../../components/Components";
 import { useHandleOrders } from "../../../Hooks";
 
 const Summary = ({ address, order }) => {
+  var currentdate = new Date(); 
+var fecha = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + "  ";
   const [displayLoader, setDisplayLoader] = useState(false);
   const [textNote, setTextNote] = useState("");
   const { registerOrder, cancelOrder } = useHandleOrders(
@@ -63,6 +67,7 @@ const Summary = ({ address, order }) => {
                   value={textNote}
                   onChange={handleChange}
                 />
+                <PagosBox orden={order?order:null} fecha={fecha}/>
               </SummaryDelivery>
               <Box sx={{ mt: 2 }}>
                 <Button

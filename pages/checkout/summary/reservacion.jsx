@@ -15,11 +15,15 @@ import { setCookies } from "cookies-next";
 import { ShopLayout } from "../../../components/layouts/ShopLayout";
 import { CartList } from "../../../components/cart/CartList";
 import { checkout } from "../../../functions";
-import { SummaryReservation } from "../../../components/checkout";
+import { SummaryReservation,PagosBox } from "../../../components/checkout";
 import { FullScreenloader } from "../../../components/Components";
 import { useHandleOrders } from "../../../Hooks";
 
 const SummaryReservationPage = ({ reservation, order }) => {
+  var currentdate = new Date(); 
+var fecha = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + "  ";
   const [displayLoader, setDisplayLoader] = useState(false);
   const [textNote, setTextNote] = useState("");
   const { registerOrderRerservation, cancelOrder } = useHandleOrders(
@@ -62,6 +66,7 @@ const SummaryReservationPage = ({ reservation, order }) => {
                   value={textNote}
                   onChange={handleChange}
                 />
+                <PagosBox orden={order?order:null} fecha={fecha}/>
               </SummaryReservation>
               <Box sx={{ mt: 2 }}>
                 <Button

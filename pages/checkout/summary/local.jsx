@@ -20,18 +20,22 @@ import { setCookies } from "cookies-next";
 import { ShopLayout } from "../../../components/layouts/ShopLayout";
 import { CartList } from "../../../components/cart/CartList";
 import { checkout } from "../../../functions";
-import { SummaryLocal } from "../../../components/checkout";
+import { SummaryLocal,PagosBox } from "../../../components/checkout";
 import { FullScreenloader } from "../../../components/Components";
 import { useHandleOrders } from "../../../Hooks";
 
 const numeroMesas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const SummaryLocalPage = ({ order }) => {
+  var currentdate = new Date(); 
+var fecha = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + "  ";
   const [displayLoader, setDisplayLoader] = useState(false);
   const [numeroMesa, setNumeroMesa] = useState("");
   const [errorChoseTable, setErrorChoseTable] = useState(false);
   const [textNote, setTextNote] = useState("");
-  const { registerOrderLocal, cancelOrder } = useHandleOrders(
+  const {registerOrderLocal, cancelOrder } = useHandleOrders(
     {
       IDPEDIDOTOTAL: order.IDPEDIDOTOTAL,
       MESA: numeroMesa,
@@ -114,6 +118,8 @@ const SummaryLocalPage = ({ order }) => {
                   value={textNote}
                   onChange={handleChangeNote}
                 />
+                <PagosBox orden={order?order:null} fecha={fecha}/>
+               
               </SummaryLocal>
               <Box sx={{ mt: 2 }}>
                 <Button
