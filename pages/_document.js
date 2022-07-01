@@ -16,6 +16,11 @@ class MyDocument extends Document {
                   rel="stylesheet"
                   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
                />
+               <meta name="description" content="El Fogón de COZ es un restaurante que ofrece los mejores platos a la parrilla con la mejor sazón" />
+               <link rel="icon" href="/favicon.ico" />
+
+               <link rel="apple-touch-icon" href="/icon/apple-touch-icon.png" />
+               <link rel="manifest" href="/manifest.json" />
             </Head>
             <body>
                <Main />
