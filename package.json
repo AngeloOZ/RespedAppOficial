@@ -25,6 +25,7 @@
     "jwt-decode": "^3.1.2",
     "next": "12.1.4",
     "next-auth": "^4.5.0",
+    "next-pwa": "^5.5.4",
     "node-sass": "^7.0.1",
     "react": "17.0.2",
     "react-beautiful-dnd": "^13.1.0",
