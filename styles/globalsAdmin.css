@@ -88,6 +88,23 @@ body {
     color: var(--white);
 }
 
+.admin-navigation .anchor-home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+.admin-navigation.active .anchor-home .admin-title {
+    display: none;
+}
+.admin-navigation .anchor-home .admin-logo {
+    width: 40px;
+    height: 40px;
+}
+.admin-navigation.active .anchor-home .admin-logo {
+    margin-top: 10px;
+}
+
 .admin-navigation ul li:hover a,
 .admin-navigation ul li.hovered a {
     color: var(--blue);

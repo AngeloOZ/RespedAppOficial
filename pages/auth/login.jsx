@@ -43,7 +43,10 @@ export default function Login() {
       setDisplayLoader(false);
       setShowError(true);
       const sms =
-        typeof response.data == "string" ? response.data : response.message;
+        typeof response?.data == "string"
+          ? response?.data || "Hubo un error en el inicio de sesión"
+          : response?.message || "Hubo un error en el inicio de sesión";
+
       setShowMessageError(
         <ListErrors message={sms} errors={response?.errors || []} />
       );

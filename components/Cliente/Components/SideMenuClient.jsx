@@ -1,17 +1,29 @@
+import { useContext } from "react";
+import Link from "next/link";
+import Image from "next/Image";
+
+import { AuthContext } from "../../../context";
 import ItemSidebar from "../../ComponentsAdmin/ItemSidebar";
+import logoNavbar from "../../../public/Img/logo_navbar.png";
 
 export const SideMenuClient = ({ showSide }) => {
+  const { logoutUser } = useContext(AuthContext);
+
   return (
-    <div className={`admin-navigation ${showSide && "active"}`}>
+    <div className={`admin-navigation ${showSide ? "active" : ""}`}>
       <ul>
         <li>
-          <a href="#">
-            <span className="admin-icon">
-              <ion-icon name="logo-apple"></ion-icon>
-            </span>
-            <span className="admin-title">El Fogón de COZ</span>
-          </a>
+          <Link href={"/"} passHref>
+            <a className="anchor-home">
+              <span className="admin-logo">
+                <Image src={logoNavbar} alt="Logo el fogon de coz" />
+              </span>
+              <span className="admin-title">El Fogón de COZ</span>
+            </a>
+          </Link>
         </li>
+        <ItemSidebar href="/" name="Inicio" icon="home-outline" />
+        <ItemSidebar href="/menu" name="Menú" icon="restaurant-outline" />
         <ItemSidebar
           href="/cliente"
           name="Perfil"
@@ -27,7 +39,7 @@ export const SideMenuClient = ({ showSide }) => {
           name="Direcciones"
           icon="map-outline"
         />
-        <ItemSidebar href="/" name="Sign Out" icon="log-out-outline" />
+        <ItemSidebar href="#" name="Cerrar sesión" icon="log-out-outline" />
       </ul>
     </div>
   );

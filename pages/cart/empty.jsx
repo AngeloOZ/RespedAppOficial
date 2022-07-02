@@ -1,11 +1,13 @@
+import { useState } from "react";
 import NextLink from "next/link";
 
 import { RemoveShoppingCartOutlined } from "@mui/icons-material";
 import { Box, Link, Typography } from "@mui/material";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
-import { checkout } from "../../functions";
+import { FullScreenloader } from "../../components/Components";
 
 const EmptyPage = () => {
+  const [loader, setLoader] = useState(false);
   return (
     <ShopLayout
       title="Carrito vació"
@@ -18,11 +20,16 @@ const EmptyPage = () => {
         height="calc(100vh - 200px)"
         sx={{ flexDirection: { xs: "column", sm: "row" } }}
       >
+        <FullScreenloader display={loader} />
         <RemoveShoppingCartOutlined color="primary" sx={{ fontSize: 100 }} />
         <Box display="flex" flexDirection="column" alignItems="center">
           <Typography>Su carrito está vació</Typography>
           <NextLink href="/menu" passHref>
-            <Link typography="h4" color="secondary">
+            <Link
+              typography="h4"
+              color="secondary"
+              onClick={() => setLoader(true)}
+            >
               Regresar
             </Link>
           </NextLink>
@@ -33,19 +40,3 @@ const EmptyPage = () => {
 };
 
 export default EmptyPage;
-
-export const getServerSideProps = async ({ req }) => {
-  const items = checkout.getItemsCart(req);
-  if(items){
-    return {
-      redirect: {
-        destination: "/cart",
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: {},
-  };
-};

@@ -1,14 +1,34 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { useContext } from "react";
-import { ClienteLayout } from "../../components/layouts/ClienteLayout";
-import { AuthContext } from "../../context";
-import { jwt } from "../../helpers";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
+import Cookies from "js-cookie";
+import { useForm } from "react-hook-form";
 
-const ProfilePage = () => {
-  const { username } = useContext(AuthContext);
+import { ClienteLayout } from "../../components/layouts/ClienteLayout";
+import { jwt } from "../../helpers";
+
+const pattern =
+  /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/;
+
+const u = {
+  IDUSUARIO: 4,
+  USERNAME: "clientePrueba",
+  TIPO: 3,
+  NAME: "Pepito",
+  LASTNAME: "Juarez",
+  PHONE: "0960508018",
+  iat: 1656712687,
+  exp: 1656799087,
+};
+
+const ProfilePage = ({ user = u }) => {
   const [isEdit, setIsEdit] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   return (
     <ClienteLayout>
       <Box
@@ -18,7 +38,7 @@ const ProfilePage = () => {
         my={1}
       >
         <Typography variant="h1" component="h1">
-          {username}
+          {user.USERNAME}
         </Typography>
         <Button
           variant="outlined"
@@ -36,7 +56,17 @@ const ProfilePage = () => {
               variant="outlined"
               color="warning"
               fullWidth
+              defaultValue={user.NAME}
               disabled={!isEdit}
+              {...register("NAME", {
+                required: "El nombre de la dirección es requerido",
+                pattern: {
+                  value: /^[A-Za-z 0-9ñ ,.;áéíóú]+$/i,
+                  message: "No se permiten caracteres especiales",
+                },
+              })}
+              error={!!errors.NAME}
+              helperText={errors.NAME?.message}
             />
           </Grid>
           <Grid item xs={12}>
@@ -45,7 +75,17 @@ const ProfilePage = () => {
               variant="outlined"
               color="warning"
               fullWidth
+              defaultValue={user.LASTNAME}
               disabled={!isEdit}
+              {...register("LASTNAME", {
+                required: "El nombre de la dirección es requerido",
+                pattern: {
+                  value: /^[A-Za-z 0-9ñ ,.;áéíóú]+$/i,
+                  message: "No se permiten caracteres especiales",
+                },
+              })}
+              error={!!errors.LASTNAME}
+              helperText={errors.LASTNAME?.message}
             />
           </Grid>
           <Grid item xs={12}>
@@ -54,7 +94,17 @@ const ProfilePage = () => {
               variant="outlined"
               color="warning"
               fullWidth
+              defaultValue={user.PHONE}
               disabled={!isEdit}
+              {...register("PHONE", {
+                required: "El número de teléfono es requerido",
+                pattern: {
+                  value: /[\d+]/,
+                  message: "El número ingresado no es válido",
+                },
+              })}
+              errors={!!errors.PHONE}
+              helperText={errors.PHONE?.message}
             />
           </Grid>
           <Grid item xs={12}>
@@ -64,9 +114,19 @@ const ProfilePage = () => {
               color="warning"
               fullWidth
               disabled={!isEdit}
+              defaultValue={user.USERNAME}
               InputProps={{
                 readOnly: true,
               }}
+              {...register("USERNAME", {
+                required: "El nombre de usuario es requerido",
+                pattern: {
+                  value: /^[A-Za-z0-9ñ]+$/i,
+                  message: "Solo es permitido caracteres alfanuméricos",
+                },
+              })}
+              errors={!!errors.USERNAME}
+              helperText={errors.USERNAME?.message}
             />
           </Grid>
           <Grid item xs={12}>
@@ -76,6 +136,15 @@ const ProfilePage = () => {
               color="warning"
               fullWidth
               disabled={!isEdit}
+              {...register("EMAIL", {
+                required: "El correo electrónico es requerido",
+                pattern: {
+                  value: pattern,
+                  message: "El correo ingresado no es válido",
+                },
+              })}
+              error={!!errors.EMAIL}
+              helperText={errors.EMAIL?.message}
             />
           </Grid>
           <Grid item xs={12}>
@@ -85,6 +154,12 @@ const ProfilePage = () => {
               color="warning"
               fullWidth
               disabled={!isEdit}
+              {...register("PASSWORD", {
+                required: "La contraseña es requerida",
+                minLength: { value: 4, message: "Mínimo 4 caracteres" },
+              })}
+              errors={!!errors.PASSWORD}
+              helperText={errors.PASSWORD?.message}
             />
           </Grid>
           {isEdit && (
@@ -105,9 +180,19 @@ export const getServerSideProps = async ({ req }) => {
   try {
     const data = await jwt.isValidToken(token);
     console.log(data);
-  } catch (error) {}
-
-  return {
-    props: {},
-  };
+    return {
+      props: {
+        user: data,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    Cookies.remove("SESSION_ID");
+    return {
+      redirect: {
+        destination: "/menu",
+        permanent: false,
+      },
+    };
+  }
 };
