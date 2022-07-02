@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import ItemSidebar from "./ItemSidebar";
+import logoNavbar from "../../public/Img/logo_navbar.png";
 
 export const SidebarAdmin = ({ showSide }) => {
   return (
