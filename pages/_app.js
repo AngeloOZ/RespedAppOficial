@@ -11,13 +11,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function MyApp({ Component, pageProps }) {
-
-  axios.defaults.baseURL = 'https://respedapp.onrender.com/api';
-  // axios.defaults.baseURL = 'http://localhost:4000/api';
+  axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
   if (Cookies.get('SESSION_ID')) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${Cookies.get('SESSION_ID')}`;
   }
-  
+
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap");
   }, []);
