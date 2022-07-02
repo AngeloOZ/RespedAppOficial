@@ -1,3 +1,5 @@
+import Link from "next/link";
+import Image from "next/image";
 import ItemSidebar from "./ItemSidebar";
 
 export const SidebarAdmin = ({ showSide }) => {
@@ -5,12 +7,14 @@ export const SidebarAdmin = ({ showSide }) => {
     <div className={`admin-navigation ${showSide && "active"}`}>
       <ul>
         <li>
-          <a href="#">
-            <span className="admin-icon">
-              <ion-icon name="logo-apple"></ion-icon>
-            </span>
-            <span className="admin-title">El fogón de COZ</span>
-          </a>
+          <Link href={"/"} passHref>
+            <a className="anchor-home">
+              <span className="admin-logo">
+                <Image src={logoNavbar} alt="Logo el fogon de coz" />
+              </span>
+              <span className="admin-title">El Fogón de COZ</span>
+            </a>
+          </Link>
         </li>
         <ItemSidebar
           href="/admin/dashboard"
@@ -32,16 +36,12 @@ export const SidebarAdmin = ({ showSide }) => {
           name="Reservas"
           icon="calendar-outline"
         />
-         <ItemSidebar
+        <ItemSidebar
           href="/admin/productos"
           name="Productos"
           icon="fast-food-outline"
         />
-        <ItemSidebar
-          href="/"
-          name="Sign Out"
-          icon="log-out-outline"
-        />
+        <ItemSidebar href="/" name="Sign Out" icon="log-out-outline" />
       </ul>
     </div>
   );

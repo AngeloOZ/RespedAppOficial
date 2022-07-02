@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Link from "next/link";
-import Image from "next/Image";
+import Image from 'next/image'
+
 
 import { AuthContext } from "../../../context";
 import ItemSidebar from "../../ComponentsAdmin/ItemSidebar";
