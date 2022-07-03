@@ -11,8 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function MyApp({ Component, pageProps }) {
-  //console.log(`URL: ${process.env.NEXT_PUBLIC_BASE_URL}`);
-  axios.defaults.baseURL = "http://198.199.75.201/api";
+  axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
   if (Cookies.get('SESSION_ID')) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${Cookies.get('SESSION_ID')}`;
   }

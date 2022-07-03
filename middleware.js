@@ -47,7 +47,7 @@ function existSession(request = NextRequest) {
 }
 async function isValidToken(token) {
    try {
-      const url = `${"http://198.199.75.201/api"}/auth/validate-token`;
+      const url = `${process.env.BASE_URL_API}/auth/validate-token`;
       const response = await fetch(url, {
          method: "POST",
          body: JSON.stringify({ token }),
