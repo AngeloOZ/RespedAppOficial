@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 
+import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { UIContext, CartContext } from "../../context";
 
@@ -18,9 +19,20 @@ import { ShoppingCartOutlined, MenuOutlined } from "@mui/icons-material";
 import { FullScreenloader } from "../Components";
 
 export const Navbar = ({ categories }) => {
+  const router = useRouter();
   const [displayLoader, setDisplayLoader] = useState(false);
   const { toggleSideMenu } = useContext(UIContext);
   const { numberOfItems } = useContext(CartContext);
+
+  const handleShowLoader = (url) => {
+    if (router.asPath != url) {
+      setDisplayLoader(true);
+      setTimeout(() => {
+        setDisplayLoader(false);
+      }, 6000);
+    }
+  };
+
   return (
     <AppBar>
       <Toolbar>
@@ -46,9 +58,7 @@ export const Navbar = ({ categories }) => {
             return (
               <NextLink href={url} passHref key={category.IDCATEGORIA}>
                 <Link mr={1}>
-                  <Button
-                    style={{ textTransform: "capitalize" }}
-                  >
+                  <Button style={{ textTransform: "capitalize" }}>
                     {category.NAME.toLowerCase()}
                   </Button>
                 </Link>
@@ -61,7 +71,7 @@ export const Navbar = ({ categories }) => {
 
         <NextLink href="/cart" passHref>
           <Link>
-            <IconButton onClick={() => setDisplayLoader(true)}>
+            <IconButton onClick={() => handleShowLoader("/cart")}>
               <Badge badgeContent={numberOfItems} color="secondary">
                 <ShoppingCartOutlined />
               </Badge>

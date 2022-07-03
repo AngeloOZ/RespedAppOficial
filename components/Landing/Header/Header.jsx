@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "../../../styles/Header.module.scss";
 import IconRedes from "./IconRedes";
-import logoHeader from "../../../public/Img/logo_header.png";;
+import logoHeader from "../../../public/Img/logo_header.png";
 
 export const Header = () => {
   return (
@@ -16,14 +16,27 @@ export const Header = () => {
         </h1>
       </div>
       <div className={styles.social_media}>
-        <IconRedes url="#" icon="bi bi-facebook" />
-        <IconRedes url="#" icon="bi bi-instagram" />
-        <IconRedes url="#" icon="bi bi-whatsapp" />
+        <IconRedes
+          url="https://www.facebook.com/El-Fogon-de-Coz-110943261649298"
+          icon="bi bi-facebook"
+        />
+        <IconRedes
+          url="https://www.instagram.com/elfogondecoz/"
+          icon="bi bi-instagram"
+        />
+        <IconRedes url="https://wa.link/xs9e0e" icon="bi bi-whatsapp" />
       </div>
       <div className={styles.information_contact}>
-        <IconRedes url="#" icon="bi bi-telephone-fill" />
-        <IconRedes url="#" icon="bi bi-envelope-fill" />
-        <IconRedes url="#" icon="bi bi-geo-alt-fill" />
+        <a href="mailto:"></a>
+        <IconRedes url="tel:+593983114429" icon="bi bi-telephone-fill" />
+        <IconRedes
+          url="mailto:elfogondecoz.puyo@gmail.com"
+          icon="bi bi-envelope-fill"
+        />
+        <IconRedes
+          url="https://goo.gl/maps/zNzyLtZ4xBYAyeyQ7"
+          icon="bi bi-geo-alt-fill"
+        />
       </div>
     </header>
   );

@@ -1,18 +1,27 @@
 import css from "../../../styles/Contacto.module.scss";
 import emailjs from "@emailjs/browser";
-import React from 'react';
+
 export const Contacto = () => {
   function sendEmail(e) {
     e.preventDefault();
 
-emailjs.sendForm('service_3yycfvc', 'template_8q2jual', e.target, 'vXddR9uNczkmMp5MM')
-    .then((result) => {
-        console.log(result.text);
-    }, (error) => {
-        console.log(error.text);
-    });
-    e.target.reset()
-}
+    emailjs
+      .sendForm(
+        "service_3yycfvc",
+        "template_8q2jual",
+        e.target,
+        "vXddR9uNczkmMp5MM"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    e.target.reset();
+  }
   return (
     <section className={css.contenedor_contacto} id="contacto">
       <div className="container-fluid" data-height-100>
@@ -30,7 +39,10 @@ emailjs.sendForm('service_3yycfvc', 'template_8q2jual', e.target, 'vXddR9uNczkmM
             <div className={css.contenedor_form}>
               <div className={css.text_contect}>
                 <h2>PÓNGANSE EN CONTACTO CON NOSOTROS</h2>
-                <p>Su dirección de correo electrónico no será publicada. Los campos obligatorios están marcados *</p>
+                <p>
+                  Su dirección de correo electrónico no será publicada. Los
+                  campos obligatorios están marcados *
+                </p>
               </div>
               <form onSubmit={sendEmail}>
                 <div className="row mt-3">
@@ -78,7 +90,7 @@ emailjs.sendForm('service_3yycfvc', 'template_8q2jual', e.target, 'vXddR9uNczkmM
                       type="submit"
                       className={`btn ${css.button_reserve}`}
                     >
-                    Enviar mensaje
+                      Enviar mensaje
                     </button>
                   </div>
                 </div>

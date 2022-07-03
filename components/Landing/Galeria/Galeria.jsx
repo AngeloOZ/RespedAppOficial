@@ -1,12 +1,7 @@
 import { useState } from "react";
-
-import Image from "next/image";
 import { ItemGalery } from "./ItemGalery";
 import FsLightbox from "fslightbox-react";
-
 import css from "../../../styles/Galeria.module.scss";
-import bg from "../../../public/Img/bg.jpg";
-
 
 const photos = [
   "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1650670208/website/galeria/6_atv7hc.webp",

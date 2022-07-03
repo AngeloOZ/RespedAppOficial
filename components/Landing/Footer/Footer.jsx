@@ -73,13 +73,25 @@ export const Footer = () => {
           <div className={css.footer_col}>
             <h4>Siguenos</h4>
             <div className={css.social_links}>
-              <a href="#">
+              <a
+                href="https://www.facebook.com/El-Fogon-de-Coz-110943261649298"
+                target={"_blank"}
+                rel="noreferrer"
+              >
                 <i className="bi bi-facebook"></i>
               </a>
-              <a href="#">
+              <a
+                href="https://www.instagram.com/elfogondecoz/"
+                target={"_blank"}
+                rel="noreferrer"
+              >
                 <i className="bi bi-instagram"></i>
               </a>
-              <a href="#">
+              <a
+                href="https://wa.link/xs9e0e"
+                target={"_blank"}
+                rel="noreferrer"
+              >
                 <i className="bi bi-whatsapp"></i>
               </a>
             </div>

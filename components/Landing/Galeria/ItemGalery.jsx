@@ -3,25 +3,21 @@ import React, { useState } from "react";
 import FsLightbox from "fslightbox-react";
 import css from "../../../styles/Galeria.module.scss";
 
-export const ItemGalery = ({
-  src,
-  alt = "Fogon de coz",
-  slider,
-  lightboxController
-}) => {
+export const ItemGalery = ({ src, alt, slider, lightboxController }) => {
+  if (!alt) {
+    alt = `Fogon de coz imagen ${slider}`;
+  }
   const handleClik = () => {
-    lightboxController(obj =>{
+    lightboxController((obj) => {
       return {
         toggler: !obj.toggler,
-        slide: slider
-      }
-    })
+        slide: slider,
+      };
+    });
   };
   return (
-    <>
-      <div className={css.itemGalery} onClick={handleClik}>
-        <Image src={src} objectFit="cover" alt={alt} layout="fill" />
-      </div>
-    </>
+    <div className={css.itemGalery} onClick={handleClik}>
+      <Image src={src} objectFit="cover" alt={alt} layout="fill" />
+    </div>
   );
 };

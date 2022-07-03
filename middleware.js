@@ -22,8 +22,12 @@ export async function middleware(request) {
    } else if (currentUrl.startsWith('/auth')) {
       const currentUser = await isValidSession(request);
       if (currentUser) {
-         return NextResponse.redirect(new URL('/', request.url));
+         switch (currentUser.TIPO) {
+            case 1: return NextResponse.redirect(new URL('/admin', request.url));
+            case 3: return NextResponse.redirect(new URL('/cliente', request.url));
+         }
       }
+      return NextResponse.redirect(new URL('/', request.url));
    } else if (currentUrl.startsWith('/checkout')) {
       const currentUser = await isValidSession(request);
       if (currentUser) {
@@ -115,8 +119,8 @@ function validateItemsCart(request) {
          const itemsCart = JSON.parse(cart);
          if (itemsCart.length <= 0) {
             return NextResponse.rewrite(new URL('/cart/empty', request.url))
-         } else {
-            return NextResponse.redirect(new URL('/cart', request.url))
+         }else{
+            return NextResponse.next();
          }
       } catch (error) {
          console.error(error);
