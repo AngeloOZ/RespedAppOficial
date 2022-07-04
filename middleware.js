@@ -6,8 +6,17 @@ import { NextResponse } from 'next/server'
 
 export async function middleware(request) {
    const currentUrl = request.nextUrl.pathname;
-
-   if (currentUrl.startsWith('/cliente')) {
+   if (currentUrl.startsWith('/auth')) {
+      const currentUser = await isValidSession(request);
+      console.log(currentUser);
+      if (currentUser) {
+         switch (currentUser.TIPO) {
+            case 1: return NextResponse.redirect(new URL('/admin', request.url));
+            case 3: return NextResponse.redirect(new URL('/cliente', request.url));
+         }
+      }
+      return NextResponse.redirect(new URL('/auth/login', request.url));
+   } else if (currentUrl.startsWith('/cliente')) {
       const currentUser = await isValidSession(request);
       if (currentUser) {
          return validateUserClient(currentUser, request);
@@ -19,15 +28,6 @@ export async function middleware(request) {
          return validateUserAdmin(currentUser, request);
       }
       return NextResponse.redirect(new URL(`/auth/login?p=${currentUrl}`, request.url));
-   } else if (currentUrl.startsWith('/auth')) {
-      const currentUser = await isValidSession(request);
-      if (currentUser) {
-         switch (currentUser.TIPO) {
-            case 1: return NextResponse.redirect(new URL('/admin', request.url));
-            case 3: return NextResponse.redirect(new URL('/cliente', request.url));
-         }
-      }
-      return NextResponse.redirect(new URL('/', request.url));
    } else if (currentUrl.startsWith('/checkout')) {
       const currentUser = await isValidSession(request);
       if (currentUser) {
