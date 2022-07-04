@@ -10,18 +10,7 @@ import { jwt } from "../../helpers";
 const pattern =
   /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/;
 
-const u = {
-  IDUSUARIO: 4,
-  USERNAME: "clientePrueba",
-  TIPO: 3,
-  NAME: "Pepito",
-  LASTNAME: "Juarez",
-  PHONE: "0960508018",
-  iat: 1656712687,
-  exp: 1656799087,
-};
-
-const ProfilePage = ({ user = u }) => {
+const ProfilePage = ({ user }) => {
   const [isEdit, setIsEdit] = useState(false);
   const {
     register,
@@ -135,6 +124,7 @@ const ProfilePage = ({ user = u }) => {
               variant="outlined"
               color="warning"
               fullWidth
+              defaultValue={user.EMAIL}
               disabled={!isEdit}
               {...register("EMAIL", {
                 required: "El correo electrónico es requerido",
@@ -149,13 +139,13 @@ const ProfilePage = ({ user = u }) => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Contraseña"
+              label="Actualizar contraseña"
               variant="outlined"
               color="warning"
               fullWidth
+              placeholder="Dejar en blanco para no cambiar la clave"
               disabled={!isEdit}
               {...register("PASSWORD", {
-                required: "La contraseña es requerida",
                 minLength: { value: 4, message: "Mínimo 4 caracteres" },
               })}
               errors={!!errors.PASSWORD}
@@ -179,14 +169,12 @@ export const getServerSideProps = async ({ req }) => {
   const { SESSION_ID: token } = req.cookies;
   try {
     const data = await jwt.isValidToken(token);
-    console.log(data);
     return {
       props: {
         user: data,
       },
     };
   } catch (error) {
-    console.log(error);
     Cookies.remove("SESSION_ID");
     return {
       redirect: {
