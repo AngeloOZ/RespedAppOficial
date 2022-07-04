@@ -1,21 +1,12 @@
+import { useContext } from "react";
+
+import { AuthContext } from "../../context/Auth";
 
 
-
-import React from "react";
 import { Paper,Grid,Card, CardContent, Typography } from "@mui/material";
-import jwt_decode from 'jwt-decode';
 
-const GridUsuario = ({ token, fecha }) => {
-   var decoded;
-   try {
-      decoded = jwt_decode(token);
-   } catch (error) {
-      decoded={
-         "IDUSUARIO": '',
-         "USERNAME": '',
-         "TIPO": ''
-      };
-   }
+const GridUsuario = ({fecha }) => {
+   const {username} =useContext(AuthContext)
    
   return (
     <div>
@@ -25,11 +16,10 @@ const GridUsuario = ({ token, fecha }) => {
          <Card>
             <CardContent>
                <div>
-               {/* {CHEQUEAR ESTO} */}
-               <Typography>{decoded.USERNAME}</Typography> 
+               <Typography sx={{fontSize: 32}}>Bienvenido, <b>{username}</b></Typography> 
                </div>
                <div>
-               <Typography>{fecha}</Typography> 
+               <Typography>Fecha: {fecha}</Typography> 
                </div>
             </CardContent>
          </Card>    
