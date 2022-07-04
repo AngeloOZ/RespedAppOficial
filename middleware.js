@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 
-export const config = {
-   runtime: 'experimental-edge',
-}
+// export const config = {
+//    runtime: 'experimental-edge',
+// }
 
 export async function middleware(request) {
    const currentUrl = request.nextUrl.pathname;
@@ -34,8 +34,6 @@ export async function middleware(request) {
          return validateSummary(request);
       }
       return NextResponse.redirect(new URL(`/auth/login?p=${currentUrl}`, request.url));
-   } else if (currentUrl.startsWith('cart')) {
-      return validateItemsCart(request)
    }
 }
 
@@ -82,7 +80,6 @@ async function isValidSession(request = NextRequest) {
 }
 
 function validateUserClient(client, request) {
-   console.log(client);
    if (client.TIPO != process.env.TIPO_CLIENTE) {
       return NextResponse.redirect(new URL(`/`, request.url));
    }
@@ -110,24 +107,5 @@ function validateSummary(request) {
       }
    } else {
       return NextResponse.redirect(new URL('/cart/empty', request.url))
-   }
-}
-function validateItemsCart(request) {
-   const cart = request.cookies.get('cart');
-   if (cart) {
-      try {
-         const itemsCart = JSON.parse(cart);
-         if (itemsCart.length <= 0) {
-            return NextResponse.rewrite(new URL('/cart/empty', request.url))
-         }else{
-            return NextResponse.next();
-         }
-      } catch (error) {
-         console.error(error);
-         NextResponse.next().cookies.delete('cart');
-         return NextResponse.redirect(new URL('/menu', request.url))
-      }
-   } else {
-      return NextResponse.rewrite(new URL('/cart/empty', request.url))
    }
 }

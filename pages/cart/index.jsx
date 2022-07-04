@@ -34,7 +34,7 @@ const styleModal = {
   justifyContent: "center",
 };
 
-const CartPage = ({ numbsOfItems, reservation }) => {
+const CartPage = ({ numbsOfItems, reservation, isEdit }) => {
   const [openModal, setOpenModal] = useState(false);
   const [displayLoader, setDisplayLoader] = useState(false);
   const handleOpenModal = () => {
@@ -53,7 +53,7 @@ const CartPage = ({ numbsOfItems, reservation }) => {
 
       <Grid container>
         <Grid item xs={12} md={7}>
-          <CartList editable />
+          <CartList editable={isEdit} />
         </Grid>
         <Grid item xs={12} md={5}>
           <Card className="summary-card">
@@ -72,7 +72,7 @@ const CartPage = ({ numbsOfItems, reservation }) => {
                         color="success"
                         className="circular-btn"
                         fullWidth
-                        onClick={()=>setDisplayLoader(true)}
+                        onClick={() => setDisplayLoader(true)}
                       >
                         Checkout
                       </Button>
@@ -105,17 +105,20 @@ const CartPage = ({ numbsOfItems, reservation }) => {
           container
           rowSpacing={1}
           columnSpacing={{ sm: 1 }}
+          mt={0}
         >
-          <Typography
-            variant="h1"
-            component="div"
-            mb={1.5}
-            mx="auto"
-            color="#000"
-            textAlign="center"
-          >
-            ¿Dónde te encuentras?
-          </Typography>
+          <Grid item xs={12}>
+            <Typography
+              variant="h1"
+              component="div"
+              mb={1.5}
+              mx="auto"
+              color="#000"
+              textAlign="center"
+            >
+              ¿Dónde te encuentras?
+            </Typography>
+          </Grid>
           <Grid item xs={12} sm={6}>
             <NextLink href="/checkout/address" passHref>
               <Link>
@@ -157,6 +160,7 @@ export default CartPage;
 export const getServerSideProps = async ({ req }) => {
   const items = checkout.getItemsCart(req);
   const reservation = checkout.getReservationCookies(req);
+  const existOrder = checkout.existSummaryOrder(req);
 
   if (!items) {
     return {
@@ -170,6 +174,7 @@ export const getServerSideProps = async ({ req }) => {
     props: {
       numbsOfItems: items.length,
       reservation: !!reservation,
+      isEdit: !existOrder,
     },
   };
 };

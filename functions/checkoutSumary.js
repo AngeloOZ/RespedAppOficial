@@ -30,7 +30,7 @@ export function getSummaryOrderCookie(request) {
          }
       } catch (error) {
          Cookies.remove('summary_order')
-         console.log(error);
+         console.error(error);
          return undefined;
       }
    }
@@ -48,7 +48,18 @@ export function getReservationCookies(request) {
       }
    }
    return undefined;
-
+}
+export function existSummaryOrder(request) {
+   const { summary_order } = request.cookies;
+   if (summary_order) {
+      try {
+         const sumamry = JSON.parse(summary_order);
+         return true;
+      } catch (error) {
+         return false;
+      }
+   }
+   return false;
 }
 export function getToken(request) {
    const { SESSION_ID } = request.cookies;
@@ -72,7 +83,7 @@ export async function getAddressUserByID(id, token) {
       const { data } = await axios.get(`/direccion/${id}`);
       return data.data;
    } catch (error) {
-      console.log(error);
+      console.error(error);
       return undefined;
    }
 }
@@ -82,7 +93,7 @@ export async function postCurrentOrder(arrayId, token) {
       const { data } = await axios.post(`/pedido`, arrayId);
       return data.data;
    } catch (error) {
-      console.log(error);
+      console.error(error);
       return undefined
    }
 }
