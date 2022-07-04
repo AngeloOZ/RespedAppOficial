@@ -1,14 +1,17 @@
 import css from "../../../styles/Contacto.module.scss";
 import emailjs from "@emailjs/browser";
 import React from 'react';
+import { SweetAlert } from "../../../helpers";
 export const Contacto = () => {
+  
   function sendEmail(e) {
     e.preventDefault();
-
-emailjs.sendForm('service_3yycfvc', 'template_8q2jual', e.target, 'vXddR9uNczkmMp5MM')
+    emailjs.sendForm('service_3yycfvc', 'template_8q2jual', e.target, process.env.NEXT_PUBLIC_MAIL_ID)
     .then((result) => {
+        SweetAlert.success({title:'Correo Enviado',text:'El restaurante ha recibido su mensaje, pronto nos contactaremos'});
         console.log(result.text);
     }, (error) => {
+      SweetAlert.error({title:'Ups, parece que hubo un error',text:'Intentelo más tarde'});
         console.log(error.text);
     });
     e.target.reset()

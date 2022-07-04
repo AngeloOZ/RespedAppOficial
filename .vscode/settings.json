@@ -4,5 +4,7 @@
         "node_modules{,/**}",
         ".vscode{,/**}"
     ],
-    "editor.tabSize": 3
+    "editor.tabSize": 3,
+    "appService.defaultWebAppToDeploy": "/subscriptions/ebe8c505-447d-467d-bf00-bcc41e6c977b/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/RespedApp",
+    "appService.deploySubpath": "."
 }
