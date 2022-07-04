@@ -8,14 +8,13 @@ export async function middleware(request) {
    const currentUrl = request.nextUrl.pathname;
    if (currentUrl.startsWith('/auth')) {
       const currentUser = await isValidSession(request);
-      console.log(currentUser);
       if (currentUser) {
          switch (currentUser.TIPO) {
             case 1: return NextResponse.redirect(new URL('/admin', request.url));
             case 3: return NextResponse.redirect(new URL('/cliente', request.url));
          }
       }
-      return NextResponse.redirect(new URL('/auth/login', request.url));
+      return NextResponse.next();
    } else if (currentUrl.startsWith('/cliente')) {
       const currentUser = await isValidSession(request);
       if (currentUser) {
@@ -80,13 +79,13 @@ async function isValidSession(request = NextRequest) {
 }
 
 function validateUserClient(client, request) {
-   if (client.TIPO != process.env.TIPO_CLIENTE) {
+   if (client.TIPO != process.env.NEXT_PUBLIC_TIPO_CLIENTE) {
       return NextResponse.redirect(new URL(`/`, request.url));
    }
    return NextResponse.next();
 }
 function validateUserAdmin(admin, request) {
-   if (admin.TIPO != process.env.TIPO_ADMIN) {
+   if (admin.TIPO != process.env.NEXT_PUBLIC_TIPO_ADMIN) {
       return NextResponse.redirect(new URL(`/`, request.url));
    }
    return NextResponse.next();

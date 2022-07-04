@@ -70,7 +70,7 @@ export const Navbar = () => {
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
                 {isLoggedIn ? (
-                  rol == process.env.TIPO_CLIENTE ? (
+                  rol == process.env.NEXT_PUBLIC_TIPO_CLIENTE ? (
                     <ItemsUser logout={logoutUser} loader={setLoader} />
                   ) : (
                     <ItemsAdmin logout={logoutUser} loader={setLoader} />

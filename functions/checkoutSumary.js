@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export function getItemsCart(request) {
    const { cart } = request.cookies;

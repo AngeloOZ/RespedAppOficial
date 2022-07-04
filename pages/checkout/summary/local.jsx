@@ -177,7 +177,8 @@ export const getServerSideProps = async ({ req, res }) => {
       }
       throw new Error("Error mio");
     } catch (error) {
-      console.log(error);
+      console.error("Error SSR");
+      console.error(error);
       return pathRedirect;
     }
   } else {
