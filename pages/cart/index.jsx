@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 
 import NextLink from "next/link";
 
@@ -21,6 +21,7 @@ import { CartList, OrderSummary } from "../../components/cart";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
 import { checkout } from "../../functions";
 import { FullScreenloader } from "../../components/Components/FullScreenloader/FullScreenloader";
+import { CartContext } from "../../context";
 
 const styleModal = {
   position: "fixed",
@@ -34,16 +35,21 @@ const styleModal = {
   justifyContent: "center",
 };
 
-const CartPage = ({ numbsOfItems, reservation }) => {
+const CartPage = ({ numbsOfItemsCart, reservation, isEdit }) => {
+  const { numberOfItems } = useContext(CartContext);
   const [openModal, setOpenModal] = useState(false);
+  const [itemsCart, setItemsCart] = useState(numbsOfItemsCart);
   const [displayLoader, setDisplayLoader] = useState(false);
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
+  useEffect(() => {
+    setItemsCart(numberOfItems);
+  }, [numberOfItems]);
 
   return (
     <ShopLayout
-      title={`Carrito - ${numbsOfItems}`}
+      title={`Carrito - ${itemsCart}`}
       pageDescription={"Carrito de compras de la tienda"}
     >
       <FullScreenloader display={displayLoader} />
@@ -53,7 +59,7 @@ const CartPage = ({ numbsOfItems, reservation }) => {
 
       <Grid container>
         <Grid item xs={12} md={7}>
-          <CartList editable />
+          <CartList editable={isEdit} />
         </Grid>
         <Grid item xs={12} md={5}>
           <Card className="summary-card">
@@ -63,32 +69,33 @@ const CartPage = ({ numbsOfItems, reservation }) => {
               </Box>
               <Divider sx={{ my: 1 }} />
               <OrderSummary />
-
-              <Box sx={{ mt: 3 }}>
-                {reservation ? (
-                  <NextLink href="/checkout/summary/reservacion" passHref>
-                    <Link>
-                      <Button
-                        color="success"
-                        className="circular-btn"
-                        fullWidth
-                        onClick={()=>setDisplayLoader(true)}
-                      >
-                        Checkout
-                      </Button>
-                    </Link>
-                  </NextLink>
-                ) : (
-                  <Button
-                    color="success"
-                    className="circular-btn"
-                    fullWidth
-                    onClick={handleOpenModal}
-                  >
-                    Checkout
-                  </Button>
-                )}
-              </Box>
+              {numberOfItems > 0 && (
+                <Box sx={{ mt: 3 }}>
+                  {reservation ? (
+                    <NextLink href="/checkout/summary/reservacion" passHref>
+                      <Link>
+                        <Button
+                          color="success"
+                          className="circular-btn"
+                          fullWidth
+                          onClick={() => setDisplayLoader(true)}
+                        >
+                          Checkout
+                        </Button>
+                      </Link>
+                    </NextLink>
+                  ) : (
+                    <Button
+                      color="success"
+                      className="circular-btn"
+                      fullWidth
+                      onClick={handleOpenModal}
+                    >
+                      Checkout
+                    </Button>
+                  )}
+                </Box>
+              )}
             </CardContent>
           </Card>
         </Grid>
@@ -105,17 +112,20 @@ const CartPage = ({ numbsOfItems, reservation }) => {
           container
           rowSpacing={1}
           columnSpacing={{ sm: 1 }}
+          mt={0}
         >
-          <Typography
-            variant="h1"
-            component="div"
-            mb={1.5}
-            mx="auto"
-            color="#000"
-            textAlign="center"
-          >
-            ¿Dónde te encuentras?
-          </Typography>
+          <Grid item xs={12}>
+            <Typography
+              variant="h1"
+              component="div"
+              mb={1.5}
+              mx="auto"
+              color="#000"
+              textAlign="center"
+            >
+              ¿Dónde te encuentras?
+            </Typography>
+          </Grid>
           <Grid item xs={12} sm={6}>
             <NextLink href="/checkout/address" passHref>
               <Link>
@@ -157,6 +167,7 @@ export default CartPage;
 export const getServerSideProps = async ({ req }) => {
   const items = checkout.getItemsCart(req);
   const reservation = checkout.getReservationCookies(req);
+  const existOrder = checkout.existSummaryOrder(req);
 
   if (!items) {
     return {
@@ -168,8 +179,9 @@ export const getServerSideProps = async ({ req }) => {
   }
   return {
     props: {
-      numbsOfItems: items.length,
+      numbsOfItemsCart: items.length,
       reservation: !!reservation,
+      isEdit: !existOrder,
     },
   };
 };

@@ -14,7 +14,7 @@ export const AuthLayout = ({ config, children }) => {
         {
           <div className={css.login_container}>
             <div className={css.login_info_container}>
-              <div className={css.container_logo}>
+              <div div className={css.container_logo}>
                 <Image
                   src="https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1655927637/website/logov3_qhidg2.png"
                   alt="Logo el fogon de coz"
@@ -23,7 +23,6 @@ export const AuthLayout = ({ config, children }) => {
                 />
               </div>
               <h1 className={css.title}>{config.titleContainer}</h1>
-              {/* <SocialLogin /> */}
               {children}
             </div>
             <ImageContainer src={config.imgContainer} />

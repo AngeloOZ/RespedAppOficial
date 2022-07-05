@@ -5,6 +5,7 @@ import { RemoveShoppingCartOutlined } from "@mui/icons-material";
 import { Box, Link, Typography } from "@mui/material";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
 import { FullScreenloader } from "../../components/Components";
+import { checkout } from "../../functions";
 
 const EmptyPage = () => {
   const [loader, setLoader] = useState(false);
@@ -40,3 +41,19 @@ const EmptyPage = () => {
 };
 
 export default EmptyPage;
+
+export const getServerSideProps = async ({ req }) => {
+  const items = checkout.getItemsCart(req);
+
+  if (items) {
+    return {
+      redirect: {
+        destination: "/cart",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+};

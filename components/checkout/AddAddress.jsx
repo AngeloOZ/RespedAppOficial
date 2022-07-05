@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Button,
@@ -8,15 +9,17 @@ import {
   Typography,
 } from "@mui/material";
 import { useAddAddress } from "../../Hooks";
+import { FullScreenloader } from "../Components";
 
 export const AddAddress = () => {
+  const [loader, setLoader] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  const { addAddress } = useAddAddress();
+  const { addAddress } = useAddAddress(setLoader);
 
   const handleAddRegisterAddress = (data) => {
     addAddress(data);
@@ -25,6 +28,7 @@ export const AddAddress = () => {
 
   return (
     <Grid item xs={12} md={4}>
+      <FullScreenloader display={loader} />
       <Typography
         variant="h2"
         fontSize={24}

@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const ItemSidebar = ({ href, name, icon }) => {
+const ItemSidebar = ({ href, name, icon, onClickA = () => {} }) => {
   const { asPath } = useRouter();
   return (
-    <li className={asPath == href ? "hovered" : ""}>
+    <li className={asPath == href ? "hovered" : ""} onClick={onClickA}>
       <Link href={href}>
         <a>
           <span className="admin-icon">

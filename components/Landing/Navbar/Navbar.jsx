@@ -10,7 +10,7 @@ import styles from "../../../styles/Navbar.module.scss";
 import { FullScreenloader } from "../../Components";
 
 export const Navbar = () => {
-  const { isLoggedIn, logoutUser } = useContext(AuthContext);
+  const { isLoggedIn, rol, logoutUser } = useContext(AuthContext);
   const [loader, setLoader] = useState(false);
   return (
     <nav
@@ -70,7 +70,11 @@ export const Navbar = () => {
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
                 {isLoggedIn ? (
-                  <ItemsUser logout={logoutUser} loader={setLoader} />
+                  rol == process.env.NEXT_PUBLIC_TIPO_CLIENTE ? (
+                    <ItemsUser logout={logoutUser} loader={setLoader} />
+                  ) : (
+                    <ItemsAdmin logout={logoutUser} loader={setLoader} />
+                  )
                 ) : (
                   <ItemsLogin loader={setLoader} />
                 )}
@@ -103,6 +107,7 @@ const ItemsLogin = ({ loader }) => {
     </>
   );
 };
+
 const ItemsUser = ({ logout, loader }) => {
   return (
     <>
@@ -117,6 +122,23 @@ const ItemsUser = ({ logout, loader }) => {
         <Link href="/cliente/ordenes">
           <a className="dropdown-item" onClick={() => loader(true)}>
             Mis ordenes
+          </a>
+        </Link>
+      </li>
+      <li onClick={logout}>
+        <span className="dropdown-item">Salir</span>
+      </li>
+    </>
+  );
+};
+
+const ItemsAdmin = ({ logout, loader }) => {
+  return (
+    <>
+      <li>
+        <Link href="/admin/dashboard">
+          <a className="dropdown-item" onClick={() => loader(true)}>
+            Perfil
           </a>
         </Link>
       </li>

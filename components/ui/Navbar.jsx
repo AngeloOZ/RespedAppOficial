@@ -17,6 +17,8 @@ import {
 
 import { ShoppingCartOutlined, MenuOutlined } from "@mui/icons-material";
 import { FullScreenloader } from "../Components";
+import logoNav from"../../public/Img/logo_navbar.png";
+import Image from "next/image";
 
 export const Navbar = ({ categories }) => {
   const router = useRouter();
@@ -38,7 +40,10 @@ export const Navbar = ({ categories }) => {
       <Toolbar>
         <NextLink href="/" passHref>
           <Link display="flex" alignItems="center">
-            <Typography variant="h6">El Fogón de COZ </Typography>
+              <Box component={"div"} mr={1}>
+                <Image src={logoNav} alt = "Logo de El fogon de coz" width={40} height={35}/>
+              </Box>
+              <Typography variant="h6">El Fogón de COZ </Typography>
           </Link>
         </NextLink>
         <FullScreenloader display={displayLoader} />

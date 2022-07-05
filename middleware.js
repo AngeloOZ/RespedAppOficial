@@ -1,13 +1,21 @@
 import { NextResponse } from 'next/server'
 
-export const config = {
-   runtime: 'experimental-edge',
-}
+// export const config = {
+//    runtime: 'experimental-edge',
+// }
 
 export async function middleware(request) {
    const currentUrl = request.nextUrl.pathname;
-
-   if (currentUrl.startsWith('/cliente')) {
+   if (currentUrl.startsWith('/auth')) {
+      const currentUser = await isValidSession(request);
+      if (currentUser) {
+         switch (currentUser.TIPO) {
+            case 1: return NextResponse.redirect(new URL('/admin', request.url));
+            case 3: return NextResponse.redirect(new URL('/cliente', request.url));
+         }
+      }
+      return NextResponse.next();
+   } else if (currentUrl.startsWith('/cliente')) {
       const currentUser = await isValidSession(request);
       if (currentUser) {
          return validateUserClient(currentUser, request);
@@ -19,23 +27,12 @@ export async function middleware(request) {
          return validateUserAdmin(currentUser, request);
       }
       return NextResponse.redirect(new URL(`/auth/login?p=${currentUrl}`, request.url));
-   } else if (currentUrl.startsWith('/auth')) {
-      const currentUser = await isValidSession(request);
-      if (currentUser) {
-         switch (currentUser.TIPO) {
-            case 1: return NextResponse.redirect(new URL('/admin', request.url));
-            case 3: return NextResponse.redirect(new URL('/cliente', request.url));
-         }
-      }
-      return NextResponse.redirect(new URL('/', request.url));
    } else if (currentUrl.startsWith('/checkout')) {
       const currentUser = await isValidSession(request);
       if (currentUser) {
          return validateSummary(request);
       }
       return NextResponse.redirect(new URL(`/auth/login?p=${currentUrl}`, request.url));
-   } else if (currentUrl.startsWith('cart')) {
-      return validateItemsCart(request)
    }
 }
 
@@ -51,7 +48,7 @@ function existSession(request = NextRequest) {
 }
 async function isValidToken(token) {
    try {
-      const url = `${process.env.BASE_URL_API}/auth/validate-token`;
+      const url = `${process.env.NEXT_PUBLIC_BASE_URL}/auth/validate-token`;
       const response = await fetch(url, {
          method: "POST",
          body: JSON.stringify({ token }),
@@ -82,14 +79,13 @@ async function isValidSession(request = NextRequest) {
 }
 
 function validateUserClient(client, request) {
-   console.log(client);
-   if (client.TIPO != process.env.TIPO_CLIENTE) {
+   if (client.TIPO != process.env.NEXT_PUBLIC_TIPO_CLIENTE) {
       return NextResponse.redirect(new URL(`/`, request.url));
    }
    return NextResponse.next();
 }
 function validateUserAdmin(admin, request) {
-   if (admin.TIPO != process.env.TIPO_ADMIN) {
+   if (admin.TIPO != process.env.NEXT_PUBLIC_TIPO_ADMIN) {
       return NextResponse.redirect(new URL(`/`, request.url));
    }
    return NextResponse.next();
@@ -110,24 +106,5 @@ function validateSummary(request) {
       }
    } else {
       return NextResponse.redirect(new URL('/cart/empty', request.url))
-   }
-}
-function validateItemsCart(request) {
-   const cart = request.cookies.get('cart');
-   if (cart) {
-      try {
-         const itemsCart = JSON.parse(cart);
-         if (itemsCart.length <= 0) {
-            return NextResponse.rewrite(new URL('/cart/empty', request.url))
-         }else{
-            return NextResponse.next();
-         }
-      } catch (error) {
-         console.error(error);
-         NextResponse.next().cookies.delete('cart');
-         return NextResponse.redirect(new URL('/menu', request.url))
-      }
-   } else {
-      return NextResponse.rewrite(new URL('/cart/empty', request.url))
    }
 }

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { SweetAlert } from "../helpers";
-import { mutate } from "swr"
+import { mutate, } from "swr"
 
 export const useAddAddress = (setLoader) => {
 
@@ -8,8 +8,8 @@ export const useAddAddress = (setLoader) => {
       try {
          setLoader(true);
          await axios.post('/direccion', data);
+         mutate('/direccion');
          setLoader(false);
-         mutate();
          SweetAlert.success({
             title: "Dirección Agregada",
             text: `La direccion: ${data.NAME} se registro con exito`,
@@ -32,7 +32,7 @@ export const useAddAddress = (setLoader) => {
       try {
          setLoader(true);
          await axios.put('/direccion', data);
-         mutate();
+         mutate('/direccion');
          setLoader(false);
          SweetAlert.success({
             title: "Dirección actualizada",
@@ -57,7 +57,7 @@ export const useAddAddress = (setLoader) => {
          setLoader(true);
          await axios.delete(`/direccion/${id}`);
          setLoader(false);
-         mutate();
+         mutate('/direccion');
          SweetAlert.success({
             title: "Dirección eliminada",
             text: `La direccion: ${name} se elimino`,

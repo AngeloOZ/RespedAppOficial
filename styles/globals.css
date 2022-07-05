@@ -31,6 +31,15 @@ a {
   color: #fff;
 }
 
+.contenedorImagen{
+  position: relative;
+}
+.contenedorImagen img{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 
 @keyframes fadeIn {
   0% {
@@ -178,7 +187,8 @@ a {
 }
 
 .itemModal {
-  width: 450px;
+  width: 450px !important;
+  max-width: 460px !important;
   background-color: #fff;
   border: 2px solid transparent;
   padding: 16px 32px 24px 32px;
@@ -188,7 +198,7 @@ a {
 @media screen and (max-width: 500px) {
   .itemModal {
     width: 90%;
-    margin: auto;
+    margin: 0 auto;
     padding: 16px 15px;
   }
 }
