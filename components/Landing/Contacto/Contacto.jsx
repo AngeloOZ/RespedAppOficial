@@ -1,35 +1,10 @@
 import css from "../../../styles/Contacto.module.scss";
 import emailjs from "@emailjs/browser";
-<<<<<<< HEAD
-
-=======
-import React from 'react';
 import { SweetAlert } from "../../../helpers";
->>>>>>> 42c1ae7f10961e1a0a5fc15a67ac66fd2cab2da9
 export const Contacto = () => {
   
   function sendEmail(e) {
     e.preventDefault();
-<<<<<<< HEAD
-
-    emailjs
-      .sendForm(
-        "service_3yycfvc",
-        "template_8q2jual",
-        e.target,
-        "vXddR9uNczkmMp5MM"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-    e.target.reset();
-  }
-=======
     emailjs.sendForm('service_3yycfvc', 'template_8q2jual', e.target, process.env.NEXT_PUBLIC_MAIL_ID)
     .then((result) => {
         SweetAlert.success({title:'Correo Enviado',text:'El restaurante ha recibido su mensaje, pronto nos contactaremos'});
@@ -40,7 +15,6 @@ export const Contacto = () => {
     });
     e.target.reset()
 }
->>>>>>> 42c1ae7f10961e1a0a5fc15a67ac66fd2cab2da9
   return (
     <section className={css.contenedor_contacto} id="contacto">
       <div className="container-fluid" data-height-100>
