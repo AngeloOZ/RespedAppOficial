@@ -6,17 +6,38 @@ import { useForm } from "react-hook-form";
 
 import { ClienteLayout } from "../../components/layouts/ClienteLayout";
 import { jwt } from "../../helpers";
+import { FullScreenloader } from "../../components/Components";
+import { useUpdateCliente } from "../../Hooks/useUpdateCliente";
 
 const pattern =
   /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/;
 
 const ProfilePage = ({ user }) => {
+  const [loader, setLoader] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const { updateClient } = useUpdateCliente(setLoader);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      EMAIL: user.EMAIL,
+      IDUSUARIO: user.IDUSUARIO,
+      LASTNAME: user.LASTNAME,
+      NAME: user.NAME,
+      PHONE: user.PHONE,
+      USERNAME: user.USERNAME,
+    },
+  });
+
+  const handelUpdateUser = (data) => {
+    if (!data.PASSWORD) {
+      delete data.PASSWORD;
+    }
+    setIsEdit(false);
+    updateClient(data);
+  };
 
   return (
     <ClienteLayout>
@@ -26,18 +47,21 @@ const ProfilePage = ({ user }) => {
         justifyContent="space-between"
         my={1}
       >
+        <FullScreenloader display={loader} />
         <Typography variant="h1" component="h1">
           {user.USERNAME}
         </Typography>
-        <Button
-          variant="outlined"
-          startIcon={<CreateIcon />}
-          onClick={() => setIsEdit(true)}
-        >
-          Delete
-        </Button>
+        {!isEdit && (
+          <Button
+            variant="outlined"
+            startIcon={<CreateIcon />}
+            onClick={() => setIsEdit(true)}
+          >
+            Editar
+          </Button>
+        )}
       </Box>
-      <form>
+      <form onSubmit={handleSubmit(handelUpdateUser)}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -92,7 +116,7 @@ const ProfilePage = ({ user }) => {
                   message: "El número ingresado no es válido",
                 },
               })}
-              errors={!!errors.PHONE}
+              error={!!errors.PHONE}
               helperText={errors.PHONE?.message}
             />
           </Grid>
@@ -114,7 +138,7 @@ const ProfilePage = ({ user }) => {
                   message: "Solo es permitido caracteres alfanuméricos",
                 },
               })}
-              errors={!!errors.USERNAME}
+              error={!!errors.USERNAME}
               helperText={errors.USERNAME?.message}
             />
           </Grid>
@@ -142,19 +166,22 @@ const ProfilePage = ({ user }) => {
               label="Actualizar contraseña"
               variant="outlined"
               color="warning"
+              type="password"
               fullWidth
-              placeholder="Dejar en blanco para no cambiar la clave"
+              placeholder="Dejar en blanco para mantener la clave"
               disabled={!isEdit}
               {...register("PASSWORD", {
                 minLength: { value: 4, message: "Mínimo 4 caracteres" },
               })}
-              errors={!!errors.PASSWORD}
+              error={!!errors.PASSWORD}
               helperText={errors.PASSWORD?.message}
             />
           </Grid>
           {isEdit && (
-            <Grid xs={12} display="flex" justifyContent={"center"} py={1}>
-              <Button size="large">Guardar cambios</Button>
+            <Grid item xs={12} display="flex" justifyContent={"center"} py={1}>
+              <Button type="submit" size="large">
+                Guardar cambios
+              </Button>
             </Grid>
           )}
         </Grid>

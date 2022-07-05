@@ -468,7 +468,7 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
     .dash-cardBox {
         grid-template-columns: repeat(1, 1fr);
     }

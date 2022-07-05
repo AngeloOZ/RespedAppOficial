@@ -98,6 +98,7 @@ export const AuthProvider = ({ children }) => {
   const logoutUser = () => {
     Cookies.remove("SESSION_ID");
     Cookies.remove("cart");
+    router.push('/');
     router.reload();
   };
 

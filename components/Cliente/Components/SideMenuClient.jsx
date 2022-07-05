@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import Link from "next/link";
-import Image from 'next/image'
-
+import Image from "next/image";
 
 import { AuthContext } from "../../../context";
 import ItemSidebar from "../../ComponentsAdmin/ItemSidebar";
@@ -40,7 +39,12 @@ export const SideMenuClient = ({ showSide }) => {
           name="Direcciones"
           icon="map-outline"
         />
-        <ItemSidebar href="#" name="Cerrar sesión" icon="log-out-outline" />
+        <ItemSidebar
+          href="#"
+          name="Cerrar sesión"
+          icon="log-out-outline"
+          onClickA={logoutUser}
+        />
       </ul>
     </div>
   );
