@@ -31,6 +31,15 @@ a {
   color: #fff;
 }
 
+.contenedorImagen{
+  position: relative;
+}
+.contenedorImagen img{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 
 @keyframes fadeIn {
   0% {

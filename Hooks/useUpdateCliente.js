@@ -1,4 +1,5 @@
 import axios from "axios";
+import { mutate } from "swr";
 import { SweetAlert } from "../helpers";
 
 export const useUpdateCliente = (loader) => {
@@ -7,7 +8,6 @@ export const useUpdateCliente = (loader) => {
       try {
          loader(true);
          const { data } = axios.put('/usuario', user);
-         console.log(data);
          loader(false);
          SweetAlert.success({
             title: "Perfil actializado",
