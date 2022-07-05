@@ -10,6 +10,7 @@
    flex-direction: column;
    background-color: rgba(0, 0, 0, 0.7);
    z-index: 999999;
+   overflow: hidden;
 
    .loaderText {
       font-size: 48px;

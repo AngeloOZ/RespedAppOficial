@@ -1,22 +1,44 @@
-import css from "../../../styles/Contacto.module.scss";
+import { useState } from "react";
+import { Button, Grid, TextField } from "@mui/material";
 import emailjs from "@emailjs/browser";
+
 import { SweetAlert } from "../../../helpers";
+import { FullScreenloader } from "../../Components";
+import css from "../../../styles/Contacto.module.scss";
+
 export const Contacto = () => {
-  
-  function sendEmail(e) {
+  const [laoder, setLaoder] = useState(false);
+
+  async function sendEmail(e) {
+    setLaoder(true);
     e.preventDefault();
-    emailjs.sendForm('service_3yycfvc', 'template_8q2jual', e.target, process.env.NEXT_PUBLIC_MAIL_ID)
-    .then((result) => {
-        SweetAlert.success({title:'Correo Enviado',text:'El restaurante ha recibido su mensaje, pronto nos contactaremos'});
-        console.log(result.text);
-    }, (error) => {
-      SweetAlert.error({title:'Ups, parece que hubo un error',text:'Intentelo más tarde'});
-        console.log(error.text);
-    });
-    e.target.reset()
-}
+    try {
+      const result = await emailjs.sendForm(
+        "service_3yycfvc",
+        "template_8q2jual",
+        e.target,
+        process.env.NEXT_PUBLIC_MAIL_ID
+      );
+      setLaoder(false);
+      SweetAlert.success({
+        title: "Correo Enviado",
+        text: "El restaurante ha recibido su mensaje, pronto nos contactaremos",
+        confirmButtonText: "Cerrar",
+      });
+    } catch (error) {
+      setLaoder(false);
+      console.error(error);
+      SweetAlert.error({
+        title: "Ups, parece que hubo un error",
+        text: "Intentelo más tarde",
+        confirmButtonText: "Cerrar",
+      });
+    }
+    e.target.reset();
+  }
   return (
     <section className={css.contenedor_contacto} id="contacto">
+      <FullScreenloader display={laoder} />
       <div className="container-fluid" data-height-100>
         <div className="row g-0 d-flex  flex-column-reverse" data-height-100>
           <div className="col-12 col-md-6" data-height-100>
@@ -38,55 +60,57 @@ export const Contacto = () => {
                 </p>
               </div>
               <form onSubmit={sendEmail}>
-                <div className="row mt-3">
-                  <div className="col">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Nombres y Apellidos*"
+                <Grid container rowSpacing={2} mt={0.1}>
+                  <Grid item xs={12}>
+                    <TextField
+                      label="Nombres y Apellidos"
+                      variant="filled"
+                      required
+                      size="small"
+                      type={"text"}
+                      fullWidth
                       name="from_name"
                     />
-                  </div>
-                </div>
-                <div className="row mt-3">
-                  <div className="col">
-                    <input
-                      type="email"
-                      className="form-control"
-                      placeholder="Correo electrónico*"
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      label="Correo electrónico"
+                      variant="filled"
+                      required
+                      size="small"
+                      type={"email"}
+                      fullWidth
                       name="to_name"
                     />
-                  </div>
-                </div>
-                <div className="row mt-3">
-                  <div className="col">
-                    <input
-                      type="telf"
-                      className="form-control"
-                      placeholder="Télefono*"
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      label="Teléfono"
+                      variant="filled"
+                      required
+                      size="small"
+                      type={"tel"}
+                      fullWidth
                       name="reply_to"
                     />
-                  </div>
-                </div>
-                <div className="row mt-3">
-                  <div className="col">
-                    <textarea
-                      className="form-control"
-                      placeholder="Mensaje"
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      label="Mensaje"
+                      variant="filled"
+                      type={"text"}
+                      size="small"
+                      multiline
+                      fullWidth
                       name="message"
-                    ></textarea>
-                  </div>
-                </div>
-                <div className="row mt-3">
-                  <div className="col">
-                    <button
-                      type="submit"
-                      className={`btn ${css.button_reserve}`}
-                    >
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button type="submit" fullWidth>
                       Enviar mensaje
-                    </button>
-                  </div>
-                </div>
+                    </Button>
+                  </Grid>
+                </Grid>
               </form>
             </div>
           </div>
