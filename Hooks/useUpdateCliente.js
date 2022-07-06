@@ -1,13 +1,17 @@
 import axios from "axios";
-import { mutate } from "swr";
+import Cookies from "js-cookie";
 import { SweetAlert } from "../helpers";
 
 export const useUpdateCliente = (loader) => {
 
-   const updateClient = (user) => {
+   const updateClient = async (user) => {
       try {
          loader(true);
-         const { data } = axios.put('/usuario', user);
+         const { data } = await axios.put('/usuario', user);
+         const token = data.data.token;
+         if (token) {
+            Cookies.set("SESSION_ID", token, { expires: 1 });
+         }
          loader(false);
          SweetAlert.success({
             title: "Perfil actializado",
