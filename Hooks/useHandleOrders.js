@@ -1,9 +1,10 @@
 import { useContext } from "react";
 
 import { useRouter } from "next/router";
-
 import axios from "axios";
 import Cookies from "js-cookie";
+import { mutate } from "swr";
+
 import { SweetAlert } from "../helpers";
 import { CartContext } from "../context";
 
@@ -28,6 +29,7 @@ export const useHandleOrders = (order = dataOrder, setDisplay) => {
       setDisplay(true);
       try {
          const { data } = await axios.post('pedido/domicilio', order);
+         mutate('/pedido');
          setDisplay(false);
          SweetAlert.success({
             title: "La orden ha sido registrada",
@@ -49,6 +51,7 @@ export const useHandleOrders = (order = dataOrder, setDisplay) => {
       console.log(order);
       try {
          const { data } = await axios.post('pedido/reserva', order);
+         mutate('/pedido');
          setDisplay(false);
          SweetAlert.success({
             title: "La orden ha sido registrada",
@@ -69,6 +72,7 @@ export const useHandleOrders = (order = dataOrder, setDisplay) => {
       setDisplay(true);
       try {
          const { data } = await axios.post('pedido/local', order);
+         mutate('/pedido');
          setDisplay(false);
          SweetAlert.success({
             title: "La orden ha sido registrada",

@@ -29,9 +29,7 @@ export const AdminLayout = ({
         <SidebarAdmin showSide={openSidebar} />
         <div className={`admin-main ${openSidebar && "active"}`}>
           <NavbarTop setOpenSidebar={setOpenSidebar} />
-          <div className="container-content">
-            {children}
-          </div>
+          <div className="container-content">{children}</div>
         </div>
       </div>
       <Script

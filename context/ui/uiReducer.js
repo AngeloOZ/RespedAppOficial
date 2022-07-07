@@ -7,6 +7,11 @@ export const uiReducer = (state, action) => {
             ...state,
             isMenuOpen: !state.isMenuOpen
          }
+      case 'UI_isDraggin':
+         return {
+            ...state,
+            isDragging: action.payload
+         }
       default:
          return state;
    }

@@ -3,6 +3,7 @@ import { UIContext, uiReducer } from "./";
 
 const UI_INITIAL_STATE = {
   isMenuOpen: false,
+  isDragging: false,
 };
 
 export const UIProvider = ({ children }) => {
@@ -12,10 +13,14 @@ export const UIProvider = ({ children }) => {
     dispatch({ type: "UI_MenuToggle" });
   };
 
+  const setIsDragginOrder = (isDrag) => {
+    dispatch({ type: "UI_isDraggin", payload: isDrag });
+  };
+
   return (
-    <UIContext.Provider 
-      value={{ ...state, toggleSideMenu }}
-      >
+    <UIContext.Provider
+      value={{ ...state, toggleSideMenu, setIsDragginOrder }}
+    >
       {children}
     </UIContext.Provider>
   );

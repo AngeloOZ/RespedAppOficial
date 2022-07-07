@@ -19,7 +19,7 @@ const styles = {
 const config = {
   titlePage: "Registrar usuario",
   descriptionPage: "",
-  titleContainer: "Registrarse",
+  titleContainer: "Registro",
   imgContainer:
     "https://res.cloudinary.com/el-fogon-de-coz/image/upload/v1653754753/website/login_kzexeq.svg",
 };

@@ -33,6 +33,11 @@ export const SidebarAdmin = ({ showSide }) => {
           icon="create-outline"
         />
         <ItemSidebar
+          href="/admin/ordenes-activas"
+          name="Ordenes activas"
+          icon="create-outline"
+        />
+        <ItemSidebar
           href="/admin/reservas"
           name="Reservas"
           icon="calendar-outline"

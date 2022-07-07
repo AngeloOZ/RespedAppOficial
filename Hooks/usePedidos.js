@@ -3,9 +3,10 @@ import axios from "axios";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
-export const usePedidos = (url = "", config = []) => {
-   const newUrl = (url === "")? "/pedido":`/pedido/${url}`
-   const { data, error } = useSWR(newUrl, fetcher, config);
+export const usePedidos = () => {
+
+   const { data, error } = useSWR('/pedido', fetcher, { refreshInterval: 1000, revalidateIfStale: true });
+
    return {
       pedidos: data?.data,
       isLoading: !error && !data,

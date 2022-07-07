@@ -1,3 +1,9 @@
-import { createContext } from 'react'
+import { createContext } from "react";
 
-export const UIContext = createContext({})
+const UI_INITIAL_STATE = {
+  isMenuOpen: false,
+  isDragging: false,
+  setIsDragginOrder: () => {},
+};
+
+export const UIContext = createContext(({} = UI_INITIAL_STATE));
