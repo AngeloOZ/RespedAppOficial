@@ -24,6 +24,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
 import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
 import axios from "axios";
+import { SweetAlert } from "../../helpers";
 
 const DataTableProducts = ({ products, categories }) => {
   const [data, setData] = useState([]);
@@ -350,6 +351,11 @@ const DataTableProducts = ({ products, categories }) => {
     await axios
       .delete(url + productoSeleccionade.IDPRODUCTO)
       .then((response) => {
+        SweetAlert.success({
+          title: "Producto eliminado",
+          text: "El producto ha sido eliminado correctamente",
+          confirmButtonText: "Cerrar",
+        });
         setData(
           data.filter(
             (producto) =>
@@ -362,6 +368,11 @@ const DataTableProducts = ({ products, categories }) => {
 
   const peticionPost = async () => {
     await axios.post(url, productoSeleccionade).then((response) => {
+      SweetAlert.success({
+        title: "Producto creado",
+        text: "El producto ha sido creado correctamente",
+        confirmButtonText: "Cerrar",
+      });
       setData(data.concat(response.data));
       abrirCerrarModalInsertar();
     });
@@ -369,6 +380,11 @@ const DataTableProducts = ({ products, categories }) => {
 
   const peticionPut = async () => {
     await axios.put(url, productoSeleccionade).then((response) => {
+      SweetAlert.success({
+        title: "Producto modificado",
+        text: "El producto ha sido modificado correctamente",
+        confirmButtonText: "Cerrar",
+      });
       var dataNueva = data;
       dataNueva.map((producto) => {
         if (productoSeleccionade.IDPRODUCTO === producto.IDPRODUCTO) {

@@ -201,7 +201,6 @@ const peticionPut=async()=>{
   if(password){
     await axios.put(url, usuarioSeleccionade)
     .then(response=>{
-      console.log(response)
       SweetAlert.success({
         title: "Usuario actualizado",
         text: "El usuario ha sido actualizado correctamente",

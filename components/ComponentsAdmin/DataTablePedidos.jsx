@@ -2,6 +2,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { Table, TableRow, TableCell,Select, TableContainer, TableHead, TableBody, Modal, Button, Box, MenuItem, Typography,Chip,FormControl,InputLabel} from '@mui/material';
 import { useState } from 'react';
+import { SweetAlert } from "../../helpers";
 
 
  const DataTablePedidos = ({pedidos,tipo}) => {
@@ -37,6 +38,11 @@ const seleccionarPedido=(pedido)=>{
 const peticionPut=async()=>{
   await axios.put(url, pedidoSeleccionade)
   .then(response=>{
+    SweetAlert.success({
+      title: "Pedido modificado",
+      text: "El pedido ha sido modificado correctamente",
+      confirmButtonText: "Cerrar",
+    });
     var dataNueva=data;
     dataNueva.map(pedido=>{
       if(pedidoSeleccionade.IDPEDIDO===pedido.IDPEDIDO){
