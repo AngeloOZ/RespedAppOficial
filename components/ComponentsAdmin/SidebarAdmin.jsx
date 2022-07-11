@@ -24,8 +24,13 @@ export const SidebarAdmin = ({ showSide }) => {
         />
         <ItemSidebar
           href="/admin/ordenes-activas"
-          name="Ordenes activas"
-          icon="create-outline"
+          name="Mover Pedidos"
+          icon="move-outline"
+        />
+        <ItemSidebar
+          href="/admin/reservas-hoy"
+          name="Reservas del día"
+          icon="today-outline"
         />
         <ItemSidebar
           href="/admin/pedidos"

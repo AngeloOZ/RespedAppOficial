@@ -6,10 +6,10 @@ import ListReservas from "../../components/ComponentsAdmin/ListReservas";
 
 
 export default function Admin() {
-   const reservasPendiente = useReservas(1).reservas;
-   const reservasConfirmada = useReservas(2).reservas;
-   const reservasFinalizada = useReservas(3).reservas;
-   const reservasRechazada = useReservas(4).reservas;
+   const reservasPendiente = useReservas("estado/1").reservas;
+   const reservasConfirmada = useReservas("estado/2").reservas;
+   const reservasFinalizada = useReservas("estado/3").reservas;
+   const reservasRechazada = useReservas("estado/4").reservas;
   return (
     <AdminLayout>
         <h1>Reservas</h1>

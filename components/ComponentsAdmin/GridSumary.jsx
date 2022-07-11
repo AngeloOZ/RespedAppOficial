@@ -4,8 +4,8 @@ import { ItemSumary } from "./ItemSumary";
 
 export const GridSumary = () => {
   const pedidos = usePedidos().pedidos;
-  const reservasPendientes = useReservas("1").reservas;
-  const reservasConfirmadas = useReservas("2").reservas;
+  const reservasPendientes = useReservas("estado/1").reservas;
+  const reservasConfirmadas = useReservas("estado/2").reservas;
   let numactivos = 0;
   let numactivosres = 0;
   let numactivosdom = 0;
