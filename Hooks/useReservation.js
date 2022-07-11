@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
-
 import axios from "axios";
 import { SweetAlert } from "../helpers";
 import Cookies from "js-cookie";
+import {mutate} from "swr";
 
 export const useReservation = (displayLoading) => {
    const router = useRouter();
-
+   
    const registerReservation = async (data) => {
       displayLoading(true);
       const { personas, notas, hora, fecha } = data;
@@ -18,6 +18,7 @@ export const useReservation = (displayLoading) => {
       }
       try {
          const { data } = await axios.post('/reserva', body);
+         mutate('/reserva/usuario');
          body.IDRESERVA = data.data;
          displayLoading(false);
          await SweetAlert.success({

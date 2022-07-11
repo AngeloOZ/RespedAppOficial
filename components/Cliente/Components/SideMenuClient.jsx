@@ -6,7 +6,7 @@ import { AuthContext } from "../../../context";
 import ItemSidebar from "../../ComponentsAdmin/ItemSidebar";
 import logoNavbar from "../../../public/Img/logo_navbar.png";
 
-export const SideMenuClient = ({ showSide }) => {
+export const SideMenuClient = ({ showSide = false }) => {
   const { logoutUser } = useContext(AuthContext);
 
   return (
@@ -22,7 +22,6 @@ export const SideMenuClient = ({ showSide }) => {
             </a>
           </Link>
         </li>
-        <ItemSidebar href="/" name="Inicio" icon="home-outline" />
         <ItemSidebar href="/menu" name="Menú" icon="restaurant-outline" />
         <ItemSidebar
           href="/cliente"
@@ -35,12 +34,17 @@ export const SideMenuClient = ({ showSide }) => {
           icon="fast-food-outline"
         />
         <ItemSidebar
+          href="/cliente/reservaciones"
+          name="Reservaciones"
+          icon="calendar-outline"
+        />
+        <ItemSidebar
           href="/cliente/direcciones"
           name="Direcciones"
           icon="map-outline"
         />
         <ItemSidebar
-          href="#"
+          href="/"
           name="Cerrar sesión"
           icon="log-out-outline"
           onClickA={logoutUser}

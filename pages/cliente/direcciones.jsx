@@ -17,7 +17,7 @@ const AddressPage = () => {
         my={1}
       >
         <Typography component="h1" fontWeight={700} fontSize={26}>
-          Direcciones
+        Mis direcciones
         </Typography>
         <Button
           color="secondary"

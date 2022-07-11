@@ -72,8 +72,10 @@ export const Navbar = () => {
                 {isLoggedIn ? (
                   rol == process.env.NEXT_PUBLIC_TIPO_CLIENTE ? (
                     <ItemsUser logout={logoutUser} loader={setLoader} />
-                  ) : (
+                  ) : rol == process.env.NEXT_PUBLIC_TIPO_ADMIN ? (
                     <ItemsAdmin logout={logoutUser} loader={setLoader} />
+                  ) : (
+                    <></>
                   )
                 ) : (
                   <ItemsLogin loader={setLoader} />
@@ -125,7 +127,14 @@ const ItemsUser = ({ logout, loader }) => {
           </a>
         </Link>
       </li>
-      <li onClick={logout}>
+      <li>
+        <Link href="/cliente/ordenes">
+          <a className="dropdown-item" onClick={() => loader(true)}>
+            Mis direcciones
+          </a>
+        </Link>
+      </li>
+      <li onClick={logout} style={{ cursor: "pointer" }}>
         <span className="dropdown-item">Salir</span>
       </li>
     </>
@@ -142,7 +151,28 @@ const ItemsAdmin = ({ logout, loader }) => {
           </a>
         </Link>
       </li>
-      <li onClick={logout}>
+      <li>
+        <Link href="/admin/reservas-hoy">
+          <a className="dropdown-item" onClick={() => loader(true)}>
+            Reservas del día
+          </a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/admin/pedidos">
+          <a className="dropdown-item" onClick={() => loader(true)}>
+            Pedidos
+          </a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/admin/productos">
+          <a className="dropdown-item" onClick={() => loader(true)}>
+            Productos
+          </a>
+        </Link>
+      </li>
+      <li onClick={logout} style={{ cursor: "pointer" }}>
         <span className="dropdown-item">Salir</span>
       </li>
     </>
