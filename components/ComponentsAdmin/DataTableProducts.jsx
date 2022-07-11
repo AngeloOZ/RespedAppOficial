@@ -27,16 +27,28 @@ import axios from "axios";
 
 const DataTableProducts = ({ products, categories }) => {
   const [data, setData] = useState([]);
+  const [checked, setChecked] = useState(true);
   const url = "/producto/";
 
   const [productoSeleccionade, setProductoSeleccionade] = useState({
-    IDCATEGORIA: "",
+    IDCATEGORIA: "1",
     NAME: "",
     DETAIL: "",
     PRICE: "",
     IMAGE: "",
-    AVAILABILITY: "",
+    AVAILABILITY: "1",
   });
+
+  
+  const switchHandler = (e) => {
+    let value = e.target.checked==true?1:0;
+    let name = e.target.name;
+    setChecked(e.target.checked);
+    setProductoSeleccionade((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleChange = (e) => {
     let value = e.target.value;
@@ -45,15 +57,7 @@ const DataTableProducts = ({ products, categories }) => {
       ...prevState,
       [name]: value,
     }));
-  };
-
-  const handleChange2 = (e) => {
-    let checked = e.target.checked;
-    let name = e.target.name;
-    setProductoSeleccionade((prevState) => ({
-      ...prevState,
-      [name]: checked == true ? 1 : 0,
-    }));
+    
   };
   const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
@@ -100,7 +104,7 @@ const DataTableProducts = ({ products, categories }) => {
         sx={{ width: 300, margin: 2 }}
       >
         <InputLabel>Categoría</InputLabel>
-        <Select onChange={handleChange} name="IDCATEGORIA">
+        <Select onChange={handleChange} name="IDCATEGORIA" value={productoSeleccionade.IDCATEGORIA} >
           {categories.map((categoria) => (
             <MenuItem key={categoria.IDCATEGORIA} value={categoria.IDCATEGORIA}>
               {categoria.NAME}
@@ -145,15 +149,14 @@ const DataTableProducts = ({ products, categories }) => {
         onChange={handleChange}
         name="IMAGE"
       >
-        {" "}
       </TextField>
       <div align="center">
         <FormControlLabel
           control={
             <Switch
               color="warning"
-              defaultChecked={true}
-              onChange={handleChange2}
+              checked={checked}
+              onChange={switchHandler}
               name="AVAILABILITY"
             />
           }
@@ -272,10 +275,8 @@ const DataTableProducts = ({ products, categories }) => {
             control={
               <Switch
                 color="warning"
-                defaultChecked={
-                  productoSeleccionade.AVAILABILITY == 1 ? true : false
-                }
-                onChange={handleChange2}
+                checked={productoSeleccionade.AVAILABILITY==1?true:false}
+                onChange={switchHandler}
                 name="AVAILABILITY"
               />
             }
