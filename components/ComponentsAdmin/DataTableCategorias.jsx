@@ -21,7 +21,6 @@ import axios from 'axios';
       ...prevState,
       [name]: value
     }))
-    console.log(categoriaSeleccionade);
   }
   const [modalInsertar, setModalInsertar]=useState(false);
   const [modalEditar, setModalEditar]=useState(false);
@@ -125,7 +124,6 @@ const peticionDelete=async()=>{
 }
 
 const peticionPost=async()=>{
-  console.log(categoriaSeleccionade)
   await axios.post(url, categoriaSeleccionade)
   .then(response=>{
     setData(data.concat(response.data))

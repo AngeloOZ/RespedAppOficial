@@ -28,7 +28,6 @@ import axios from 'axios';
       ...prevState,
       [name]: value
     }))
-    console.log(usuarioSeleccionade);
   }
   
   let nombreTipo;
@@ -166,7 +165,6 @@ const peticionDelete=async()=>{
 }
 
 const peticionPost=async()=>{
-  console.log(usuarioSeleccionade)
   await axios.post(url, usuarioSeleccionade)
   .then(response=>{
     setData(data.concat(response.data))

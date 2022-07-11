@@ -27,7 +27,6 @@ export default function MenuIndex() {
 }
 
 export const getServerSideProps = async ({ req }) => {
-  console.log(req.params);
   return {
     props: {},
   };

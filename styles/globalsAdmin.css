@@ -236,12 +236,11 @@ body {
 
 .dash-cardBox .dash-card {
     position: relative;
-    background: var(--white);
+    background: var(--black1);
     padding: 30px;
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
-    cursor: pointer;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
 
@@ -249,7 +248,7 @@ body {
     position: relative;
     font-weight: 500;
     font-size: 2.2rem;
-    color: var(--blue);
+    color: var(--white);
 }
 
 .dash-cardBox .dash-card .dash-cardName {
@@ -260,7 +259,7 @@ body {
 
 .dash-cardBox .dash-card .dash-iconBx {
     font-size: 3.5rem;
-    color: var(--black2);
+    color: #f57c00;
 }
 
 .dash-cardBox .dash-card:hover {
@@ -455,8 +454,11 @@ body {
 }
 
 @media (max-width: 768px) {
+    .dash-cardBox {
+        grid-template-columns: repeat(1, 1fr);
+    }
     .admin-details {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(1, 1fr);
     }
 
     .admin-recentOrders {
@@ -469,10 +471,6 @@ body {
 }
 
 @media (max-width: 400px) {
-    .dash-cardBox {
-        grid-template-columns: repeat(1, 1fr);
-    }
-
     .admin-cardHeader h2 {
         font-size: 20px;
     }

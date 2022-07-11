@@ -45,7 +45,6 @@ const DataTableProducts = ({ products, categories }) => {
       ...prevState,
       [name]: value,
     }));
-    console.log(productoSeleccionade);
   };
 
   const handleChange2 = (e) => {
@@ -55,7 +54,6 @@ const DataTableProducts = ({ products, categories }) => {
       ...prevState,
       [name]: checked == true ? 1 : 0,
     }));
-    console.log(productoSeleccionade);
   };
   const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
@@ -362,7 +360,6 @@ const DataTableProducts = ({ products, categories }) => {
   };
 
   const peticionPost = async () => {
-    console.log(productoSeleccionade);
     await axios.post(url, productoSeleccionade).then((response) => {
       setData(data.concat(response.data));
       abrirCerrarModalInsertar();

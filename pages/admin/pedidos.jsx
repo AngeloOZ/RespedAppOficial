@@ -7,7 +7,7 @@ export default function Admin() {
    const pedidosLocales = usePedidos("local").pedidos;
    const pedidosDomicilio = usePedidos("domicilio").pedidos;
    const pedidosReserva = usePedidos("reserva").pedidos;
-   const pedidosFinalizados = usePedidos().pedidos;
+   const pedidosFinalizados = usePedidos("finalizado").pedidos;
   return (
     <AdminLayout>
         <h1>Pedidos</h1>

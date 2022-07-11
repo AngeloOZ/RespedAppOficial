@@ -27,7 +27,6 @@ import { useHandleOrders } from "../../../Hooks";
 const numeroMesas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const SummaryLocalPage = ({ order }) => {
-  console.log(order)
   var currentdate = new Date(); 
 var fecha = currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/" 
@@ -159,7 +158,6 @@ export const getServerSideProps = async ({ req, res }) => {
     },
   };
   const itemsCart = checkout.getItemsCart(req);
-  console.log(itemsCart)
   const summaryOrder = checkout.getSummaryOrderCookie(req);
   const token = checkout.getToken(req);
 

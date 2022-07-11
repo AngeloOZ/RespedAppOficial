@@ -12,7 +12,6 @@ const OrdenesPage = () => {
 
   return (
     <ClienteLayout>
-      {console.log(ordersDelivery)}
       <AccordionItem title={"Ordenes locales"}>
         {isLoadingLocal ? (
           <Box sx={{ display: "flex", justifyContent: "center" }}>

@@ -23,18 +23,13 @@ export const SidebarAdmin = ({ showSide }) => {
           icon="grid-outline"
         />
         <ItemSidebar
-          href="/admin/usuarios"
-          name="Usuarios"
-          icon="people-outline"
+          href="/admin/ordenes-activas"
+          name="Ordenes activas"
+          icon="create-outline"
         />
         <ItemSidebar
           href="/admin/pedidos"
           name="Pedidos"
-          icon="create-outline"
-        />
-        <ItemSidebar
-          href="/admin/ordenes-activas"
-          name="Ordenes activas"
           icon="create-outline"
         />
         <ItemSidebar
@@ -46,6 +41,11 @@ export const SidebarAdmin = ({ showSide }) => {
           href="/admin/productos"
           name="Productos"
           icon="fast-food-outline"
+        />
+        <ItemSidebar
+          href="/admin/usuarios"
+          name="Usuarios"
+          icon="people-outline"
         />
         <ItemSidebar href="/" name="Sign Out" icon="log-out-outline" />
       </ul>

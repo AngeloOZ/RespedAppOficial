@@ -17,7 +17,6 @@ export default function OrdenesActivas() {
             <OrdenList status={1} orders={pedidos || []} />
           </Card>
         </Grid>
-        {console.log(pedidos)}
         <Grid item xs={12} sm={3}>
           <Card sx={{ height: "calc(100vh - 100px )" }}>
             <CardHeader title="Confirmado" />
@@ -34,8 +33,8 @@ export default function OrdenesActivas() {
 
         <Grid item xs={12} sm={3}>
           <Card sx={{ height: "calc(100vh - 100px )" }}>
-            <CardHeader title="Finalizado" />
-            <OrdenList status={5} orders={pedidos || []} />
+            <CardHeader title="Completado" />
+            <OrdenList status={4} orders={pedidos || []} />
           </Card>
         </Grid>
       </Grid>

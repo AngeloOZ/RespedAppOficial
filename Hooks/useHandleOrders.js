@@ -48,7 +48,6 @@ export const useHandleOrders = (order = dataOrder, setDisplay) => {
    }
    const registerOrderRerservation = async () => {
       setDisplay(true);
-      console.log(order);
       try {
          const { data } = await axios.post('pedido/reserva', order);
          mutate('/pedido');

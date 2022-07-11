@@ -8,7 +8,6 @@ export async function setStateOrder(order, orders) {
       ordersAux = [...ordersAux, order]
       const data = await axios.put('/pedido', { IDPEDIDOTOTAL, IDSTATE });
       mutate('/pedido');
-      console.log(data);
       return true;
    } catch (error) {
       console.error(error);

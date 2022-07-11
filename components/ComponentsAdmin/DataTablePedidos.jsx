@@ -19,7 +19,6 @@ import { useState } from 'react';
       ...prevState,
       [name]: value
     }))
-    console.log(pedidoSeleccionade);
   }
   const [modalEditar, setModalEditar]=useState(false);
   if (pedidos === undefined) {
@@ -45,7 +44,6 @@ const peticionPut=async()=>{
     })
     setData(dataNueva);
     abrirCerrarModalEditar();
-    console.log(response)
   })
 }
 
