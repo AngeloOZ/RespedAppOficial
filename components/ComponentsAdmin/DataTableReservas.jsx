@@ -67,7 +67,7 @@ const bodyEditar = (
     <FormControl variant='standard'color='warning' sx={{width: 230}}>
         <InputLabel>Estado</InputLabel>
         <Select
-          value={reservaSeleccionade &&reservaSeleccionade.IDSTATE}
+          value={reservaSeleccionade&&reservaSeleccionade.IDSTATE}
           defaultValue={reservaSeleccionade &&reservaSeleccionade.IDSTATE}
           onChange={handleChange}
           name='IDSTATE'
@@ -115,10 +115,10 @@ const bodyEditar = (
                   <TableCell>{reserva.NOTE}</TableCell>
                   <TableCell width={100}>
                     {
-                      (reserva.STATE==1) ?   <Chip label='PENDIENTE' color="primary"/> :
-                      (reserva.STATE==2) ?   <Chip label='CONFIRMADA' color="success"/>  : 
-                      (reserva.STATE==3) ?   <Chip label='FINALIZADA' color="warning"/>  : 
-                      (reserva.STATE==4) ?   <Chip label='RECHAZADA' color="error"/>  : null
+                      (reserva.IDSTATE==1) ?   <Chip label='PENDIENTE' color="primary"/> :
+                      (reserva.IDSTATE==2) ?   <Chip label='CONFIRMADA' color="success"/>  : 
+                      (reserva.IDSTATE==3) ?   <Chip label='FINALIZADA' color="warning"/>  : 
+                      (reserva.IDSTATE==4) ?   <Chip label='RECHAZADA' color="error"/>  : null
  }
                    
                     </TableCell>

@@ -9,10 +9,12 @@ import { useState } from 'react';
   const url = '/pedido/'
   const [pedidoSeleccionade, setPedidoSeleccionade]=useState({
     IDPEDIDOTOTAL: '',
-    IDSTATE: ''
+    IDSTATE: '',
+    PAGADO: '',
   })
 
   const handleChange=e=>{
+
     let value = e.target.value;
     let name = e.target.name;
     setPedidoSeleccionade(prevState=>({
@@ -99,6 +101,7 @@ const bodyEditar = (
               <TableCell>Nota</TableCell>
               {(tipo==1) ? <TableCell>Mesa</TableCell> : (tipo==2) ? <TableCell>Direccion</TableCell> : (tipo==3) ? <TableCell>No Reserva</TableCell>: null}
               <TableCell>Estado</TableCell>
+              <TableCell>Pagado</TableCell>
               {
                       (tipo!=4)?
                       <TableCell>Acciones</TableCell>:null
@@ -108,8 +111,8 @@ const bodyEditar = (
           </TableHead>
           <TableBody>
             {
-               pedidos.map(pedido => (
-                <TableRow key={pedido.IDPEDIDO}>
+               pedidos.map((pedido,index) => (
+                <TableRow key={index}>
                   <TableCell>{pedido.NUMPEDIDO}</TableCell>
                   
                   {
@@ -145,6 +148,7 @@ const bodyEditar = (
  }
                    
                     </TableCell>
+                    <TableCell>{pedido.PAGADO==true?"SI":"NO"}</TableCell>
                     {
                       (tipo!=4)?
                       <TableCell width={100} align='center'>

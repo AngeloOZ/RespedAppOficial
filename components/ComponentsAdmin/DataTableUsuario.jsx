@@ -4,10 +4,13 @@ import { useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
+import { SweetAlert } from "../../helpers";
 
 
  const DataTableUsuario = ({users, tipo}) => {
   const [data, setData]=useState([]);
+  const [password, setPassword]=useState(false);
+  const [textPassword, setTextPassword]=useState("");
 
   const url = '/usuario/'
 
@@ -24,6 +27,16 @@ import axios from 'axios';
   const handleChange=e=>{
     let value = e.target.value;
     let name = e.target.name;
+    setUsuarioSeleccionade(prevState=>({
+      ...prevState,
+      [name]: value
+    }))
+  }
+  const handleChange2=e=>{
+    let value = e.target.value;
+    let name = e.target.name;
+    setTextPassword(value)
+    setPassword(true)
     setUsuarioSeleccionade(prevState=>({
       ...prevState,
       [name]: value
@@ -51,6 +64,8 @@ const abrirCerrarModalInsertar=()=>{
   setModalInsertar(!modalInsertar);
 }
 const abrirCerrarModalEditar=()=>{
+  setTextPassword("")
+  setPassword(false);
   setModalEditar(!modalEditar);
 }
 const abrirCerrarModalEliminar=()=>{
@@ -111,7 +126,7 @@ const bodyEditar = (
   }} >
     <div align='center'>
     {
-      <Typography sx={{color: '#f57c00',margin:1}}><b> EDITAR {nombreTipo}   </b></Typography>
+      <Typography sx={{color: '#f57c00',margin:1}}><b> EDITAR {nombreTipo}</b></Typography>
     }
     </div>
     
@@ -120,7 +135,7 @@ const bodyEditar = (
     <TextField label="Apellido" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'LASTNAME' value={usuarioSeleccionade && usuarioSeleccionade.LASTNAME}> </TextField>
     <TextField label="Email" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'EMAIL' value={usuarioSeleccionade && usuarioSeleccionade.EMAIL}> </TextField>
     <TextField label="Teléfono" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PHONE' value={usuarioSeleccionade && usuarioSeleccionade.PHONE}> </TextField>
-    <TextField label="Contraseña" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange} name = 'PASSWORD' value={usuarioSeleccionade && usuarioSeleccionade.PASSWORD}> </TextField>
+    <TextField inputMode='password' label="Contraseña" sx={{ width: 300,margin: 2 }} color='warning' onChange={handleChange2} name = 'PASSWORD' value={textPassword}> </TextField>
     <div align='center'>
       <Button  variant="outlined" color='warning' sx={{m: 2}} onClick={()=>peticionPut()}>Aceptar</Button>
       <Button onClick={()=>abrirCerrarModalEditar()} variant="outlined" color='warning' sx={{m: 2}}>Cancelar</Button>
@@ -159,6 +174,11 @@ const bodyEliminar=(
 const peticionDelete=async()=>{
   await axios.delete(url+usuarioSeleccionade.IDUSUARIO)
   .then(response=>{
+    SweetAlert.success({
+      title: "Usuario eliminado",
+      text: "El usuario ha sido eliminado correctamente",
+      confirmButtonText: "Cerrar",
+    });
     setData(data.filter(usuario=>usuario.IDUSUARIO!==usuarioSeleccionade.IDUSUARIO));
     abrirCerrarModalEliminar();
   })
@@ -169,26 +189,74 @@ const peticionPost=async()=>{
   .then(response=>{
     setData(data.concat(response.data))
     abrirCerrarModalInsertar()
+    SweetAlert.success({
+      title: "Usuario creado",
+      text: "El usuario ha sido creado correctamente",
+      confirmButtonText: "Cerrar",
+    });
   })
 }
 
 const peticionPut=async()=>{
-  await axios.put(url, usuarioSeleccionade)
-  .then(response=>{
-    var dataNueva=data;
-    dataNueva.map(usuario=>{
-      if(usuarioSeleccionade.IDUSUARIO===usuario.IDUSUARIO){
-        usuario.USERNAME=usuarioSeleccionade.USERNAME;
-        usuario.NAME=usuarioSeleccionade.NAME;
-        usuario.LASTNAME=usuarioSeleccionade.LASTNAME;
-        usuario.EMAIL=usuarioSeleccionade.EMAIL;
-        usuario.PHONE=usuarioSeleccionade.PHONE;
-        usuario.PASSWORD=usuarioSeleccionade.PASSWORD;
-      }
+  if(password){
+    await axios.put(url, usuarioSeleccionade)
+    .then(response=>{
+      console.log(response)
+      SweetAlert.success({
+        title: "Usuario actualizado",
+        text: "El usuario ha sido actualizado correctamente",
+        confirmButtonText: "Cerrar",
+      });
+      var dataNueva=data;
+      dataNueva.map(usuario=>{
+        if(usuarioSeleccionade.IDUSUARIO===usuario.IDUSUARIO){
+          usuario.USERNAME=usuarioSeleccionade.USERNAME;
+          usuario.NAME=usuarioSeleccionade.NAME;
+          usuario.LASTNAME=usuarioSeleccionade.LASTNAME;
+          usuario.EMAIL=usuarioSeleccionade.EMAIL;
+          usuario.PHONE=usuarioSeleccionade.PHONE;
+          usuario.PASSWORD=usuarioSeleccionade.PASSWORD;
+        }
+      })
+      setData(dataNueva);
+      abrirCerrarModalEditar();
     })
-    setData(dataNueva);
-    abrirCerrarModalEditar();
-  })
+  }
+  else{
+    var usuarioNuevo ={
+      "IDTIPOUSUARIO":usuarioSeleccionade.IDTIPOUSUARIO,
+      "IDUSUARIO":usuarioSeleccionade.IDUSUARIO,
+      "USERNAME":usuarioSeleccionade.USERNAME,
+      "NAME":usuarioSeleccionade.NAME,
+      "LASTNAME":usuarioSeleccionade.LASTNAME,
+      "EMAIL":usuarioSeleccionade.EMAIL,
+      "PHONE":usuarioSeleccionade.PHONE
+    }
+    await axios.put(url, usuarioNuevo)
+    .then(response=>{
+      console.log(response)
+      SweetAlert.success({
+        title: "Usuario actualizado",
+        text: "El usuario ha sido actualizado correctamente",
+        confirmButtonText: "Cerrar",
+      });
+      var dataNueva=data;
+      dataNueva.map(usuario=>{
+        if(usuarioSeleccionade.IDUSUARIO===usuario.IDUSUARIO){
+          usuario.USERNAME=usuarioSeleccionade.USERNAME;
+          usuario.NAME=usuarioSeleccionade.NAME;
+          usuario.LASTNAME=usuarioSeleccionade.LASTNAME;
+          usuario.EMAIL=usuarioSeleccionade.EMAIL;
+          usuario.PHONE=usuarioSeleccionade.PHONE;
+          usuario.PASSWORD=usuarioSeleccionade.PASSWORD;
+        }
+      })
+      setData(dataNueva);
+      abrirCerrarModalEditar();
+    })
+  }
+ 
+  
 }
   return (
     <div style={{width: '100%' }}>
