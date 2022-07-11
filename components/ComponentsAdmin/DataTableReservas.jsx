@@ -1,7 +1,7 @@
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { Table, TableRow, TableCell,Select, TableContainer, TableHead, TableBody, Modal, Button, Box, MenuItem, Typography,Chip,FormControl,InputLabel} from '@mui/material';
-
+import { mutate } from "swr";
 import { useState } from 'react';
 
  const DataTableReserva = ({reservas,tipo}) => {
@@ -35,6 +35,7 @@ const seleccionarReserva=(reserva)=>{
 const peticionPut=async()=>{
   await axios.put(url, reservaSeleccionade)
   .then(response=>{
+    mutate('/reserva');
     var dataNueva=data;
     dataNueva.map(reserva=>{
       if(reservaSeleccionade.IDRESERVA===reserva.IDRESERVA){
@@ -105,8 +106,8 @@ const bodyEditar = (
           </TableHead>
           <TableBody>
             {
-               reservas.map(reserva => (
-                <TableRow key={reserva.IDRESERVA}>
+               reservas.map((reserva,index) => (
+                <TableRow key={index}>
                   <TableCell>{reserva.NUMRESERVA}</TableCell>
                   <TableCell>{reserva.NAME}</TableCell>
                   <TableCell>{reserva.PEOPLE}</TableCell>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Table, TableRow, TableCell,Select, TableContainer, TableHead, TableBody, Modal, Button, Box, MenuItem, Typography,Chip,FormControl,InputLabel} from '@mui/material';
 import { useState } from 'react';
 import { SweetAlert } from "../../helpers";
+import { mutate } from "swr";
 
 
  const DataTablePedidos = ({pedidos,tipo}) => {
@@ -38,6 +39,7 @@ const seleccionarPedido=(pedido)=>{
 const peticionPut=async()=>{
   await axios.put(url, pedidoSeleccionade)
   .then(response=>{
+    mutate('/pedido');
     SweetAlert.success({
       title: "Pedido modificado",
       text: "El pedido ha sido modificado correctamente",

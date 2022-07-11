@@ -4,6 +4,7 @@ import { useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
+import { mutate } from "swr";
 import { SweetAlert } from "../../helpers";
 
 
@@ -119,6 +120,7 @@ const bodyEliminar=(
 const peticionDelete=async()=>{
   await axios.delete(url+categoriaSeleccionade.IDCATEGORIA)
   .then(response=>{
+    mutate('/categoria');
     SweetAlert.success({
       title: "Categoría eliminada",
       text: "La categoría ha sido eliminada correctamente",
@@ -132,6 +134,7 @@ const peticionDelete=async()=>{
 const peticionPost=async()=>{
   await axios.post(url, categoriaSeleccionade)
   .then(response=>{
+    mutate('/categoria');
     SweetAlert.success({
       title: "Categoría creada",
       text: "La categoría ha sido creada correctamente",
@@ -145,6 +148,7 @@ const peticionPost=async()=>{
 const peticionPut=async()=>{
   await axios.put(url, categoriaSeleccionade)
   .then(response=>{
+    mutate('/categoria');
     SweetAlert.success({
       title: "Categoría modificada",
       text: "La categoría ha sido modificada correctamente",

@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import { SweetAlert } from "../../helpers";
-
+import { mutate } from "swr";
 
  const DataTableUsuario = ({users, tipo}) => {
   const [data, setData]=useState([]);
@@ -174,6 +174,7 @@ const bodyEliminar=(
 const peticionDelete=async()=>{
   await axios.delete(url+usuarioSeleccionade.IDUSUARIO)
   .then(response=>{
+    mutate('/usuario');
     SweetAlert.success({
       title: "Usuario eliminado",
       text: "El usuario ha sido eliminado correctamente",
@@ -187,6 +188,7 @@ const peticionDelete=async()=>{
 const peticionPost=async()=>{
   await axios.post(url, usuarioSeleccionade)
   .then(response=>{
+    mutate('/usuario');
     setData(data.concat(response.data))
     abrirCerrarModalInsertar()
     SweetAlert.success({
@@ -197,10 +199,11 @@ const peticionPost=async()=>{
   })
 }
 
-const peticionPut=async()=>{
+const peticionPut=async()=>{  
   if(password){
     await axios.put(url, usuarioSeleccionade)
     .then(response=>{
+      mutate('/usuario');
       SweetAlert.success({
         title: "Usuario actualizado",
         text: "El usuario ha sido actualizado correctamente",

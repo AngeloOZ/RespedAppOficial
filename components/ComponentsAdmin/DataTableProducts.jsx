@@ -25,6 +25,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
 import axios from "axios";
 import { SweetAlert } from "../../helpers";
+import { mutate } from "swr";
 
 const DataTableProducts = ({ products, categories }) => {
   const [data, setData] = useState([]);
@@ -351,6 +352,7 @@ const DataTableProducts = ({ products, categories }) => {
     await axios
       .delete(url + productoSeleccionade.IDPRODUCTO)
       .then((response) => {
+        mutate('/producto');
         SweetAlert.success({
           title: "Producto eliminado",
           text: "El producto ha sido eliminado correctamente",
@@ -368,6 +370,7 @@ const DataTableProducts = ({ products, categories }) => {
 
   const peticionPost = async () => {
     await axios.post(url, productoSeleccionade).then((response) => {
+      mutate('/producto');
       SweetAlert.success({
         title: "Producto creado",
         text: "El producto ha sido creado correctamente",
@@ -380,6 +383,7 @@ const DataTableProducts = ({ products, categories }) => {
 
   const peticionPut = async () => {
     await axios.put(url, productoSeleccionade).then((response) => {
+      mutate('/producto');
       SweetAlert.success({
         title: "Producto modificado",
         text: "El producto ha sido modificado correctamente",
