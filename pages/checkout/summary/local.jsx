@@ -119,7 +119,6 @@ var fecha = currentdate.getDate() + "/"
                   onChange={handleChangeNote}
                 />
                 <PagosBox orden={order?order:null} fecha={fecha}/>
-               
               </SummaryLocal>
               <Box sx={{ mt: 2 }}>
                 <Button

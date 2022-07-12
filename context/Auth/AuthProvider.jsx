@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 
 import axios from "axios";
 import Cookies from "js-cookie";
-
 import { AuthContext, authReducer } from "./";
 
 const AUTH_INITIAL_STATE = {
@@ -38,7 +37,7 @@ export const AuthProvider = ({ children }) => {
           },
         });
       } catch (error) {
-        console.warn(error);
+        console.error(error);
         Cookies.remove("SESSION_ID");
       }
     }
@@ -98,7 +97,7 @@ export const AuthProvider = ({ children }) => {
   const logoutUser = () => {
     Cookies.remove("SESSION_ID");
     Cookies.remove("cart");
-    router.push('/');
+    router.push("/");
     router.reload();
   };
 

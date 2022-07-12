@@ -85,10 +85,10 @@ function validateUserClient(client, request) {
    return NextResponse.next();
 }
 function validateUserAdmin(admin, request) {
-   if (admin.TIPO != process.env.NEXT_PUBLIC_TIPO_ADMIN) {
-      return NextResponse.redirect(new URL(`/`, request.url));
+   if (admin.TIPO == process.env.NEXT_PUBLIC_TIPO_ADMIN || admin.TIPO == process.env.NEXT_PUBLIC_TIPO_MESERO) {
+      return NextResponse.next();
    }
-   return NextResponse.next();
+   return NextResponse.redirect(new URL(`/`, request.url));
 }
 function validateSummary(request) {
    const cart = request.cookies.get('cart');

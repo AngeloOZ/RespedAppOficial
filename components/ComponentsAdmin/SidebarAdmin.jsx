@@ -6,7 +6,7 @@ import logoNavbar from "../../public/Img/logo_navbar.png";
 import { AuthContext } from "../../context";
 
 export const SidebarAdmin = ({ showSide = false }) => {
-  const { logoutUser } = useContext(AuthContext);
+  const { logoutUser, rol } = useContext(AuthContext);
 
   return (
     <div className={`admin-navigation ${showSide ? "active" : ""}`}>
@@ -23,11 +23,20 @@ export const SidebarAdmin = ({ showSide = false }) => {
             </a>
           </li>
         </Link>
-        <ItemSidebar
-          href="/admin/dashboard"
-          name="Dashboard"
-          icon="grid-outline"
-        />
+        {rol == process.env.NEXT_PUBLIC_TIPO_ADMIN && (
+          <ItemSidebar
+            href="/admin/dashboard"
+            name="Dashboard"
+            icon="grid-outline"
+          />
+        )}
+        {rol == process.env.NEXT_PUBLIC_TIPO_MESERO && (
+          <ItemSidebar
+            href="/menu"
+            name="Menú"
+            icon="restaurant-outline"
+          />
+        )}
         <ItemSidebar
           href="/admin/ordenes-activas"
           name="Mover Pedidos"
@@ -43,24 +52,30 @@ export const SidebarAdmin = ({ showSide = false }) => {
           name="Pedidos"
           icon="create-outline"
         />
-        <ItemSidebar
-          href="/admin/reservas"
-          name="Reservas"
-          icon="calendar-outline"
-        />
-        <ItemSidebar
-          href="/admin/productos"
-          name="Productos"
-          icon="fast-food-outline"
-        />
-        <ItemSidebar
-          href="/admin/usuarios"
-          name="Usuarios"
-          icon="people-outline"
-        />
+        {rol == process.env.NEXT_PUBLIC_TIPO_ADMIN && (
+          <ItemSidebar
+            href="/admin/reservas"
+            name="Reservas"
+            icon="calendar-outline"
+          />
+        )}
+        {rol == process.env.NEXT_PUBLIC_TIPO_ADMIN && (
+          <ItemSidebar
+            href="/admin/productos"
+            name="Productos"
+            icon="fast-food-outline"
+          />
+        )}
+        {rol == process.env.NEXT_PUBLIC_TIPO_ADMIN && (
+          <ItemSidebar
+            href="/admin/usuarios"
+            name="Usuarios"
+            icon="people-outline"
+          />
+        )}
         <ItemSidebar
           href="/"
-          name="Sign Out"
+          name="Cerrar sesión"
           icon="log-out-outline"
           onClickA={logoutUser}
         />
