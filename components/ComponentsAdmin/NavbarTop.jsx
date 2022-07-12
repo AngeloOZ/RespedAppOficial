@@ -1,4 +1,4 @@
-// TODO: Arreglar el componente imagen
+
 export const NavbarTop = ({ setOpenSidebar }) => {
   const handleClickBars = () => {
     setOpenSidebar((active) => !active);

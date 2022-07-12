@@ -131,6 +131,13 @@ const ItemsUser = ({ logout, loader }) => {
         </Link>
       </li>
       <li>
+        <Link href="/admin/ordenes-activas">
+          <a className="dropdown-item" onClick={() => loader(true)}>
+            Ordenes activas
+          </a>
+        </Link>
+      </li>
+      <li>
         <Link href="/cliente/ordenes">
           <a className="dropdown-item" onClick={() => loader(true)}>
             Mis ordenes
@@ -157,7 +164,7 @@ const ItemsAdmin = ({ logout, loader }) => {
       <li>
         <Link href="/admin/dashboard">
           <a className="dropdown-item" onClick={() => loader(true)}>
-            Perfil
+            Dashboard
           </a>
         </Link>
       </li>

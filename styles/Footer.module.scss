@@ -24,6 +24,10 @@ $color-wh: #ffffff;
     color: $color-wh;
     text-align: center;
     padding: 10px 0;
+    a{
+        color: #fff;
+        text-decoration: none;
+    }
 }
 
 .text_history {

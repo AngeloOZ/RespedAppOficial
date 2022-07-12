@@ -7,7 +7,7 @@ export default function NavBarItem({ text, href }) {
     asPath === href ? "nav-link active_link_cs" : "nav-link";
 
   return (
-    <li className="nav-item">
+    <li className={listClassname}>
       <Link href={href}>
         <a className="nav-link">{text}</a>
       </Link>

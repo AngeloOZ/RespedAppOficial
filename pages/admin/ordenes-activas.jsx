@@ -10,7 +10,7 @@ export default function OrdenesActivas() {
   return (
     <AdminLayout>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ height: "calc(100vh - 100px )" }}>
             <CardHeader
               style={{ backgroundColor: "#42a5f5", color: "white" }}
@@ -19,7 +19,7 @@ export default function OrdenesActivas() {
             <OrdenList status={1} orders={pedidos || []} />
           </Card>
         </Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ height: "calc(100vh - 100px )" }}>
             <CardHeader
               style={{ backgroundColor: "#66bb6a", color: "white" }}
@@ -29,7 +29,7 @@ export default function OrdenesActivas() {
           </Card>
         </Grid>
 
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ height: "calc(100vh - 100px )" }}>
             <CardHeader
               style={{ backgroundColor: "#ce93d8", color: "white" }}
@@ -39,7 +39,7 @@ export default function OrdenesActivas() {
           </Card>
         </Grid>
 
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ height: "calc(100vh - 100px )" }}>
             <CardHeader
               style={{ backgroundColor: "#ffa726", color: "white" }}

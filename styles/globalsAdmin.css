@@ -41,7 +41,7 @@ body {
     height: 100%;
     background: var(--blue);
     border-left: 10px solid var(--blue);
-    transition: 0.5s;
+    transition: 0.3s ease;
     overflow: hidden;
 }
 
@@ -175,7 +175,7 @@ body {
     left: var(--width-sideBar);
     min-height: 100vh;
     background: var(--white);
-    transition: 0.5s;
+    transition: 0.3s ease;
 }
 
 .admin-main.active {
@@ -249,6 +249,7 @@ body {
     display: flex;
     justify-content: space-between;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    user-select: none;
 }
 
 .dash-cardBox .dash-card .dash-numbers {
@@ -273,12 +274,6 @@ body {
     background: var(--blue);
 }
 
-.dash-cardBox .dash-card:hover .dash-numbers,
-.dash-cardBox .dash-card:hover .dash-cardName,
-.dash-cardBox .dash-card:hover .dash-iconBx {
-    color: var(--white);
-}
-
 /* ================== Order Detailts List ============== */
 .admin-details {
     position: relative;
@@ -287,7 +282,6 @@ body {
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-gap: 30px;
-    /* margin-top: 10px; */
 }
 
 .admin-details .admin-recentOrders {
