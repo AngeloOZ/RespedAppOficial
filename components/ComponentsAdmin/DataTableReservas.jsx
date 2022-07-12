@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { mutate } from "swr";
 import { useState } from "react";
+import { StateOfReservation } from "../Cliente";
 
 const DataTableReserva = ({ reservas, tipo }) => {
   const [data, setData] = useState([]);
@@ -147,15 +148,7 @@ const DataTableReserva = ({ reservas, tipo }) => {
                 <TableCell>{reserva.RESERVATIONTIME}</TableCell>
                 <TableCell>{reserva.NOTE}</TableCell>
                 <TableCell width={100}>
-                  {reserva.IDSTATE == 1 ? (
-                    <Chip label="PENDIENTE" color="primary" />
-                  ) : reserva.IDSTATE == 2 ? (
-                    <Chip label="CONFIRMADA" color="success" />
-                  ) : reserva.IDSTATE == 3 ? (
-                    <Chip label="FINALIZADA" color="warning" />
-                  ) : reserva.IDSTATE == 4 ? (
-                    <Chip label="RECHAZADA" color="error" />
-                  ) : null}
+                  <StateOfReservation state={reserva.IDSTATE} />
                 </TableCell>
                 <TableCell width={100} align="center">
                   {tipo != 3 && tipo != 4 ? (

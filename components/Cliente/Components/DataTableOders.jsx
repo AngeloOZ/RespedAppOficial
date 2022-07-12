@@ -11,6 +11,7 @@ import {
 export const DataTableOders = ({ pedidos, tipo }) => {
   return (
     <TableContainer>
+      {console.log(pedidos)}
       <Table>
         <TableHead>
           <TableRow>
