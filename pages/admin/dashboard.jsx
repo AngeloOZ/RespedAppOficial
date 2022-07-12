@@ -15,7 +15,6 @@ export default function Admin() {
   return (
     <AdminLayout>
       <GridUsuario fecha={fecha} />
-
       <Paper sx={{ margin: 1 , bgcolor: '#ffb74d'}}>
         
         <GridSumary/>

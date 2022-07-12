@@ -3,11 +3,28 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import React from 'react';
-import { EventNoteTwoTone } from "@mui/icons-material";
 import { SweetAlert } from "../../helpers";
+import axios from 'axios';
+import { mutate } from "swr";
 
 export const PagosBox = ({orden,fecha}) => {
-
+  const url = '/pedido'
+  const peticionPut=async()=>{
+    const pedidoSeleccionade = {
+      IDPEDIDOTOTAL: orden.IDPEDIDOTOTAL,
+      PAGADO: 1,
+    }
+    await axios.put(url, pedidoSeleccionade)
+    .then(response=>{
+      console.log(response)
+      mutate('/pedido');
+      SweetAlert.success({
+        title: "Pedido modificado",
+        text: "El pedido ha sido modificado correctamente",
+        confirmButtonText: "Cerrar",
+      });
+    })
+  }
   function sendEmail() {
     emailjs.send("service_3yycfvc","template_19mlxo4",{
       from_name: "username",
@@ -52,6 +69,7 @@ export const PagosBox = ({orden,fecha}) => {
                     return actions.order.capture().then((details) => {
                         const name = details.payer.name.given_name;
                         if(details.status=='COMPLETED'){
+                          peticionPut();
                           SweetAlert.success({title:'Pago realizado con éxito',text:'El restaurante ha recibido su pago, revisa todos los detalles nuevamente y da clic en confirmar'});
                           sendEmail();
 
