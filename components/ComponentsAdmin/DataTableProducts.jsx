@@ -24,19 +24,33 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
 import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
 import axios from "axios";
+import { SweetAlert } from "../../helpers";
+import { mutate } from "swr";
 
 const DataTableProducts = ({ products, categories }) => {
   const [data, setData] = useState([]);
+  const [checked, setChecked] = useState(true);
   const url = "/producto/";
 
   const [productoSeleccionade, setProductoSeleccionade] = useState({
-    IDCATEGORIA: "",
+    IDCATEGORIA: "1",
     NAME: "",
     DETAIL: "",
     PRICE: "",
     IMAGE: "",
-    AVAILABILITY: "",
+    AVAILABILITY: "1",
   });
+
+  
+  const switchHandler = (e) => {
+    let value = e.target.checked==true?1:0;
+    let name = e.target.name;
+    setChecked(e.target.checked);
+    setProductoSeleccionade((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleChange = (e) => {
     let value = e.target.value;
@@ -45,15 +59,7 @@ const DataTableProducts = ({ products, categories }) => {
       ...prevState,
       [name]: value,
     }));
-  };
-
-  const handleChange2 = (e) => {
-    let checked = e.target.checked;
-    let name = e.target.name;
-    setProductoSeleccionade((prevState) => ({
-      ...prevState,
-      [name]: checked == true ? 1 : 0,
-    }));
+    
   };
   const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
@@ -100,7 +106,7 @@ const DataTableProducts = ({ products, categories }) => {
         sx={{ width: 300, margin: 2 }}
       >
         <InputLabel>Categoría</InputLabel>
-        <Select onChange={handleChange} name="IDCATEGORIA">
+        <Select onChange={handleChange} name="IDCATEGORIA" value={productoSeleccionade.IDCATEGORIA} >
           {categories.map((categoria) => (
             <MenuItem key={categoria.IDCATEGORIA} value={categoria.IDCATEGORIA}>
               {categoria.NAME}
@@ -145,15 +151,14 @@ const DataTableProducts = ({ products, categories }) => {
         onChange={handleChange}
         name="IMAGE"
       >
-        {" "}
       </TextField>
       <div align="center">
         <FormControlLabel
           control={
             <Switch
               color="warning"
-              defaultChecked={true}
-              onChange={handleChange2}
+              checked={checked}
+              onChange={switchHandler}
               name="AVAILABILITY"
             />
           }
@@ -272,10 +277,8 @@ const DataTableProducts = ({ products, categories }) => {
             control={
               <Switch
                 color="warning"
-                defaultChecked={
-                  productoSeleccionade.AVAILABILITY == 1 ? true : false
-                }
-                onChange={handleChange2}
+                checked={productoSeleccionade.AVAILABILITY==1?true:false}
+                onChange={switchHandler}
                 name="AVAILABILITY"
               />
             }
@@ -349,6 +352,12 @@ const DataTableProducts = ({ products, categories }) => {
     await axios
       .delete(url + productoSeleccionade.IDPRODUCTO)
       .then((response) => {
+        mutate('/producto');
+        SweetAlert.success({
+          title: "Producto eliminado",
+          text: "El producto ha sido eliminado correctamente",
+          confirmButtonText: "Cerrar",
+        });
         setData(
           data.filter(
             (producto) =>
@@ -361,6 +370,12 @@ const DataTableProducts = ({ products, categories }) => {
 
   const peticionPost = async () => {
     await axios.post(url, productoSeleccionade).then((response) => {
+      mutate('/producto');
+      SweetAlert.success({
+        title: "Producto creado",
+        text: "El producto ha sido creado correctamente",
+        confirmButtonText: "Cerrar",
+      });
       setData(data.concat(response.data));
       abrirCerrarModalInsertar();
     });
@@ -368,6 +383,12 @@ const DataTableProducts = ({ products, categories }) => {
 
   const peticionPut = async () => {
     await axios.put(url, productoSeleccionade).then((response) => {
+      mutate('/producto');
+      SweetAlert.success({
+        title: "Producto modificado",
+        text: "El producto ha sido modificado correctamente",
+        confirmButtonText: "Cerrar",
+      });
       var dataNueva = data;
       dataNueva.map((producto) => {
         if (productoSeleccionade.IDPRODUCTO === producto.IDPRODUCTO) {

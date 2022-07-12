@@ -18,7 +18,7 @@ export default function Admin() {
 
       <Paper sx={{ margin: 1 , bgcolor: '#ffb74d'}}>
         
-        <GridSumary />
+        <GridSumary/>
       </Paper>
 
 

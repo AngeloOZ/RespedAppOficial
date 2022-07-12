@@ -8,14 +8,13 @@ import ListProductos from "../../components/ComponentsAdmin/ListProducts";
 
 export default function Admin() {
    const categories = useCategories().categories
-   const products = useProducts().products
+   const products = useProducts("todo").products
   return (
     <AdminLayout>
         <h1>Productos</h1>
         <div>
          <ListCategorias categories = {categories?categories:[]}/>
          <ListProductos  products ={products?products:[]} categories ={categories?categories:[]}/> 
-         
     </div>
     </AdminLayout>
   )

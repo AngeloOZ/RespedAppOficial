@@ -1,9 +1,11 @@
 
+import { CircularProgress } from "@mui/material";
 import { usePedidos, useReservas } from "../../Hooks";
 import { ItemSumary } from "./ItemSumary";
 
 export const GridSumary = () => {
   const pedidos = usePedidos().pedidos;
+  const isLoading = usePedidos().isLoading;
   const reservasPendientes = useReservas("estado/1").reservas;
   const reservasConfirmadas = useReservas("estado/2").reservas;
   let numactivos = 0;
@@ -68,6 +70,7 @@ export const GridSumary = () => {
   }
   return (
     <div className="dash-cardBox">
+      {isLoading?<CircularProgress color="inherit" />:<>
       <ItemSumary number={numactivos} name="Pedidos en Local Activos" icon="restaurant-outline" />
       <ItemSumary number={numactivosres} name="Pedidos por Reserva Activos" icon="calendar-outline" />
       <ItemSumary number={numactivosdom} name="Pedidos a Domicilio Activos" icon="home-outline" />
@@ -80,6 +83,9 @@ export const GridSumary = () => {
       <ItemSumary number={numnopagado} name="Pedidos No Pagados" icon="close-outline" />
       <ItemSumary number={numreservas1} name="Reservas Pendientes" icon="hourglass-outline" />
       <ItemSumary number={numreservas2} name="Reservas Confirmadas" icon="checkmark-circle-outline" />
+      
+      </>}
+      
       
     </div>
   );

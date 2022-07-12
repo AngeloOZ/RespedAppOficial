@@ -2,6 +2,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { Table, TableRow, TableCell,Select, TableContainer, TableHead, TableBody, Modal, Button, Box, MenuItem, Typography,Chip,FormControl,InputLabel} from '@mui/material';
 import { useState } from 'react';
+import { SweetAlert } from "../../helpers";
+import { mutate } from "swr";
 
 
  const DataTablePedidos = ({pedidos,tipo}) => {
@@ -9,10 +11,12 @@ import { useState } from 'react';
   const url = '/pedido/'
   const [pedidoSeleccionade, setPedidoSeleccionade]=useState({
     IDPEDIDOTOTAL: '',
-    IDSTATE: ''
+    IDSTATE: '',
+    PAGADO: '',
   })
 
   const handleChange=e=>{
+
     let value = e.target.value;
     let name = e.target.name;
     setPedidoSeleccionade(prevState=>({
@@ -35,6 +39,12 @@ const seleccionarPedido=(pedido)=>{
 const peticionPut=async()=>{
   await axios.put(url, pedidoSeleccionade)
   .then(response=>{
+    mutate('/pedido');
+    SweetAlert.success({
+      title: "Pedido modificado",
+      text: "El pedido ha sido modificado correctamente",
+      confirmButtonText: "Cerrar",
+    });
     var dataNueva=data;
     dataNueva.map(pedido=>{
       if(pedidoSeleccionade.IDPEDIDO===pedido.IDPEDIDO){
@@ -99,6 +109,7 @@ const bodyEditar = (
               <TableCell>Nota</TableCell>
               {(tipo==1) ? <TableCell>Mesa</TableCell> : (tipo==2) ? <TableCell>Direccion</TableCell> : (tipo==3) ? <TableCell>No Reserva</TableCell>: null}
               <TableCell>Estado</TableCell>
+              <TableCell>Pagado</TableCell>
               {
                       (tipo!=4)?
                       <TableCell>Acciones</TableCell>:null
@@ -108,8 +119,8 @@ const bodyEditar = (
           </TableHead>
           <TableBody>
             {
-               pedidos.map(pedido => (
-                <TableRow key={pedido.IDPEDIDO}>
+               pedidos.map((pedido,index) => (
+                <TableRow key={index}>
                   <TableCell>{pedido.NUMPEDIDO}</TableCell>
                   
                   {
@@ -145,6 +156,7 @@ const bodyEditar = (
  }
                    
                     </TableCell>
+                    <TableCell>{pedido.PAGADO==true?"SI":"NO"}</TableCell>
                     {
                       (tipo!=4)?
                       <TableCell width={100} align='center'>

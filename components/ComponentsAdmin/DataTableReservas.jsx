@@ -1,7 +1,7 @@
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { Table, TableRow, TableCell,Select, TableContainer, TableHead, TableBody, Modal, Button, Box, MenuItem, Typography,Chip,FormControl,InputLabel} from '@mui/material';
-
+import { mutate } from "swr";
 import { useState } from 'react';
 
  const DataTableReserva = ({reservas,tipo}) => {
@@ -35,6 +35,7 @@ const seleccionarReserva=(reserva)=>{
 const peticionPut=async()=>{
   await axios.put(url, reservaSeleccionade)
   .then(response=>{
+    mutate('/reserva');
     var dataNueva=data;
     dataNueva.map(reserva=>{
       if(reservaSeleccionade.IDRESERVA===reserva.IDRESERVA){
@@ -67,7 +68,7 @@ const bodyEditar = (
     <FormControl variant='standard'color='warning' sx={{width: 230}}>
         <InputLabel>Estado</InputLabel>
         <Select
-          value={reservaSeleccionade &&reservaSeleccionade.IDSTATE}
+          value={reservaSeleccionade&&reservaSeleccionade.IDSTATE}
           defaultValue={reservaSeleccionade &&reservaSeleccionade.IDSTATE}
           onChange={handleChange}
           name='IDSTATE'
@@ -105,8 +106,8 @@ const bodyEditar = (
           </TableHead>
           <TableBody>
             {
-               reservas.map(reserva => (
-                <TableRow key={reserva.IDRESERVA}>
+               reservas.map((reserva,index) => (
+                <TableRow key={index}>
                   <TableCell>{reserva.NUMRESERVA}</TableCell>
                   <TableCell>{reserva.NAME}</TableCell>
                   <TableCell>{reserva.PEOPLE}</TableCell>
@@ -115,10 +116,10 @@ const bodyEditar = (
                   <TableCell>{reserva.NOTE}</TableCell>
                   <TableCell width={100}>
                     {
-                      (reserva.STATE==1) ?   <Chip label='PENDIENTE' color="primary"/> :
-                      (reserva.STATE==2) ?   <Chip label='CONFIRMADA' color="success"/>  : 
-                      (reserva.STATE==3) ?   <Chip label='FINALIZADA' color="warning"/>  : 
-                      (reserva.STATE==4) ?   <Chip label='RECHAZADA' color="error"/>  : null
+                      (reserva.IDSTATE==1) ?   <Chip label='PENDIENTE' color="primary"/> :
+                      (reserva.IDSTATE==2) ?   <Chip label='CONFIRMADA' color="success"/>  : 
+                      (reserva.IDSTATE==3) ?   <Chip label='FINALIZADA' color="warning"/>  : 
+                      (reserva.IDSTATE==4) ?   <Chip label='RECHAZADA' color="error"/>  : null
  }
                    
                     </TableCell>
