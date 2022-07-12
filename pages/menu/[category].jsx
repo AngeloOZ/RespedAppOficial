@@ -14,7 +14,7 @@ export default function MenuIndex() {
     <ShopLayout title={query.name}>
       <Box textAlign="center" component="div" paddingY={2}>
         <Typography variant="h1" component="h1" textTransform="capitalize">
-          Categoria <span className="toLowerCase">de</span> {query.name}
+          Categoria <span className="toLowerCase">de</span> {query.category}
         </Typography>
         {isLoading ? (
           <ProductPlaceHolder />

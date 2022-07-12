@@ -75,7 +75,14 @@ body {
 
 .admin-navigation ul li:nth-child(1) {
     margin-bottom: 40px;
-    pointer-events: none;
+}
+.admin-navigation ul li:nth-child(1):hover {
+    background-color: transparent;
+    color: #fff;
+}
+.admin-navigation ul li:nth-child(1):hover a{
+    background-color: transparent;
+    color: #fff;
 }
 
 .admin-navigation ul li a {
@@ -92,7 +99,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    user-select: none;
+    /* user-select: none; */
 }
 .admin-navigation.active .anchor-home .admin-title {
     display: none;

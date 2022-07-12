@@ -102,10 +102,10 @@ export default function Login() {
           errors={!!errors.password}
           helperText={errors.password?.message}
         />
-        <p>
+        {/* <p>
           ¿He olvidado mi contraseña?
           <span className={css.span}> Clic aquí</span>
-        </p>
+        </p> */}
         <button type="submit" className={css.btn_login}>
           Iniciar sesión
         </button>

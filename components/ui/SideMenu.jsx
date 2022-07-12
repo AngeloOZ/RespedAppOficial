@@ -58,9 +58,7 @@ export const SideMenu = ({ categories = [] }) => {
               <ListItemText primary="Todos" />
             </ListItem>
             {categories.map((category) => {
-              const url = `/menu/${
-                category.IDCATEGORIA
-              }?name=${category.NAME.toLowerCase()}`;
+              const url = `/menu/${category.IDCATEGORIA}`;
               return (
                 <ListItem
                   button

@@ -41,9 +41,8 @@ const DataTableProducts = ({ products, categories }) => {
     AVAILABILITY: "1",
   });
 
-  
   const switchHandler = (e) => {
-    let value = e.target.checked==true?1:0;
+    let value = e.target.checked == true ? 1 : 0;
     let name = e.target.name;
     setChecked(e.target.checked);
     setProductoSeleccionade((prevState) => ({
@@ -59,7 +58,6 @@ const DataTableProducts = ({ products, categories }) => {
       ...prevState,
       [name]: value,
     }));
-    
   };
   const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
@@ -106,7 +104,11 @@ const DataTableProducts = ({ products, categories }) => {
         sx={{ width: 300, margin: 2 }}
       >
         <InputLabel>Categoría</InputLabel>
-        <Select onChange={handleChange} name="IDCATEGORIA" value={productoSeleccionade.IDCATEGORIA} >
+        <Select
+          onChange={handleChange}
+          name="IDCATEGORIA"
+          value={productoSeleccionade.IDCATEGORIA}
+        >
           {categories.map((categoria) => (
             <MenuItem key={categoria.IDCATEGORIA} value={categoria.IDCATEGORIA}>
               {categoria.NAME}
@@ -150,8 +152,7 @@ const DataTableProducts = ({ products, categories }) => {
         color="warning"
         onChange={handleChange}
         name="IMAGE"
-      >
-      </TextField>
+      ></TextField>
       <div align="center">
         <FormControlLabel
           control={
@@ -277,7 +278,7 @@ const DataTableProducts = ({ products, categories }) => {
             control={
               <Switch
                 color="warning"
-                checked={productoSeleccionade.AVAILABILITY==1?true:false}
+                checked={productoSeleccionade.AVAILABILITY == 1 ? true : false}
                 onChange={switchHandler}
                 name="AVAILABILITY"
               />
@@ -352,7 +353,7 @@ const DataTableProducts = ({ products, categories }) => {
     await axios
       .delete(url + productoSeleccionade.IDPRODUCTO)
       .then((response) => {
-        mutate('/producto');
+        mutate("/producto");
         SweetAlert.success({
           title: "Producto eliminado",
           text: "El producto ha sido eliminado correctamente",
@@ -370,7 +371,7 @@ const DataTableProducts = ({ products, categories }) => {
 
   const peticionPost = async () => {
     await axios.post(url, productoSeleccionade).then((response) => {
-      mutate('/producto');
+      mutate("/producto");
       SweetAlert.success({
         title: "Producto creado",
         text: "El producto ha sido creado correctamente",
@@ -383,7 +384,7 @@ const DataTableProducts = ({ products, categories }) => {
 
   const peticionPut = async () => {
     await axios.put(url, productoSeleccionade).then((response) => {
-      mutate('/producto');
+      mutate("/producto");
       SweetAlert.success({
         title: "Producto modificado",
         text: "El producto ha sido modificado correctamente",

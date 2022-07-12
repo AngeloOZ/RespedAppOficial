@@ -17,7 +17,7 @@ import {
 
 import { ShoppingCartOutlined, MenuOutlined } from "@mui/icons-material";
 import { FullScreenloader } from "../Components";
-import logoNav from"../../public/Img/logo_navbar.png";
+import logoNav from "../../public/Img/logo_navbar.png";
 import Image from "next/image";
 
 export const Navbar = ({ categories }) => {
@@ -40,10 +40,15 @@ export const Navbar = ({ categories }) => {
       <Toolbar>
         <NextLink href="/" passHref>
           <Link display="flex" alignItems="center">
-              <Box component={"div"} mr={1}>
-                <Image src={logoNav} alt = "Logo de El fogon de coz" width={40} height={35}/>
-              </Box>
-              <Typography variant="h6">El Fogón de COZ </Typography>
+            <Box component={"div"} mr={1}>
+              <Image
+                src={logoNav}
+                alt="Logo de El fogon de coz"
+                width={40}
+                height={35}
+              />
+            </Box>
+            <Typography variant="h6">El Fogón de COZ </Typography>
           </Link>
         </NextLink>
         <FullScreenloader display={displayLoader} />
@@ -57,9 +62,7 @@ export const Navbar = ({ categories }) => {
             </Link>
           </NextLink>
           {categories.map((category) => {
-            const url = `/menu/${
-              category.IDCATEGORIA
-            }?name=${category.NAME.toLowerCase()}`;
+            const url = `/menu/${category.NAME.toLowerCase()}`;
             return (
               <NextLink href={url} passHref key={category.IDCATEGORIA}>
                 <Link mr={1}>

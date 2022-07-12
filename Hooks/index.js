@@ -6,5 +6,6 @@ export * from "./useGetOrders";
 export * from "./usePedidos";
 export * from "./useProducts";
 export * from "./useReservas";
+export * from "./useReservasClient";
 export * from "./useReservation";
 export * from "./useUsuarios";

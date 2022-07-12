@@ -21,7 +21,7 @@ import { CartList, OrderSummary } from "../../components/cart";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
 import { checkout } from "../../functions";
 import { FullScreenloader } from "../../components/Components/FullScreenloader/FullScreenloader";
-import { CartContext } from "../../context";
+import { AuthContext, CartContext } from "../../context";
 
 const styleModal = {
   position: "fixed",
@@ -36,10 +36,12 @@ const styleModal = {
 };
 
 const CartPage = ({ numbsOfItemsCart, reservation, isEdit }) => {
+  const { rol } = useContext(AuthContext);
   const { numberOfItems } = useContext(CartContext);
   const [openModal, setOpenModal] = useState(false);
   const [itemsCart, setItemsCart] = useState(numbsOfItemsCart);
   const [displayLoader, setDisplayLoader] = useState(false);
+
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
@@ -73,6 +75,19 @@ const CartPage = ({ numbsOfItemsCart, reservation, isEdit }) => {
                 <Box sx={{ mt: 3 }}>
                   {reservation ? (
                     <NextLink href="/checkout/summary/reservacion" passHref>
+                      <Link>
+                        <Button
+                          color="success"
+                          className="circular-btn"
+                          fullWidth
+                          onClick={() => setDisplayLoader(true)}
+                        >
+                          Checkout
+                        </Button>
+                      </Link>
+                    </NextLink>
+                  ) : rol == process.env.NEXT_PUBLIC_TIPO_MESERO ? (
+                    <NextLink href="/checkout/summary/local" passHref>
                       <Link>
                         <Button
                           color="success"
@@ -163,6 +178,7 @@ const CartPage = ({ numbsOfItemsCart, reservation, isEdit }) => {
 };
 
 export default CartPage;
+
 
 export const getServerSideProps = async ({ req }) => {
   const items = checkout.getItemsCart(req);
