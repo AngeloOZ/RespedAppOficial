@@ -9,11 +9,7 @@ export const AdminLayout = ({
   desc = "",
   children,
 }) => {
-  const [openSidebar, setOpenSidebar] = useState(false);
-
-  const handleClickSide = () => {
-    setOpenSidebar(!openSidebar);
-  };
+  const [openSidebar, setOpenSidebar] = useState(true);
 
   return (
     <>

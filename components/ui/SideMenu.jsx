@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { LoginOutlined, RestaurantOutlined } from "@mui/icons-material";
 
-import { ListItemAdmin, ListItemsClient, ListItemsAuth } from "./";
+import { ListItemAdmin, ListItemsClient, ListItemsAuth, ListItemsMesero } from "./";
 
 export const SideMenu = ({ categories = [] }) => {
   const router = useRouter();
@@ -35,8 +35,13 @@ export const SideMenu = ({ categories = [] }) => {
     >
       <Box sx={{ width: 250 }}>
         <List>
-          {isLoggedIn && rol == 1 && <ListItemAdmin navigateTo={navigateTo} />}
-          {isLoggedIn && rol == 3 && (
+          {isLoggedIn && rol == process.env.NEXT_PUBLIC_TIPO_ADMIN && (
+            <ListItemAdmin navigateTo={navigateTo} />
+          )}
+          {isLoggedIn && rol == process.env.NEXT_PUBLIC_TIPO_MESERO && (
+            <ListItemsMesero navigateTo={navigateTo} />
+          )}
+          {isLoggedIn && rol == process.env.NEXT_PUBLIC_TIPO_CLIENTE && (
             <ListItemsClient navigateTo={navigateTo} />
           )}
           {isLoggedIn && (
@@ -58,7 +63,7 @@ export const SideMenu = ({ categories = [] }) => {
               <ListItemText primary="Todos" />
             </ListItem>
             {categories.map((category) => {
-              const url = `/menu/${category.IDCATEGORIA}`;
+              const url = `/menu/${category.NAME.toLowerCase()}`;
               return (
                 <ListItem
                   button

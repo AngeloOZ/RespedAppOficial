@@ -12,7 +12,6 @@ export const useGetOrders = (config = SWRConfig) => {
 
    const GetOrdersLocal = () => {
       const { data, error } = useSWR("/pedido/usuario/local", fetcher, config);
-
       return {
          ordersLocal: data?.data,
          isLoading: !error && !data,
