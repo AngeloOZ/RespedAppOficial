@@ -99,7 +99,14 @@ export const Footer = () => {
         </div>
       </div>
       <div className={css.copyrigth}>
-        Copyright &copy; {date.getFullYear()} - Diseñado por Angello
+        Copyright &copy; {date.getFullYear()} - Diseñado por{" "}
+        <a href="https://github.com/AngeloOZ" target="_black">
+          AngeloOZ
+        </a>
+        {" "}&{" "}
+        <a href="https://github.com/milychimbo" target="_black">
+          Milychimbo
+        </a>
       </div>
     </footer>
   );
