@@ -344,6 +344,9 @@ const DataTableUsuario = ({ users, tipo }) => {
   const peticionDelete = async () => {
     await axios.delete(url + usuarioSeleccionade.IDUSUARIO).then((response) => {
       mutate("/usuario");
+      mutate("/usuario/tipo/1");
+      mutate("/usuario/tipo/2");
+      mutate("/usuario/tipo/3");
       SweetAlert.success({
         title: "Usuario eliminado",
         text: "El usuario ha sido eliminado correctamente",
@@ -361,6 +364,9 @@ const DataTableUsuario = ({ users, tipo }) => {
   const peticionPost = async () => {
     await axios.post(url, usuarioSeleccionade).then((response) => {
       mutate("/usuario");
+      mutate("/usuario/tipo/1");
+      mutate("/usuario/tipo/2");
+      mutate("/usuario/tipo/3");
       setData(data.concat(response.data));
       abrirCerrarModalInsertar();
       SweetAlert.success({
@@ -375,6 +381,9 @@ const DataTableUsuario = ({ users, tipo }) => {
     if (password) {
       await axios.put(url, usuarioSeleccionade).then((response) => {
         mutate("/usuario");
+        mutate("/usuario/tipo/1");
+        mutate("/usuario/tipo/2");
+        mutate("/usuario/tipo/3");
         SweetAlert.success({
           title: "Usuario actualizado",
           text: "El usuario ha sido actualizado correctamente",
