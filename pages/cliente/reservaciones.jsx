@@ -1,4 +1,5 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
+import { TableReservation } from "../../components/Cliente";
 import { ClienteLayout } from "../../components/layouts/ClienteLayout";
 import { useReservasClient } from "../../Hooks";
 
@@ -22,12 +23,7 @@ const ReservacionesPage = () => {
           <CircularProgress />
         </Box>
       ) : (
-         console.log(reservas)
-      //   <TableAddress
-      //     addresess={addresses?.data || []}
-      //     open={openModal}
-      //     setOpen={setopenModal}
-      //   />
+        <TableReservation reservations={reservas || []} />
       )}
     </ClienteLayout>
   );

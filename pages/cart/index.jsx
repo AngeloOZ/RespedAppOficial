@@ -82,7 +82,7 @@ const CartPage = ({ numbsOfItemsCart, reservation, isEdit }) => {
                           fullWidth
                           onClick={() => setDisplayLoader(true)}
                         >
-                          Checkout
+                          Continuar
                         </Button>
                       </Link>
                     </NextLink>
@@ -95,7 +95,7 @@ const CartPage = ({ numbsOfItemsCart, reservation, isEdit }) => {
                           fullWidth
                           onClick={() => setDisplayLoader(true)}
                         >
-                          Checkout
+                          Continuar
                         </Button>
                       </Link>
                     </NextLink>
@@ -106,7 +106,7 @@ const CartPage = ({ numbsOfItemsCart, reservation, isEdit }) => {
                       fullWidth
                       onClick={handleOpenModal}
                     >
-                      Checkout
+                      Continuar
                     </Button>
                   )}
                 </Box>

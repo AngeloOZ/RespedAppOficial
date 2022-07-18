@@ -11,6 +11,7 @@ import {
 export const DataTableOders = ({ pedidos, tipo }) => {
   return (
     <TableContainer>
+      {console.log(pedidos)}
       <Table>
         <TableHead>
           <TableRow>
@@ -19,13 +20,14 @@ export const DataTableOders = ({ pedidos, tipo }) => {
             <TableCell>Valor Total</TableCell>
             <TableCell>Nota</TableCell>
             {tipo == 1 ? (
-              <TableCell>Mesa</TableCell>
+              <TableCell align="center">Mesa</TableCell>
             ) : tipo == 2 ? (
               <TableCell>Direccion</TableCell>
             ) : tipo == 3 ? (
               <TableCell>No Reserva</TableCell>
             ) : null}
             <TableCell>Estado</TableCell>
+            <TableCell>Estado del pago</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -54,7 +56,7 @@ const TableRowContent = ({ pedido, tipo }) => {
       <TableCell>{pedido.VALORTOTAL}</TableCell>
       <TableCell>{pedido.NOTE}</TableCell>
       {tipo == 1 ? (
-        <TableCell>{pedido.MESA}</TableCell>
+        <TableCell align="center">{pedido.MESA}</TableCell>
       ) : tipo == 2 ? (
         <TableCell>{pedido.DIRECCION}</TableCell>
       ) : tipo == 3 ? (
@@ -74,6 +76,13 @@ const TableRowContent = ({ pedido, tipo }) => {
         ) : pedido.ESTADO == "PENDIENTE" ? (
           <Chip label="PENDIENTE" color="info" />
         ) : null}
+      </TableCell>
+      <TableCell align="center">
+        {pedido.PAGADO ? (
+          <Chip label="Pagado" color="success" style={{ borderRadius: "none" }} />
+        ) : (
+          <Chip label="Pendiente" color="warning" />
+        )}
       </TableCell>
     </TableRow>
   );
