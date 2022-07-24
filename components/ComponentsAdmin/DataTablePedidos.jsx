@@ -53,6 +53,10 @@ const DataTablePedidos = ({ pedidos, tipo }) => {
   const peticionPut = async () => {
     await axios.put(url, pedidoSeleccionade).then((response) => {
       mutate("/pedido");
+      mutate("/pedido/local");
+      mutate("/pedido/domicilio");
+      mutate("/pedido/reserva");
+      mutate("/pedido/finalizado");
       SweetAlert.success({
         title: "Pedido modificado",
         text: "El pedido ha sido modificado correctamente",

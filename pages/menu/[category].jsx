@@ -9,7 +9,7 @@ import { ProductList } from "../../components/products";
 
 export default function MenuIndex() {
   const { query } = useRouter();
-  const { products, isLoading } = useProducts(query.category);
+  const { products, isLoading } = useProducts(`categoria/${query.category}`);
   return (
     <ShopLayout title={query.name}>
       <Box textAlign="center" component="div" paddingY={2}>
