@@ -59,17 +59,18 @@
 	cursor: not-allowed;
 }
 .cartButton.clicked .aux1 {
-	animation: cart 1.5s ease-in-out forwards;
+	animation: cart 0.8s ease-in-out forwards;
 }
 .cartButton.clicked .aux2 {
-	animation: box 1.5s ease-in-out forwards;
+	animation: box 0.8s ease-in-out forwards;
 }
 .cartButton.clicked span.addToCart {
-	animation: txt1 1.5s ease-in-out forwards;
+	animation: txt1 0.8s ease-in-out forwards;
 }
 .cartButton.clicked span.added {
-	animation: txt2 1.5s ease-in-out forwards;
+	animation: txt2 0.8s ease-in-out forwards;
 }
+
 @keyframes cart {
 	0% {
 		left: -10%;

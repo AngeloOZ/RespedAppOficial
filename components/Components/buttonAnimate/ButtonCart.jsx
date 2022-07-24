@@ -11,7 +11,7 @@ export const ButtonCart = ({ style = {}, onClick = () => {} }) => {
 
       setTimeout(() => {
         setActiveAnimate(false);
-      }, 2500);
+      }, 1000);
 
       onClick();
     }
